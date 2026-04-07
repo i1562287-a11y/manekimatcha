@@ -46,7 +46,6 @@ const Products = () => {
   const [houjiKg, setHoujiKg] = useState(0);
   const [invoiceOpen, setInvoiceOpen] = useState(false);
   const [defaultPayment, setDefaultPayment] = useState<string | undefined>();
-  const [searchParams, setSearchParams] = useSearchParams();
 
 
   const matchaTotal = matchaKg * MATCHA_PRICE;
