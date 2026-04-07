@@ -19,44 +19,59 @@ Deno.serve(async (req) => {
     if (!TELEGRAM_API_KEY) throw new Error('TELEGRAM_API_KEY is not configured');
 
     const body = await req.json();
-    const { name, business, vatNumber, outsidePortugal, country, email, phone, paymentMethod, items, totalExVat, vat, totalInclVat } = body;
+    const { name, email, rawText, business, vatNumber, outsidePortugal, country, phone, paymentMethod, items, totalExVat, vat, totalInclVat } = body;
 
-    if (!name || !email || !items || items.length === 0) {
+    if (!name || !email) {
       return new Response(JSON.stringify({ error: 'Missing required fields' }), {
         status: 400,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
 
-    const itemLines = items
-      .filter((i: any) => i.kg > 0)
-      .map((i: any) => `  • ${i.kg} kg ${i.name} — €${(i.kg * i.pricePerKg).toFixed(2)}`)
-      .join('\n');
+    let text: string;
 
-    const vatLine = outsidePortugal
-      ? `VAT: €0.00 (reverse charge)`
-      : `VAT (23%): €${vat?.toFixed(2)}`;
+    if (rawText) {
+      // Pre-formatted message (e.g. sample kit request)
+      text = rawText;
+    } else {
+      // Order message
+      if (!items || items.length === 0) {
+        return new Response(JSON.stringify({ error: 'Missing items' }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
 
-    const text = [
-      `🍵 <b>New Order Request</b>`,
-      ``,
-      `<b>Customer:</b> ${name}`,
-      business ? `<b>Business:</b> ${business}` : null,
-      vatNumber ? `<b>VAT/NIF:</b> ${vatNumber}` : null,
-      outsidePortugal && country ? `<b>Country:</b> ${country} (EU reverse charge)` : null,
-      `<b>Email:</b> ${email}`,
-      phone ? `<b>Phone:</b> ${phone}` : null,
-      `<b>Payment:</b> ${paymentMethod}`,
-      ``,
-      `<b>Items:</b>`,
-      itemLines,
-      ``,
-      `Subtotal: €${totalExVat?.toFixed(2)}`,
-      vatLine,
-      `<b>Total: €${totalInclVat?.toFixed(2)}</b>`,
-    ]
-      .filter(Boolean)
-      .join('\n');
+      const itemLines = items
+        .filter((i: any) => i.kg > 0)
+        .map((i: any) => `  • ${i.kg} kg ${i.name} — €${(i.kg * i.pricePerKg).toFixed(2)}`)
+        .join('\n');
+
+      const vatLine = outsidePortugal
+        ? `VAT: €0.00 (reverse charge)`
+        : `VAT (23%): €${vat?.toFixed(2)}`;
+
+      text = [
+        `🍵 <b>New Order Request</b>`,
+        ``,
+        `<b>Customer:</b> ${name}`,
+        business ? `<b>Business:</b> ${business}` : null,
+        vatNumber ? `<b>VAT/NIF:</b> ${vatNumber}` : null,
+        outsidePortugal && country ? `<b>Country:</b> ${country} (EU reverse charge)` : null,
+        `<b>Email:</b> ${email}`,
+        phone ? `<b>Phone:</b> ${phone}` : null,
+        `<b>Payment:</b> ${paymentMethod}`,
+        ``,
+        `<b>Items:</b>`,
+        itemLines,
+        ``,
+        `Subtotal: €${totalExVat?.toFixed(2)}`,
+        vatLine,
+        `<b>Total: €${totalInclVat?.toFixed(2)}</b>`,
+      ]
+        .filter(Boolean)
+        .join('\n');
+    }
 
     const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
       method: 'POST',
