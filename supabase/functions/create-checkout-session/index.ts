@@ -124,7 +124,7 @@ Deno.serve(async (req) => {
       customer_email: customerId ? undefined : email,
       line_items: lineItems,
       mode: 'payment',
-      success_url: `${origin}/?payment=success`,
+      success_url: `${origin}/payment-success`,
       cancel_url: `${origin}/?payment=cancelled`,
       metadata: {
         customer_name: name,
