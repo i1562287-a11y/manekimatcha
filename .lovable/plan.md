@@ -1,44 +1,53 @@
 
 
-# Інтерактивне замовлення в блоці Products
+# Фотогалерея: ферми, люди, якість матча
 
-Додаємо вибір кількості, калькуляцію цін та 3 способи оформлення замовлення — все в одному блоці.
+## Unsplash фото (рекомендації)
 
-## Моя рекомендація
+Конкретні фото з Unsplash для використання:
 
-Для B2B-бізнесу з чаєм найкраще працює такий флоу:
+1. **Чайні ряди / ферма Shizuoka** — `https://images.unsplash.com/photo-1545048702-79362596cdc9` (зелені ряди чаю, Японія)
+2. **Збір чаю вручну** — `https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9` (фермер на чайній плантації)
+3. **Яскравий матча порошок (якість)** — `https://images.unsplash.com/photo-1515823064-d6e0c04616a7` (close-up зеленого порошку матча)
+4. **Матча латте / приготування** — `https://images.unsplash.com/photo-1536256263959-770b48d82b0a` (chasen, чашка матча)
+5. **Традиційна церемонія** — `https://images.unsplash.com/photo-1558618666-fcd25c85f82e` (японська чайна церемонія)
 
-1. **Вибір кількості** (кг) для кожного продукту — stepper (+/−) з кроком 1 кг, мін. 1 кг
-2. **Жива калькуляція** — загальна вартість ex VAT + incl VAT оновлюється миттєво
-3. **Три кнопки дії** після підсумку:
-   - **"Request Invoice"** — модальне вікно з формою (ім'я, бізнес, email, телефон). Замовлення надсилається як toast (поки без бекенду). Це основний B2B-шлях.
-   - **"Pay Now"** — поки що заглушка з написом "Coming soon" або можемо підключити Stripe пізніше
-   - **"Request Samples / Callback"** — скрол до існуючої Contact форми з попередньо заповненим повідомленням про продукти та кількість
+## Де вставити
 
-Stripe можна додати окремим кроком потім — це потребує підключення акаунту та налаштування.
+### 1. Hero — фото замість тексту або поруч з Product Passport
+Правий стовпець Hero зараз — темна панель зі специфікаціями. Додамо **фото чайної ферми як background-image** за Product Passport панеллю (overlay з opacity), щоб створити глибину.
 
-## Що змінюється
+### 2. Новий компонент `Gallery.tsx` — між WhySection та Products
+Повноширинна секція з 3-4 фото в сітці, Pinterest-стиль:
+- Фото ферми (горизонтальне, широке)
+- Фермер за роботою (вертикальне)
+- Close-up матча порошку (квадратне) — показує колір/якість
+- Приготування матча (вертикальне)
 
-### 1. Products.tsx — повна переробка
-- Додати `useState` для кількості matcha (matchaKg) та houjicha (houjichiKg), дефолт 1
-- Stepper-компонент: кнопки −/+ з інпутом між ними, стиль mono-label
-- Під ціною за кг — блок "Your order": `{kg} × €{price} = €{total}` (ex VAT) та incl VAT
-- Загальний підсумок внизу секції (обидва продукти сумарно)
-- Три CTA-кнопки в рядок (або стек на мобайлі)
+Сітка: CSS grid з різними `row-span` для Pinterest-ефекту. Підписи під кожним фото (font-mono-label, xs, tracking-widest).
 
-### 2. OrderModal.tsx — новий компонент
-- Модальне вікно (Dialog) для "Request Invoice"
-- Форма: Name, Business, Email, Phone, Payment method (radio: Bank Transfer / MB Way / Multibanco)
-- Показує підсумок замовлення (продукти, кг, ціна)
-- Submit → toast "Order received! Invoice will be sent to {email}"
-- Стилі: ink bg, cream text, gold accents — як у Contact формі
+### 3. Матча vs погана матча — блок порівняння якості
+Всередині Gallery або як окремий підблок: два фото поряд з підписами:
+- "Ceremonial grade — vivid jade green" (Unsplash фото яскравої матча)
+- "Low grade — dull yellow-green" (darker/yellower unsplash фото)
 
-### 3. Pricing.tsx — залишається
-- Payment options блок залишається як є (інформаційний)
+Це покаже що ми розуміємось на якості.
 
-### 4. Contact.tsx — мінорна зміна
-- Додати підтримку query-параметра або пропсу для попереднього заповнення message
+## Що змінюється (файли)
+
+### 1. `src/components/maneki/Gallery.tsx` — новий компонент
+- Секція "From the farm" з Pinterest-style grid
+- 4-5 Unsplash фото з `?w=800&q=80` для оптимізації
+- Кожне фото: `<img>` з `object-cover`, підпис знизу
+- Блок порівняння якості (good vs bad matcha) з анотаціями
+- `useFadeUp` анімація
+
+### 2. `src/components/maneki/Hero.tsx` — додати background
+- Фото чайної ферми як фонове зображення правої панелі з `bg-cover` та dark overlay
+
+### 3. `src/pages/Index.tsx` — додати Gallery
+- Імпорт та розміщення `<Gallery />` між `<WhySection />` та `<Products />`
 
 ## Стилістика
-Зберігаємо існуючу: sharp corners, cream/ink/gold палітра, font-heading для цін, font-mono-label для лейблів. Stepper-кнопки — border cream/10, gold hover. Підсумок — виділений блок з bg-ink текстом cream.
+Sharp corners, cream/ink палітра. Фото без border-radius. Підписи font-mono-label uppercase. Kanji watermark на секції.
 
