@@ -21,6 +21,7 @@ const Index = () => (
     <BatchBadge />
     <TrustStrip />
     <WhySection />
+    <Gallery />
     <Products />
     <Pricing />
     <Compliance />
