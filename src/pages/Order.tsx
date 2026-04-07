@@ -67,9 +67,7 @@ const Order = () => {
         });
         if (error) throw error;
         if (data?.url) {
-          window.open(data.url, '_blank');
-          toast.success("Payment page opened in a new tab. Complete the payment there.");
-          setSubmitting(false);
+          window.location.href = data.url;
           return;
         }
         throw new Error("No checkout URL returned");
