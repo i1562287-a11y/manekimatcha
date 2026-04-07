@@ -52,11 +52,7 @@ const Products = () => {
 
   useEffect(() => {
     const payment = searchParams.get("payment");
-    if (payment === "success") {
-      toast.success("Payment successful! Thank you for your order.");
-      searchParams.delete("payment");
-      setSearchParams(searchParams, { replace: true });
-    } else if (payment === "cancelled") {
+    if (payment === "cancelled") {
       toast.info("Payment cancelled. Your order info has been saved — we'll follow up.");
       searchParams.delete("payment");
       setSearchParams(searchParams, { replace: true });
