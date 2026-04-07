@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import KanjiWatermark from "./KanjiWatermark";
 import OrderModal from "./OrderModal";
 import { useFadeUp } from "./useFadeUp";
@@ -48,16 +46,7 @@ const Products = () => {
   const [houjiKg, setHoujiKg] = useState(0);
   const [invoiceOpen, setInvoiceOpen] = useState(false);
   const [defaultPayment, setDefaultPayment] = useState<string | undefined>();
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const payment = searchParams.get("payment");
-    if (payment === "cancelled") {
-      toast.info("Payment cancelled. Your order info has been saved — we'll follow up.");
-      searchParams.delete("payment");
-      setSearchParams(searchParams, { replace: true });
-    }
-  }, [searchParams, setSearchParams]);
 
   const matchaTotal = matchaKg * MATCHA_PRICE;
   const houjiTotal = houjiKg * HOUJICHA_PRICE;
