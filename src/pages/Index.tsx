@@ -1,16 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navbar from "@/components/maneki/Navbar";
+import Hero from "@/components/maneki/Hero";
+import BatchBadge from "@/components/maneki/BatchBadge";
+import TrustStrip from "@/components/maneki/TrustStrip";
+import WhySection from "@/components/maneki/WhySection";
+import Products from "@/components/maneki/Products";
+import Pricing from "@/components/maneki/Pricing";
+import Compliance from "@/components/maneki/Compliance";
+import JapanTrust from "@/components/maneki/JapanTrust";
+import WhoWeServe from "@/components/maneki/WhoWeServe";
+import Contact from "@/components/maneki/Contact";
+import Footer from "@/components/maneki/Footer";
+import NoiseOverlay from "@/components/maneki/NoiseOverlay";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
-  return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
-  );
-};
-
-const Index = PlaceholderIndex;
+const Index = () => (
+  <>
+    <NoiseOverlay />
+    <Navbar />
+    <Hero />
+    <BatchBadge />
+    <TrustStrip />
+    <WhySection />
+    <Products />
+    <Pricing />
+    <Compliance />
+    <JapanTrust />
+    <WhoWeServe />
+    <Contact />
+    <Footer />
+  </>
+);
 
 export default Index;
