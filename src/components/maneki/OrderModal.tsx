@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -37,10 +37,11 @@ const OrderModal = ({ open, onOpenChange, items, defaultPaymentMethod }: OrderMo
   const [submitting, setSubmitting] = useState(false);
 
   // Sync defaultPaymentMethod when modal opens
-  const prevDefault = useState(defaultPaymentMethod)[0];
-  if (defaultPaymentMethod && defaultPaymentMethod !== prevDefault && open) {
-    setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
-  }
+  useEffect(() => {
+    if (open && defaultPaymentMethod) {
+      setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
+    }
+  }, [open, defaultPaymentMethod]);
 
   const activeItems = items.filter((i) => i.kg > 0);
   const totalExVat = activeItems.reduce((s, i) => s + i.kg * i.pricePerKg, 0);
