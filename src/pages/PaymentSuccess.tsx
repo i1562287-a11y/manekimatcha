@@ -12,9 +12,21 @@ const PaymentSuccess = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-ink text-cream relative flex items-center justify-center">
+    <div className="min-h-screen bg-ink text-cream relative flex flex-col">
       <NoiseOverlay />
-      <div className="relative z-10 max-w-lg w-full mx-auto px-6 py-24 text-center">
+      {/* Mini navbar */}
+      <nav className="relative z-10 w-full px-6 py-4">
+        <div className="max-w-7xl mx-auto">
+          <Link to="/" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <span className="text-2xl">招き猫</span>
+            <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">
+              Maneki Matcha
+            </span>
+          </Link>
+        </div>
+      </nav>
+      <div className="relative z-10 flex-1 flex items-center justify-center">
+      <div className="max-w-lg w-full mx-auto px-6 py-16 text-center">
         {/* Success icon */}
         <div className="flex justify-center mb-8">
           <div className="w-20 h-20 border-2 border-gold flex items-center justify-center">
