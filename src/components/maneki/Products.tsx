@@ -252,7 +252,7 @@ const Products = () => {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row">
                 <button
-                  onClick={() => setInvoiceOpen(true)}
+                  onClick={() => { setDefaultPayment(undefined); setInvoiceOpen(true); }}
                   className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors"
                 >
                   <FileText size={18} />
@@ -282,6 +282,7 @@ const Products = () => {
         open={invoiceOpen}
         onOpenChange={setInvoiceOpen}
         items={orderItems}
+        defaultPaymentMethod={defaultPayment}
       />
     </section>
   );
