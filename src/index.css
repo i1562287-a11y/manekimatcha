@@ -99,7 +99,9 @@
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-.fade-up.visible {
+.fade-up.visible,
+.visible .fade-up,
+.visible.fade-up {
   opacity: 1;
   transform: translateY(0);
 }
