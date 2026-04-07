@@ -34,23 +34,13 @@ const OrderModal = ({ open, onOpenChange, items, defaultPaymentMethod }: OrderMo
     phone: "",
     paymentMethod: defaultPaymentMethod || "bank-transfer",
   });
-
-  // Sync defaultPaymentMethod when it changes
-  useState(() => {
-    if (defaultPaymentMethod) {
-      setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
-    }
-  });
-    name: "",
-    business: "",
-    vatNumber: "",
-    outsidePortugal: false,
-    country: "",
-    email: "",
-    phone: "",
-    paymentMethod: "bank-transfer",
-  });
   const [submitting, setSubmitting] = useState(false);
+
+  // Sync defaultPaymentMethod when modal opens
+  const prevDefault = useState(defaultPaymentMethod)[0];
+  if (defaultPaymentMethod && defaultPaymentMethod !== prevDefault && open) {
+    setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
+  }
 
   const activeItems = items.filter((i) => i.kg > 0);
   const totalExVat = activeItems.reduce((s, i) => s + i.kg * i.pricePerKg, 0);
