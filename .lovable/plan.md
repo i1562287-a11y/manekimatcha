@@ -1,44 +1,31 @@
 
 
-# Інтерактивне замовлення в блоці Products
+# Додати VAT/NIF та галочку "не з Португалії" в OrderModal
 
-Додаємо вибір кількості, калькуляцію цін та 3 способи оформлення замовлення — все в одному блоці.
+## Що додаємо
 
-## Моя рекомендація
+1. **Поле VAT / NIF** — текстове поле після "Business Name", placeholder: `PT123456789`
+2. **Чекбокс "Company outside Portugal"** — якщо увімкнено:
+   - Поле NIF стає "VAT Number (EU)" з placeholder `DE123456789` замість `PT...`
+   - В Order Summary рядок VAT змінюється на "VAT: €0.00 (reverse charge)" — бо для EU B2B intra-community поставок VAT = 0%
+   - Загальна сума перераховується без VAT
+3. **Поле "Country"** — з'являється тільки коли чекбокс увімкнено (простий текстовий інпут)
 
-Для B2B-бізнесу з чаєм найкраще працює такий флоу:
+## Куди збирати дані
 
-1. **Вибір кількості** (кг) для кожного продукту — stepper (+/−) з кроком 1 кг, мін. 1 кг
-2. **Жива калькуляція** — загальна вартість ex VAT + incl VAT оновлюється миттєво
-3. **Три кнопки дії** після підсумку:
-   - **"Request Invoice"** — модальне вікно з формою (ім'я, бізнес, email, телефон). Замовлення надсилається як toast (поки без бекенду). Це основний B2B-шлях.
-   - **"Pay Now"** — поки що заглушка з написом "Coming soon" або можемо підключити Stripe пізніше
-   - **"Request Samples / Callback"** — скрол до існуючої Contact форми з попередньо заповненим повідомленням про продукти та кількість
+Поки що бекенду немає — дані зберігаються тільки в `useState` і відправляються як toast. Коли підключимо Supabase, створимо таблицю `orders` з полями: name, business, email, phone, vat_number, is_eu_non_pt, country, payment_method, items (jsonb), total. Зараз — тільки фронтенд.
 
-Stripe можна додати окремим кроком потім — це потребує підключення акаунту та налаштування.
+## Зміни у файлі
 
-## Що змінюється
+### `OrderModal.tsx`
+- Додати до стейту `form`: `vatNumber: ""`, `outsidePortugal: false`, `country: ""`
+- Після поля "Business Name" додати:
+  - Чекбокс з лейблом "Company outside Portugal (EU reverse charge)"
+  - Поле "VAT / NIF Number" (required)
+  - Поле "Country" (з'являється тільки якщо чекбокс увімкнено)
+- Перерахунок VAT: якщо `outsidePortugal === true` → `vat = 0`, показувати "Reverse charge — 0% VAT"
+- В toast додати VAT номер
 
-### 1. Products.tsx — повна переробка
-- Додати `useState` для кількості matcha (matchaKg) та houjicha (houjichiKg), дефолт 1
-- Stepper-компонент: кнопки −/+ з інпутом між ними, стиль mono-label
-- Під ціною за кг — блок "Your order": `{kg} × €{price} = €{total}` (ex VAT) та incl VAT
-- Загальний підсумок внизу секції (обидва продукти сумарно)
-- Три CTA-кнопки в рядок (або стек на мобайлі)
-
-### 2. OrderModal.tsx — новий компонент
-- Модальне вікно (Dialog) для "Request Invoice"
-- Форма: Name, Business, Email, Phone, Payment method (radio: Bank Transfer / MB Way / Multibanco)
-- Показує підсумок замовлення (продукти, кг, ціна)
-- Submit → toast "Order received! Invoice will be sent to {email}"
-- Стилі: ink bg, cream text, gold accents — як у Contact формі
-
-### 3. Pricing.tsx — залишається
-- Payment options блок залишається як є (інформаційний)
-
-### 4. Contact.tsx — мінорна зміна
-- Додати підтримку query-параметра або пропсу для попереднього заповнення message
-
-## Стилістика
-Зберігаємо існуючу: sharp corners, cream/ink/gold палітра, font-heading для цін, font-mono-label для лейблів. Stepper-кнопки — border cream/10, gold hover. Підсумок — виділений блок з bg-ink текстом cream.
+## Логіка VAT reverse charge
+Це стандартна EU B2B практика: якщо покупець має EU VAT номер і він не з Португалії, продавець виставляє інвойс без VAT (reverse charge mechanism, Art. 138 EU VAT Directive). Покупець сам декларує VAT у своїй країні.
 
