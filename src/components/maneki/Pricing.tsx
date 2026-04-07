@@ -32,8 +32,9 @@ const Pricing = () => {
             {paymentMethods.map((m) => (
               <div
                 key={m.name}
-                className="flex items-center justify-between bg-cream/5 p-5 border border-cream/10"
+                className="flex items-center gap-4 bg-cream/5 p-5 border border-cream/10"
               >
+                <m.icon className="text-gold shrink-0" size={20} />
                 <div>
                   <p className="font-body text-sm text-cream font-semibold">{m.name}</p>
                   <p className="font-body text-xs text-cream/40">{m.desc}</p>
