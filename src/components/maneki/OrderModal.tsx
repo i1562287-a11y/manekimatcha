@@ -20,10 +20,27 @@ interface OrderModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   items: OrderItem[];
+  defaultPaymentMethod?: string;
 }
 
-const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
+const OrderModal = ({ open, onOpenChange, items, defaultPaymentMethod }: OrderModalProps) => {
   const [form, setForm] = useState({
+    name: "",
+    business: "",
+    vatNumber: "",
+    outsidePortugal: false,
+    country: "",
+    email: "",
+    phone: "",
+    paymentMethod: defaultPaymentMethod || "bank-transfer",
+  });
+
+  // Sync defaultPaymentMethod when it changes
+  useState(() => {
+    if (defaultPaymentMethod) {
+      setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
+    }
+  });
     name: "",
     business: "",
     vatNumber: "",
