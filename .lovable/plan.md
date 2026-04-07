@@ -1,40 +1,44 @@
 
 
-# Переробка блоку ціноутворення
+# Інтерактивне замовлення в блоці Products
 
-Замість старої системи з тірами (T1-T4, H1-H3) та калькулятором маржі — нова проста структура ціноутворення згідно наданого тексту.
+Додаємо вибір кількості, калькуляцію цін та 3 способи оформлення замовлення — все в одному блоці.
+
+## Моя рекомендація
+
+Для B2B-бізнесу з чаєм найкраще працює такий флоу:
+
+1. **Вибір кількості** (кг) для кожного продукту — stepper (+/−) з кроком 1 кг, мін. 1 кг
+2. **Жива калькуляція** — загальна вартість ex VAT + incl VAT оновлюється миттєво
+3. **Три кнопки дії** після підсумку:
+   - **"Request Invoice"** — модальне вікно з формою (ім'я, бізнес, email, телефон). Замовлення надсилається як toast (поки без бекенду). Це основний B2B-шлях.
+   - **"Pay Now"** — поки що заглушка з написом "Coming soon" або можемо підключити Stripe пізніше
+   - **"Request Samples / Callback"** — скрол до існуючої Contact форми з попередньо заповненим повідомленням про продукти та кількість
+
+Stripe можна додати окремим кроком потім — це потребує підключення акаунту та налаштування.
 
 ## Що змінюється
 
 ### 1. Products.tsx — повна переробка
-Замість тірних карток — дві продуктові картки з новим контентом:
+- Додати `useState` для кількості matcha (matchaKg) та houjicha (houjichiKg), дефолт 1
+- Stepper-компонент: кнопки −/+ з інпутом між ними, стиль mono-label
+- Під ціною за кг — блок "Your order": `{kg} × €{price} = €{total}` (ex VAT) та incl VAT
+- Загальний підсумок внизу секції (обидва продукти сумарно)
+- Три CTA-кнопки в рядок (або стек на мобайлі)
 
-**Matcha картка:**
-- Заголовок: "Matcha — Shizuoka (Japan)"
-- Опис: "Stone-ground tencha. Clean umami, vibrant green, stable in daily café service."
-- Ціна: €155/kg (ex VAT), VAT 23%: €35.65, €190.65/kg (incl. VAT)
-- Підтекст: "Designed for cafés: consistent taste, easy to work with, perfect for matcha lattes and iced drinks."
+### 2. OrderModal.tsx — новий компонент
+- Модальне вікно (Dialog) для "Request Invoice"
+- Форма: Name, Business, Email, Phone, Payment method (radio: Bank Transfer / MB Way / Multibanco)
+- Показує підсумок замовлення (продукти, кг, ціна)
+- Submit → toast "Order received! Invoice will be sent to {email}"
+- Стилі: ink bg, cream text, gold accents — як у Contact формі
 
-**Houjicha картка:**
-- Заголовок: "Houjicha — Miyazaki (Japan)"
-- Опис: "Roasted Japanese green tea. Warm, toasty, naturally low in caffeine."
-- Ціна: €115/kg (ex VAT), VAT 23%: €26.45, €141.45/kg (incl. VAT)
-- Підтекст: "Ideal for houjicha lattes and evening drinks. A unique addition to your menu with almost no competition in most cafés."
+### 3. Pricing.tsx — залишається
+- Payment options блок залишається як є (інформаційний)
 
-### 2. Pricing.tsx — замінити калькулятор на блок оплати
-Замість margin calculator — секція "Payment options (Portugal)":
-- MB Way
-- Multibanco
-- Credit / Debit Card
-- Bank Transfer (IBAN)
-- Invoice for B2B partners
-
-### 3. Footer — оновити текст
-Додати/оновити footer note:
-- "All prices ex-works Lisbon warehouse."
-- "MOQ: 1 kg."
-- "Bulk orders (5+ kg) available on request."
+### 4. Contact.tsx — мінорна зміна
+- Додати підтримку query-параметра або пропсу для попереднього заповнення message
 
 ## Стилістика
-Зберігаємо існуючу естетику: cream/ink палітра, kanji watermarks, sharp corners, font-heading/font-body/font-mono-label класи. Цінова розбивка (ex VAT / VAT / incl VAT) виділяється великим шрифтом для основної ціни та дрібнішим для VAT деталей. Payment options — список з іконками або мінімальними бейджами.
+Зберігаємо існуючу: sharp corners, cream/ink/gold палітра, font-heading для цін, font-mono-label для лейблів. Stepper-кнопки — border cream/10, gold hover. Підсумок — виділений блок з bg-ink текстом cream.
 
