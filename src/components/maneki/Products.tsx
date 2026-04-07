@@ -50,14 +50,6 @@ const Products = () => {
   const [defaultPayment, setDefaultPayment] = useState<string | undefined>();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  useEffect(() => {
-    const payment = searchParams.get("payment");
-    if (payment === "cancelled") {
-      toast.info("Payment cancelled. Your order info has been saved — we'll follow up.");
-      searchParams.delete("payment");
-      setSearchParams(searchParams, { replace: true });
-    }
-  }, [searchParams, setSearchParams]);
 
   const matchaTotal = matchaKg * MATCHA_PRICE;
   const houjiTotal = houjiKg * HOUJICHA_PRICE;
