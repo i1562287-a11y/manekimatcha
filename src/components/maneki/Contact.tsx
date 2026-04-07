@@ -15,14 +15,40 @@ const Contact = () => {
   });
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.name.trim() || !form.email.trim()) return;
     setSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      const text = [
+        `📦 <b>Sample Kit Request</b>`,
+        ``,
+        `<b>Name:</b> ${form.name}`,
+        form.business ? `<b>Business:</b> ${form.business}` : null,
+        `<b>Email:</b> ${form.email}`,
+        form.whatsapp ? `<b>WhatsApp:</b> ${form.whatsapp}` : null,
+        form.message ? `\n<b>Message:</b>\n${form.message}` : null,
+      ].filter(Boolean).join('\n');
+
+      const { error } = await supabase.functions.invoke("send-order-telegram", {
+        body: {
+          name: form.name,
+          email: form.email,
+          rawText: text,
+        },
+      });
+
+      if (error) throw error;
+
       toast.success("Sample request sent! We'll be in touch within 24 hours.");
       setForm({ name: "", business: "", email: "", whatsapp: "", message: "" });
+    } catch (err) {
+      console.error("Sample request error:", err);
+      toast.error("Failed to send request. Please try again or email us directly.");
+    } finally {
       setSubmitting(false);
-    }, 800);
+    }
   };
 
   return (
