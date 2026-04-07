@@ -57,7 +57,16 @@ const Hero = () => {
         </div>
 
         {/* Right — Dark specs panel */}
-        <div className="bg-ink text-cream p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center">
+        <div
+          className="bg-ink text-cream p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center"
+          style={{
+            backgroundImage: `url(https://images.unsplash.com/photo-1545048702-79362596cdc9?w=1200&q=60)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-ink/85" />
           <KanjiWatermark kanji="猫" className="right-4 top-4 text-cream" />
           <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-8">
             Product Passport
