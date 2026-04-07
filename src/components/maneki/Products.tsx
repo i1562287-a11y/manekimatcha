@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import KanjiWatermark from "./KanjiWatermark";
-import OrderModal from "./OrderModal";
 import { useFadeUp } from "./useFadeUp";
 import { Minus, Plus, FileText, CreditCard, MessageCircle } from "lucide-react";
 
@@ -42,10 +42,9 @@ const KgStepper = ({
 
 const Products = () => {
   const ref = useFadeUp();
+  const navigate = useNavigate();
   const [matchaKg, setMatchaKg] = useState(1);
   const [houjiKg, setHoujiKg] = useState(0);
-  const [invoiceOpen, setInvoiceOpen] = useState(false);
-  const [defaultPayment, setDefaultPayment] = useState<string | undefined>();
 
 
   const matchaTotal = matchaKg * MATCHA_PRICE;
@@ -77,8 +76,7 @@ const Products = () => {
   };
 
   const handlePayNow = () => {
-    setDefaultPayment("card");
-    setInvoiceOpen(true);
+    navigate("/order", { state: { items: orderItems, defaultPaymentMethod: "card" } });
   };
 
   const orderItems = [
@@ -237,7 +235,7 @@ const Products = () => {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row">
                 <button
-                  onClick={() => { setDefaultPayment(undefined); setInvoiceOpen(true); }}
+                  onClick={() => navigate("/order", { state: { items: orderItems } })}
                   className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors"
                 >
                   <FileText size={18} />
@@ -263,12 +261,6 @@ const Products = () => {
         )}
       </div>
 
-      <OrderModal
-        open={invoiceOpen}
-        onOpenChange={setInvoiceOpen}
-        items={orderItems}
-        defaultPaymentMethod={defaultPayment}
-      />
     </section>
   );
 };
