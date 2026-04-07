@@ -14,8 +14,9 @@ const Footer = () => {
               </span>
             </div>
             <p className="font-body text-sm text-cream/40 max-w-xs">
-              Japanese matcha and houjicha, imported directly from named farms 
-              to your European café.
+              All prices ex-works Lisbon warehouse.<br />
+              MOQ: 1 kg.<br />
+              Bulk orders (5+ kg) available on request.
             </p>
           </div>
 
