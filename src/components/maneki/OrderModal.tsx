@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface OrderItem {
   name: string;
@@ -24,6 +25,9 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
   const [form, setForm] = useState({
     name: "",
     business: "",
+    vatNumber: "",
+    outsidePortugal: false,
+    country: "",
     email: "",
     phone: "",
     paymentMethod: "bank-transfer",
@@ -32,7 +36,7 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
 
   const activeItems = items.filter((i) => i.kg > 0);
   const totalExVat = activeItems.reduce((s, i) => s + i.kg * i.pricePerKg, 0);
-  const vat = totalExVat * 0.23;
+  const vat = form.outsidePortugal ? 0 : totalExVat * 0.23;
   const totalInclVat = totalExVat + vat;
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -40,12 +44,48 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
     if (!form.name.trim() || !form.email.trim()) return;
     setSubmitting(true);
     setTimeout(() => {
-      toast.success(`Order received! Invoice will be sent to ${form.email}`);
-      setForm({ name: "", business: "", email: "", phone: "", paymentMethod: "bank-transfer" });
+      toast.success(
+        `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
+      );
+      setForm({
+        name: "",
+        business: "",
+        vatNumber: "",
+        outsidePortugal: false,
+        country: "",
+        email: "",
+        phone: "",
+        paymentMethod: "bank-transfer",
+      });
       setSubmitting(false);
       onOpenChange(false);
     }, 800);
   };
+
+  const textFields = [
+    { key: "name", label: "Your Name", type: "text", required: true },
+    { key: "business", label: "Business Name", type: "text", required: false },
+  ];
+
+  const contactFields = [
+    { key: "email", label: "Email", type: "email", required: true },
+    { key: "phone", label: "Phone / WhatsApp", type: "tel", required: false },
+  ];
+
+  const renderInput = (field: { key: string; label: string; type: string; required: boolean }) => (
+    <div key={field.key}>
+      <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
+        {field.label}
+      </label>
+      <input
+        type={field.type}
+        required={field.required}
+        value={form[field.key as keyof typeof form] as string}
+        onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+        className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 font-body text-sm focus:outline-none focus:border-gold placeholder:text-cream/20 rounded-none"
+      />
+    </div>
+  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -73,9 +113,16 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
               <span>€{totalExVat.toFixed(2)}</span>
             </div>
             <div className="flex justify-between font-body text-sm text-cream/50">
-              <span>VAT (23%)</span>
+              <span>
+                {form.outsidePortugal ? "VAT (reverse charge)" : "VAT (23%)"}
+              </span>
               <span>€{vat.toFixed(2)}</span>
             </div>
+            {form.outsidePortugal && (
+              <p className="font-body text-xs text-gold/70 italic">
+                EU reverse charge — Art. 138 VAT Directive
+              </p>
+            )}
             <div className="flex justify-between font-heading text-lg text-cream font-bold">
               <span>Total</span>
               <span>€{totalInclVat.toFixed(2)}</span>
@@ -85,25 +132,55 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-8 pt-6 space-y-4">
-          {[
-            { key: "name", label: "Your Name", type: "text", required: true },
-            { key: "business", label: "Business Name", type: "text", required: false },
-            { key: "email", label: "Email", type: "email", required: true },
-            { key: "phone", label: "Phone / WhatsApp", type: "tel", required: false },
-          ].map((field) => (
-            <div key={field.key}>
+          {textFields.map(renderInput)}
+
+          {/* VAT / NIF */}
+          <div>
+            <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
+              {form.outsidePortugal ? "VAT Number (EU)" : "NIF / VAT Number"}
+            </label>
+            <input
+              type="text"
+              value={form.vatNumber}
+              onChange={(e) => setForm({ ...form, vatNumber: e.target.value })}
+              placeholder={form.outsidePortugal ? "DE123456789" : "PT123456789"}
+              className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 font-body text-sm focus:outline-none focus:border-gold placeholder:text-cream/20 rounded-none"
+            />
+          </div>
+
+          {/* Outside Portugal checkbox */}
+          <label className="flex items-center gap-3 cursor-pointer group">
+            <Checkbox
+              checked={form.outsidePortugal}
+              onCheckedChange={(checked) =>
+                setForm({ ...form, outsidePortugal: checked === true, country: "" })
+              }
+              className="border-cream/30 data-[state=checked]:bg-gold data-[state=checked]:border-gold rounded-none h-5 w-5"
+            />
+            <span className="font-body text-sm text-cream/70 group-hover:text-cream transition-colors">
+              Company outside Portugal{" "}
+              <span className="text-cream/40">(EU reverse charge — 0% VAT)</span>
+            </span>
+          </label>
+
+          {/* Country — only when outside Portugal */}
+          {form.outsidePortugal && (
+            <div>
               <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
-                {field.label}
+                Country
               </label>
               <input
-                type={field.type}
-                required={field.required}
-                value={form[field.key as keyof typeof form]}
-                onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
+                type="text"
+                required
+                value={form.country}
+                onChange={(e) => setForm({ ...form, country: e.target.value })}
+                placeholder="e.g. Germany, France, Spain"
                 className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 font-body text-sm focus:outline-none focus:border-gold placeholder:text-cream/20 rounded-none"
               />
             </div>
-          ))}
+          )}
+
+          {contactFields.map(renderInput)}
 
           {/* Payment Method */}
           <div>
