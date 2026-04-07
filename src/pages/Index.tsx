@@ -3,6 +3,7 @@ import Hero from "@/components/maneki/Hero";
 import BatchBadge from "@/components/maneki/BatchBadge";
 import TrustStrip from "@/components/maneki/TrustStrip";
 import WhySection from "@/components/maneki/WhySection";
+import Gallery from "@/components/maneki/Gallery";
 import Products from "@/components/maneki/Products";
 import Pricing from "@/components/maneki/Pricing";
 import Compliance from "@/components/maneki/Compliance";
