@@ -46,28 +46,53 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
     setSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("send-order-telegram", {
-        body: {
-          name: form.name,
-          business: form.business,
-          vatNumber: form.vatNumber,
-          outsidePortugal: form.outsidePortugal,
-          country: form.country,
-          email: form.email,
-          phone: form.phone,
-          paymentMethod: form.paymentMethod,
-          items: activeItems,
-          totalExVat,
-          vat,
-          totalInclVat,
-        },
-      });
+      if (form.paymentMethod === "card") {
+        // Stripe checkout flow
+        const { data, error } = await supabase.functions.invoke("create-checkout-session", {
+          body: {
+            name: form.name,
+            business: form.business,
+            vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal,
+            country: form.country,
+            email: form.email,
+            phone: form.phone,
+            items: activeItems,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+        if (data?.url) {
+          window.location.href = data.url;
+          return;
+        }
+        throw new Error("No checkout URL returned");
+      } else {
+        // Invoice / non-card flow
+        const { data, error } = await supabase.functions.invoke("send-order-telegram", {
+          body: {
+            name: form.name,
+            business: form.business,
+            vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal,
+            country: form.country,
+            email: form.email,
+            phone: form.phone,
+            paymentMethod: form.paymentMethod,
+            items: activeItems,
+            totalExVat,
+            vat,
+            totalInclVat,
+          },
+        });
 
-      toast.success(
-        `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
-      );
+        if (error) throw error;
+
+        toast.success(
+          `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
+        );
+      }
+
       setForm({
         name: "",
         business: "",
@@ -243,7 +268,11 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
             disabled={submitting}
             className="w-full bg-gold text-ink py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors disabled:opacity-50"
           >
-            {submitting ? "Sending..." : "Send Order Request"}
+            {submitting
+              ? "Processing..."
+              : form.paymentMethod === "card"
+              ? "Proceed to Payment"
+              : "Send Order Request"}
           </button>
         </form>
       </DialogContent>
