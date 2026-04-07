@@ -1,6 +1,4 @@
-import { useState, useEffect } from "react";
-import { toast } from "sonner";
-import { useSearchParams } from "react-router-dom";
+import { useState } from "react";
 import KanjiWatermark from "./KanjiWatermark";
 import OrderModal from "./OrderModal";
 import { useFadeUp } from "./useFadeUp";
