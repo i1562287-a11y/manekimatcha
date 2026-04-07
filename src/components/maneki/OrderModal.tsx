@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Dialog,
   DialogContent,
@@ -39,11 +40,31 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
   const vat = form.outsidePortugal ? 0 : totalExVat * 0.23;
   const totalInclVat = totalExVat + vat;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) return;
     setSubmitting(true);
-    setTimeout(() => {
+
+    try {
+      const { data, error } = await supabase.functions.invoke("send-order-telegram", {
+        body: {
+          name: form.name,
+          business: form.business,
+          vatNumber: form.vatNumber,
+          outsidePortugal: form.outsidePortugal,
+          country: form.country,
+          email: form.email,
+          phone: form.phone,
+          paymentMethod: form.paymentMethod,
+          items: activeItems,
+          totalExVat,
+          vat,
+          totalInclVat,
+        },
+      });
+
+      if (error) throw error;
+
       toast.success(
         `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
       );
@@ -57,9 +78,13 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
         phone: "",
         paymentMethod: "bank-transfer",
       });
-      setSubmitting(false);
       onOpenChange(false);
-    }, 800);
+    } catch (err) {
+      console.error("Order submit error:", err);
+      toast.error("Failed to send order. Please try again or contact us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const textFields = [
