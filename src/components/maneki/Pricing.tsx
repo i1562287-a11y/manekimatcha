@@ -1,11 +1,12 @@
+import { Smartphone, Landmark, CreditCard, Building2, FileText } from "lucide-react";
 import { useFadeUp } from "./useFadeUp";
 
 const paymentMethods = [
-  { name: "MB Way", desc: "Instant mobile payment" },
-  { name: "Multibanco", desc: "ATM & online reference" },
-  { name: "Credit / Debit Card", desc: "Visa, Mastercard" },
-  { name: "Bank Transfer (IBAN)", desc: "Direct bank transfer" },
-  { name: "Invoice for B2B partners", desc: "NET 15 / NET 30 terms" },
+  { name: "MB Way", desc: "Instant mobile payment", icon: Smartphone },
+  { name: "Multibanco", desc: "ATM & online reference", icon: Landmark },
+  { name: "Credit / Debit Card", desc: "Visa, Mastercard", icon: CreditCard },
+  { name: "Bank Transfer (IBAN)", desc: "Direct bank transfer", icon: Building2 },
+  { name: "Invoice for B2B partners", desc: "NET 15 / NET 30 terms", icon: FileText },
 ];
 
 const Pricing = () => {
@@ -31,8 +32,9 @@ const Pricing = () => {
             {paymentMethods.map((m) => (
               <div
                 key={m.name}
-                className="flex items-center justify-between bg-cream/5 p-5 border border-cream/10"
+                className="flex items-center gap-4 bg-cream/5 p-5 border border-cream/10"
               >
+                <m.icon className="text-gold shrink-0" size={20} />
                 <div>
                   <p className="font-body text-sm text-cream font-semibold">{m.name}</p>
                   <p className="font-body text-xs text-cream/40">{m.desc}</p>
