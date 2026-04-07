@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -20,9 +20,10 @@ interface OrderModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   items: OrderItem[];
+  defaultPaymentMethod?: string;
 }
 
-const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
+const OrderModal = ({ open, onOpenChange, items, defaultPaymentMethod }: OrderModalProps) => {
   const [form, setForm] = useState({
     name: "",
     business: "",
@@ -31,9 +32,16 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
     country: "",
     email: "",
     phone: "",
-    paymentMethod: "bank-transfer",
+    paymentMethod: defaultPaymentMethod || "bank-transfer",
   });
   const [submitting, setSubmitting] = useState(false);
+
+  // Sync defaultPaymentMethod when modal opens
+  useEffect(() => {
+    if (open && defaultPaymentMethod) {
+      setForm((f) => ({ ...f, paymentMethod: defaultPaymentMethod }));
+    }
+  }, [open, defaultPaymentMethod]);
 
   const activeItems = items.filter((i) => i.kg > 0);
   const totalExVat = activeItems.reduce((s, i) => s + i.kg * i.pricePerKg, 0);
@@ -46,28 +54,53 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
     setSubmitting(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("send-order-telegram", {
-        body: {
-          name: form.name,
-          business: form.business,
-          vatNumber: form.vatNumber,
-          outsidePortugal: form.outsidePortugal,
-          country: form.country,
-          email: form.email,
-          phone: form.phone,
-          paymentMethod: form.paymentMethod,
-          items: activeItems,
-          totalExVat,
-          vat,
-          totalInclVat,
-        },
-      });
+      if (form.paymentMethod === "card") {
+        // Stripe checkout flow
+        const { data, error } = await supabase.functions.invoke("create-checkout-session", {
+          body: {
+            name: form.name,
+            business: form.business,
+            vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal,
+            country: form.country,
+            email: form.email,
+            phone: form.phone,
+            items: activeItems,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+        if (data?.url) {
+          window.location.href = data.url;
+          return;
+        }
+        throw new Error("No checkout URL returned");
+      } else {
+        // Invoice / non-card flow
+        const { data, error } = await supabase.functions.invoke("send-order-telegram", {
+          body: {
+            name: form.name,
+            business: form.business,
+            vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal,
+            country: form.country,
+            email: form.email,
+            phone: form.phone,
+            paymentMethod: form.paymentMethod,
+            items: activeItems,
+            totalExVat,
+            vat,
+            totalInclVat,
+          },
+        });
 
-      toast.success(
-        `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
-      );
+        if (error) throw error;
+
+        toast.success(
+          `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
+        );
+      }
+
       setForm({
         name: "",
         business: "",
@@ -243,7 +276,11 @@ const OrderModal = ({ open, onOpenChange, items }: OrderModalProps) => {
             disabled={submitting}
             className="w-full bg-gold text-ink py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors disabled:opacity-50"
           >
-            {submitting ? "Sending..." : "Send Order Request"}
+            {submitting
+              ? "Processing..."
+              : form.paymentMethod === "card"
+              ? "Proceed to Payment"
+              : "Send Order Request"}
           </button>
         </form>
       </DialogContent>

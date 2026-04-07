@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
+import { useSearchParams } from "react-router-dom";
 import KanjiWatermark from "./KanjiWatermark";
 import OrderModal from "./OrderModal";
 import { useFadeUp } from "./useFadeUp";
@@ -46,6 +47,21 @@ const Products = () => {
   const [matchaKg, setMatchaKg] = useState(1);
   const [houjiKg, setHoujiKg] = useState(0);
   const [invoiceOpen, setInvoiceOpen] = useState(false);
+  const [defaultPayment, setDefaultPayment] = useState<string | undefined>();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const payment = searchParams.get("payment");
+    if (payment === "success") {
+      toast.success("Payment successful! Thank you for your order.");
+      searchParams.delete("payment");
+      setSearchParams(searchParams, { replace: true });
+    } else if (payment === "cancelled") {
+      toast.info("Payment cancelled. Your order info has been saved — we'll follow up.");
+      searchParams.delete("payment");
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   const matchaTotal = matchaKg * MATCHA_PRICE;
   const houjiTotal = houjiKg * HOUJICHA_PRICE;
@@ -76,7 +92,8 @@ const Products = () => {
   };
 
   const handlePayNow = () => {
-    toast.info("Online payment coming soon! Use 'Request Invoice' for now.");
+    setDefaultPayment("card");
+    setInvoiceOpen(true);
   };
 
   const orderItems = [
@@ -235,7 +252,7 @@ const Products = () => {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 lg:flex-col xl:flex-row">
                 <button
-                  onClick={() => setInvoiceOpen(true)}
+                  onClick={() => { setDefaultPayment(undefined); setInvoiceOpen(true); }}
                   className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors"
                 >
                   <FileText size={18} />
@@ -265,6 +282,7 @@ const Products = () => {
         open={invoiceOpen}
         onOpenChange={setInvoiceOpen}
         items={orderItems}
+        defaultPaymentMethod={defaultPayment}
       />
     </section>
   );
