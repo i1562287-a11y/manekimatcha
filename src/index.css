@@ -4,53 +4,53 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 160 20% 10%;
+    --background: 39 33% 94%;
+    --foreground: 147 30% 14%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 160 20% 10%;
+    --card: 39 33% 94%;
+    --card-foreground: 147 30% 14%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 160 20% 10%;
+    --popover: 39 33% 94%;
+    --popover-foreground: 147 30% 14%;
 
-    --primary: 152 100% 32%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 153 28% 36%;
+    --primary-foreground: 39 33% 94%;
 
-    --secondary: 152 60% 90%;
-    --secondary-foreground: 160 20% 10%;
+    --secondary: 138 28% 94%;
+    --secondary-foreground: 147 30% 14%;
 
-    --muted: 150 10% 95%;
-    --muted-foreground: 160 10% 40%;
+    --muted: 36 20% 90%;
+    --muted-foreground: 147 15% 40%;
 
-    --accent: 152 100% 32%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 153 28% 36%;
+    --accent-foreground: 39 33% 94%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 150 10% 85%;
-    --input: 150 10% 85%;
-    --ring: 152 100% 32%;
+    --border: 36 15% 82%;
+    --input: 36 15% 82%;
+    --ring: 153 28% 36%;
 
     --radius: 0rem;
 
     /* Brand tokens */
-    --cream: 0 0% 100%;
-    --ink: 160 20% 10%;
-    --matcha: 152 100% 32%;
-    --gold: 152 80% 40%;
-    --pale-matcha: 150 40% 95%;
-    --batch-gold: 150 30% 92%;
-    --warm-cream: 0 0% 98%;
+    --cream: 39 33% 94%;
+    --ink: 147 30% 14%;
+    --matcha: 153 28% 36%;
+    --gold: 42 47% 54%;
+    --pale-matcha: 138 28% 94%;
+    --batch-gold: 42 56% 92%;
+    --warm-cream: 36 45% 95%;
 
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 160 20% 10%;
-    --sidebar-primary: 152 100% 32%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 150 40% 95%;
-    --sidebar-accent-foreground: 160 20% 10%;
-    --sidebar-border: 150 10% 85%;
-    --sidebar-ring: 152 100% 32%;
+    --sidebar-background: 39 33% 94%;
+    --sidebar-foreground: 147 30% 14%;
+    --sidebar-primary: 153 28% 36%;
+    --sidebar-primary-foreground: 39 33% 94%;
+    --sidebar-accent: 138 28% 94%;
+    --sidebar-accent-foreground: 147 30% 14%;
+    --sidebar-border: 36 15% 82%;
+    --sidebar-ring: 153 28% 36%;
   }
 }
 
