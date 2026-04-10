@@ -31,6 +31,10 @@ export default {
         "pale-matcha": "hsl(var(--pale-matcha))",
         "batch-gold": "hsl(var(--batch-gold))",
         "warm-cream": "hsl(var(--warm-cream))",
+        "cream-dark": "hsl(var(--cream-dark))",
+        fog: "hsl(var(--fog))",
+        mist: "hsl(var(--mist))",
+        white: "hsl(var(--white))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
