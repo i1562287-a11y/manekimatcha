@@ -40,7 +40,7 @@ const TrustBlock = () => {
       <div className="fade-up max-w-7xl mx-auto px-6">
 
         {/* PART 1 — Proof Block */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {proofCards.map((card) => (
             <div
               key={card.label}
