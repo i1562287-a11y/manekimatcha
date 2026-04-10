@@ -1,6 +1,7 @@
 import Navbar from "@/components/maneki/Navbar";
 import Hero from "@/components/maneki/Hero";
 import BatchBadge from "@/components/maneki/BatchBadge";
+import TrustBlock from "@/components/maneki/TrustBlock";
 import TrustStrip from "@/components/maneki/TrustStrip";
 import WhySection from "@/components/maneki/WhySection";
 import Products from "@/components/maneki/Products";
@@ -18,6 +19,7 @@ const Index = () => (
     <Navbar />
     <Hero />
     <BatchBadge />
+    <TrustBlock />
     <TrustStrip />
     <WhySection />
     <Products />
