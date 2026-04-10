@@ -78,13 +78,11 @@ const Contact = () => {
               <span className="font-body text-sm">hello@manekimatcha.pt</span>
             </a>
             <a
-              href="https://wa.me/351000000000"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="tel:+3920164126"
               className="flex items-center gap-4 text-cream/80 hover:text-gold transition-colors"
             >
-              <span className="font-mono-label text-xs tracking-widest uppercase">WhatsApp</span>
-              <span className="font-body text-sm">+351 000 000 000</span>
+              <span className="font-mono-label text-xs tracking-widest uppercase">Manager</span>
+              <span className="font-body text-sm">+39 20 164 126</span>
             </a>
             <a
               href="https://instagram.com/manekimatcha"
