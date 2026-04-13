@@ -1,8 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KanjiWatermark from "./KanjiWatermark";
+import ProductCarousel from "./ProductCarousel";
 import { useFadeUp } from "./useFadeUp";
 import { Minus, Plus, FileText, CreditCard, MessageCircle } from "lucide-react";
+
+import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
+import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
+import matchaPackFront from "@/assets/products/matcha/matcha-pack-front.png";
+import matchaPackBack from "@/assets/products/matcha/matcha-pack-back.png";
+
+const MATCHA_IMAGES = [
+  { src: matchaPowder, alt: "Matcha powder close-up" },
+  { src: matchaCup, alt: "Matcha in cup, top view" },
+  { src: matchaPackFront, alt: "Matcha package front" },
+  { src: matchaPackBack, alt: "Matcha package back" },
+];
 
 const MATCHA_PRICE = 155;
 const HOUJICHA_PRICE = 115;
@@ -101,6 +114,7 @@ const Products = () => {
           <div className="bg-pale-matcha p-8 lg:p-10 relative overflow-hidden">
             <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
             <div className="relative z-10">
+              <ProductCarousel images={MATCHA_IMAGES} accentColor="bg-matcha" />
               <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
                 SHIZUOKA · JAPAN
               </p>
