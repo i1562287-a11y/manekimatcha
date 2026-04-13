@@ -208,7 +208,7 @@ const Products = () => {
                 )}
 
                 <p className="font-body text-sm text-ink/60 mt-4">
-                  Designed for cafés: consistent taste, easy to work with, perfect for matcha lattes and iced drinks.
+                  The go-to matcha for cafés: rich colour, great taste, easy to work with. Makes every latte look and taste the way it should.
                 </p>
               </div>
             </div>
