@@ -124,7 +124,39 @@ const Products = () => {
         </div>
 
         <div className="space-y-8">
-          {/* Matcha */}
+          {/* Premium Matcha — SOLD OUT */}
+          <div className="bg-pale-matcha relative overflow-hidden opacity-75">
+            <KanjiWatermark kanji="極" className="right-2 -top-10 text-matcha" />
+            <div className="absolute top-4 right-4 z-20 bg-ink text-cream font-mono-label text-xs tracking-widest uppercase px-4 py-2">
+              Sold Out
+            </div>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-6 lg:p-8">
+                <ProductCarousel images={PREMIUM_IMAGES} />
+              </div>
+              <div className="p-6 lg:p-8 flex flex-col justify-center">
+                <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
+                  SHIZUOKA · JAPAN
+                </p>
+                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha Premium Grade</h3>
+                <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
+                  Ceremonial-level tencha from Shizuoka. Silky texture, deep umami, zero bitterness — crafted for straight matcha shots and thin usucha. The tea that speaks for itself.
+                </p>
+
+                <div className="bg-cream p-6 mb-4">
+                  <p className="font-heading text-2xl text-ink/40 font-bold">
+                    Price on request
+                  </p>
+                </div>
+
+                <p className="font-body text-sm text-ink/40 mt-4">
+                  Next batch expected soon. Contact us to reserve.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Matcha Standard */}
           <div className="bg-pale-matcha relative overflow-hidden">
             <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
@@ -139,7 +171,7 @@ const Products = () => {
                 </p>
                 <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha Standard Grade</h3>
                 <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
-                  Stone-ground tencha from Shizuoka. Clean umami, vibrant green, consistent quality for daily café service.
+                  Stone-ground tencha from Shizuoka. Vibrant green colour that pops in every latte — perfect for your customers' Instagram. Smooth, full-bodied taste with no bitterness. Built for high-volume café service.
                 </p>
 
                 <div className="bg-cream p-6 mb-4">
