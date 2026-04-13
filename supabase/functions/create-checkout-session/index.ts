@@ -116,7 +116,7 @@ Deno.serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
-    const origin = req.headers.get('origin') || 'https://manekimatcha.lovable.app';
+    const origin = req.headers.get('origin') || 'https://nokarimatcha.lovable.app';
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
