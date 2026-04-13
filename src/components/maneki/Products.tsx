@@ -21,6 +21,11 @@ const MATCHA_IMAGES = [
   { src: matchaPackFront, alt: "Matcha package front" },
 ];
 
+const PREMIUM_IMAGES = [
+  { src: premiumBall, alt: "Premium matcha ball close-up" },
+  { src: premiumPack, alt: "Premium matcha 1kg pack" },
+];
+
 const HOUJICHA_IMAGES = [
   { src: houjichaPowder, alt: "Houjicha powder close-up" },
   { src: houjiPackFront, alt: "Houjicha package front" },
