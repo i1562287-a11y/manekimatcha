@@ -114,6 +114,7 @@ const Products = () => {
           <div className="bg-pale-matcha p-8 lg:p-10 relative overflow-hidden">
             <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
             <div className="relative z-10">
+              <ProductCarousel images={MATCHA_IMAGES} accentColor="bg-matcha" />
               <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
                 SHIZUOKA · JAPAN
               </p>
