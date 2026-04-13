@@ -287,6 +287,13 @@ const Products = () => {
                   </p>
                 </div>
 
+                <button
+                  disabled
+                  className="flex items-center justify-center gap-2 bg-ink/20 text-ink/40 px-6 py-3 font-mono-label text-sm tracking-widest uppercase cursor-not-allowed"
+                >
+                  Sold Out
+                </button>
+
                 <p className="font-body text-sm text-ink/40 mt-4">
                   Next batch expected soon. Contact us to reserve.
                 </p>
