@@ -119,7 +119,7 @@ const Products = () => {
             Product Range
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-ink font-bold">
-            Two products. One standard.
+            Three products. One standard.
           </h2>
         </div>
 
