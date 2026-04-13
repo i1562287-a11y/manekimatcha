@@ -9,6 +9,9 @@ import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
 import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
 import matchaPackFront from "@/assets/products/matcha/matcha-pack-front.png";
 
+import premiumBall from "@/assets/products/matcha/matcha-ball.png";
+import premiumPack from "@/assets/products/matcha/matcha-pack-shizumat.png";
+
 import houjichaPowder from "@/assets/products/houjicha/houjicha-powder.png";
 import houjiPackFront from "@/assets/products/houjicha/houjicha-pack-front.png";
 
