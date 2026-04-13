@@ -5,7 +5,7 @@ const personas = [
     icon: "☕",
     title: "Specialty Cafés",
     pain: "\"My matcha supplier can't tell me which farm it's from.\"",
-    body: "You care about origin, quality, and presentation. Maneki gives you a traceable, competition-grade matcha that your baristas can talk about with confidence. We provide the documentation, the story, and the margin."
+    body: "You care about origin, quality, and presentation. Nokari gives you a traceable, competition-grade matcha that your baristas can talk about with confidence. We provide the documentation, the story, and the margin."
   },
   {
     icon: "🌿",
@@ -17,7 +17,7 @@ const personas = [
     icon: "🏪",
     title: "Expat & Asian Retailers",
     pain: "\"I want to stock real Japanese tea, not European repack.\"",
-    body: "Your customers know the difference. Maneki supplies genuine Japanese-origin tea with proper documentation — ready for retail shelves in Portugal and the EU. Labels included, compliance handled."
+    body: "Your customers know the difference. Nokari supplies genuine Japanese-origin tea with proper documentation — ready for retail shelves in Portugal and the EU. Labels included, compliance handled."
   },
 ];
 

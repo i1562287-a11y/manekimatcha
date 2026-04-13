@@ -34,9 +34,9 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
-            <span className="text-2xl">招き猫</span>
+            <span className="text-2xl">野狩</span>
             <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-ink font-medium">
-              Maneki Matcha
+              Nokari Matcha
             </span>
           </a>
 

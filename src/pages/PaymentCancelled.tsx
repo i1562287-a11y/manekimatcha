@@ -16,9 +16,9 @@ const PaymentCancelled = () => {
       <nav className="relative z-10 w-full px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <Link to="/" className="inline-flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="text-2xl">招き猫</span>
+            <span className="text-2xl">野狩</span>
             <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">
-              Maneki Matcha
+              Nokari Matcha
             </span>
           </Link>
         </div>
@@ -61,7 +61,7 @@ const PaymentCancelled = () => {
               className="inline-flex items-center justify-center gap-2 bg-gold text-ink px-8 py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors"
             >
               <ArrowLeft size={18} />
-              Back to Maneki
+              Back to Nokari
             </button>
             <button
               onClick={() => {

@@ -37,7 +37,7 @@ const Hero = () => {
         <div className="relative overflow-hidden bg-ink order-1 lg:order-2 aspect-square lg:aspect-auto lg:min-h-[500px]">
           <img
             src={matchaPowder}
-            alt="Maneki Matcha powder close-up"
+            alt="Nokari Matcha powder close-up"
             className="w-full h-full object-cover absolute inset-0"
           />
         </div>
