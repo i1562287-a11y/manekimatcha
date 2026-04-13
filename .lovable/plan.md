@@ -1,36 +1,26 @@
 
 
-## Product Image Carousel for Matcha
+## Hero Section: Photo Integration
 
-### What we're building
-A Shopify-style image carousel inside the Matcha product card with swipe/click navigation and dot indicators. 4 photos in order:
-1. Powder (ball of matcha powder)
-2. Top view (matcha in cup from above)
-3. Package front
-4. Package back
+### What changes
 
-### Implementation
+**Right panel** — replace the dark "Product Passport" block with a full-bleed matcha powder photo (the one already saved at `src/assets/products/matcha/matcha-powder.png`). The Product Passport specs move into a compact overlay strip at the bottom of the image (semi-transparent ink background), keeping the data visible but secondary to the visual.
 
-**1. Copy uploaded images to `src/assets/products/matcha/`**
-- `user-uploads://ChatGPT_Image_13_апр._2026_г._14_33_12.png` → `matcha-powder.png`
-- `user-uploads://6rGfX9DXxv3oUKKx0282a_gkaUZgfu_1.jpg` → `matcha-cup.jpg`
-- `user-uploads://ChatGPT_Image_13_апр._2026_г._14_44_08.png` → `matcha-pack-front.png`
-- `user-uploads://ChatGPT_Image_13_апр._2026_г._14_45_23.png` → `matcha-pack-back.png`
+This gives the hero a strong product-first impression — powder on dark, text on cream — classic split layout.
 
-**2. Create `src/components/maneki/ProductCarousel.tsx`**
-- Reusable carousel component using Embla (already installed via `carousel.tsx`)
-- Thumbnail dots at bottom, click to navigate
-- Touch swipe support (Embla handles this)
-- Sharp corners (no border-radius), consistent with brand
-- Aspect ratio container for consistent image sizing
-- Current slide indicator dots styled with matcha/gold colors
+### Farm photo for background/secondary use
 
-**3. Update `src/components/maneki/Products.tsx`**
-- Import `ProductCarousel` and matcha images
-- Add carousel above the price block inside the Matcha card
-- Pass array of image imports + alt texts to the carousel
-- Houjicha card stays as-is (no photos yet)
+You don't need it in the hero itself, but it would work great as a full-width background for the **TrustBlock** or **JapanTrust** section (parallax-style, dimmed).
 
-### Layout
-The carousel sits at the top of each product card, before the product name. Full-width within the card padding area. Dot navigation below the image.
+**Ideal size:** 1920 x 1080 px (landscape, 16:9)
+
+**Scene I'd want:**
+> Rows of tea bushes (tencha) on a misty hillside in Shizuoka, early morning light, soft fog between the rows. No people, no signage. Muted greens and warm golden light. Photographic style — not illustration. Think editorial travel photography: shallow atmosphere, natural haze, quiet and contemplative.
+
+### Technical steps
+
+1. Import `matcha-powder.png` into `Hero.tsx`
+2. Replace the right-side `<div className="bg-ink ...">` with an image container — `object-cover`, sharp corners, full height
+3. Move Product Passport specs into a small overlay bar at the bottom of the image (absolute positioned, `bg-ink/80 backdrop-blur`, horizontal layout on desktop, stacked on mobile)
+4. Adjust responsive behavior: on mobile, image stacks above text at ~50vh height
 
