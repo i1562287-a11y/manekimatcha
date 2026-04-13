@@ -8,13 +8,19 @@ import { Minus, Plus, FileText, CreditCard, MessageCircle } from "lucide-react";
 import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
 import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
 import matchaPackFront from "@/assets/products/matcha/matcha-pack-front.png";
-import matchaPackBack from "@/assets/products/matcha/matcha-pack-back.png";
+
+import houjichaPowder from "@/assets/products/houjicha/houjicha-powder.png";
+import houjiPackFront from "@/assets/products/houjicha/houjicha-pack-front.png";
 
 const MATCHA_IMAGES = [
   { src: matchaPowder, alt: "Matcha powder close-up" },
   { src: matchaCup, alt: "Matcha in cup, top view" },
   { src: matchaPackFront, alt: "Matcha package front" },
-  { src: matchaPackBack, alt: "Matcha package back" },
+];
+
+const HOUJICHA_IMAGES = [
+  { src: houjichaPowder, alt: "Houjicha powder close-up" },
+  { src: houjiPackFront, alt: "Houjicha package front" },
 ];
 
 const MATCHA_PRICE = 155;
@@ -123,9 +129,9 @@ const Products = () => {
                 <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
                   SHIZUOKA · JAPAN
                 </p>
-                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha</h3>
+                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha Standard Grade</h3>
                 <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
-                  Stone-ground tencha. Clean umami, vibrant green, stable in daily café service.
+                  Stone-ground tencha from Shizuoka. Clean umami, vibrant green, consistent quality for daily café service.
                 </p>
 
                 <div className="bg-cream p-6 mb-4">
@@ -171,7 +177,13 @@ const Products = () => {
           {/* Houjicha */}
           <div className="bg-warm-cream relative overflow-hidden">
             <KanjiWatermark kanji="焙" className="right-2 -top-10 text-gold" />
-            <div className="relative z-10 p-8 lg:p-10">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
+              {/* Left: carousel */}
+              <div className="p-6 lg:p-8">
+                <ProductCarousel images={HOUJICHA_IMAGES} />
+              </div>
+              {/* Right: details */}
+              <div className="p-6 lg:p-8 flex flex-col justify-center">
               <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold/60 mb-2">
                 MIYAZAKI · JAPAN
               </p>
@@ -216,6 +228,7 @@ const Products = () => {
               <p className="font-body text-sm text-ink/60 mt-4">
                 Ideal for houjicha lattes and evening drinks. A unique addition to your menu with almost no competition in most cafés.
               </p>
+              </div>
             </div>
           </div>
         </div>
