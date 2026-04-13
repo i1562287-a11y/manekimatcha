@@ -1,8 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import KanjiWatermark from "./KanjiWatermark";
+import ProductCarousel from "./ProductCarousel";
 import { useFadeUp } from "./useFadeUp";
 import { Minus, Plus, FileText, CreditCard, MessageCircle } from "lucide-react";
+
+import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
+import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
+import matchaPackFront from "@/assets/products/matcha/matcha-pack-front.png";
+import matchaPackBack from "@/assets/products/matcha/matcha-pack-back.png";
+
+const MATCHA_IMAGES = [
+  { src: matchaPowder, alt: "Matcha powder close-up" },
+  { src: matchaCup, alt: "Matcha in cup, top view" },
+  { src: matchaPackFront, alt: "Matcha package front" },
+  { src: matchaPackBack, alt: "Matcha package back" },
+];
 
 const MATCHA_PRICE = 155;
 const HOUJICHA_PRICE = 115;
