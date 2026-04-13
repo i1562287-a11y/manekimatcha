@@ -295,7 +295,7 @@ const Products = () => {
 
         {/* Order Summary & CTAs */}
         {hasOrder && (
-          <div className="mt-12 bg-ink p-8 lg:p-10">
+          <div id="order-summary" className="mt-12 bg-ink p-8 lg:p-10">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
               {/* Summary */}
               <div>
