@@ -124,8 +124,144 @@ const Products = () => {
         </div>
 
         <div className="space-y-8">
+          {/* Matcha Standard */}
+          <div className="bg-pale-matcha relative overflow-hidden">
+            <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-6 lg:p-8">
+                <ProductCarousel images={MATCHA_IMAGES} />
+              </div>
+              <div className="p-6 lg:p-8 flex flex-col justify-center">
+                <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
+                  SHIZUOKA · JAPAN
+                </p>
+                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha Standard Grade</h3>
+                <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
+                  Stone-ground tencha from Shizuoka. Vibrant green colour that pops in every latte — perfect for your customers' Instagram. Smooth, full-bodied taste with no bitterness. Built for high-volume café service.
+                </p>
+
+                <div className="bg-cream p-6 mb-4">
+                  <p className="font-heading text-3xl text-ink font-bold">
+                    €{MATCHA_PRICE}{" "}
+                    <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
+                  </p>
+                  <div className="mt-2 space-y-0.5">
+                    <p className="font-body text-sm text-ink/50">
+                      VAT (23%): €{(MATCHA_PRICE * VAT_RATE).toFixed(2)}
+                    </p>
+                    <p className="font-body text-sm text-ink font-semibold">
+                      €{(MATCHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
+                      <span className="font-normal text-ink/50">(incl. VAT)</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
+                    Quantity (kg)
+                  </p>
+                  <KgStepper value={matchaKg} onChange={setMatchaKg} />
+                </div>
+
+                {matchaKg > 0 && (
+                  <div className="bg-ink/5 p-4 mb-4">
+                    <div className="flex justify-between font-body text-sm text-ink/70">
+                      <span>{matchaKg} kg × €{MATCHA_PRICE}</span>
+                      <span className="font-heading font-bold text-ink">€{matchaTotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
+
+                {matchaKg > 0 && (
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("order-summary");
+                      el?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="flex items-center justify-center gap-2 bg-matcha text-cream px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink transition-colors"
+                  >
+                    <ShoppingCart size={16} />
+                    Add to Order
+                  </button>
+                )}
+
+                <p className="font-body text-sm text-ink/60 mt-4">
+                  The go-to matcha for cafés: rich colour, great taste, easy to work with. Makes every latte look and taste the way it should.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Houjicha */}
+          <div className="bg-warm-cream relative overflow-hidden">
+            <KanjiWatermark kanji="焙" className="right-2 -top-10 text-gold" />
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-6 lg:p-8">
+                <ProductCarousel images={HOUJICHA_IMAGES} />
+              </div>
+              <div className="p-6 lg:p-8 flex flex-col justify-center">
+                <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold/60 mb-2">
+                  MIYAZAKI · JAPAN
+                </p>
+                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Houjicha</h3>
+                <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
+                  Roasted Japanese green tea. Warm, toasty, naturally low in caffeine.
+                </p>
+
+                <div className="bg-cream p-6 mb-4">
+                  <p className="font-heading text-3xl text-ink font-bold">
+                    €{HOUJICHA_PRICE}{" "}
+                    <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
+                  </p>
+                  <div className="mt-2 space-y-0.5">
+                    <p className="font-body text-sm text-ink/50">
+                      VAT (23%): €{(HOUJICHA_PRICE * VAT_RATE).toFixed(2)}
+                    </p>
+                    <p className="font-body text-sm text-ink font-semibold">
+                      €{(HOUJICHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
+                      <span className="font-normal text-ink/50">(incl. VAT)</span>
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mb-4">
+                  <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
+                    Quantity (kg)
+                  </p>
+                  <KgStepper value={houjiKg} onChange={setHoujiKg} />
+                </div>
+
+                {houjiKg > 0 && (
+                  <div className="bg-ink/5 p-4 mb-4">
+                    <div className="flex justify-between font-body text-sm text-ink/70">
+                      <span>{houjiKg} kg × €{HOUJICHA_PRICE}</span>
+                      <span className="font-heading font-bold text-ink">€{houjiTotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
+
+                {houjiKg > 0 && (
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById("order-summary");
+                      el?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink hover:text-cream transition-colors"
+                  >
+                    <ShoppingCart size={16} />
+                    Add to Order
+                  </button>
+                )}
+
+                <p className="font-body text-sm text-ink/60 mt-4">
+                  Ideal for houjicha lattes and evening drinks. A unique addition to your menu with almost no competition in most cafés.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* Premium Matcha — SOLD OUT */}
-          <div className="bg-pale-matcha relative overflow-hidden opacity-75">
+          <div className="bg-pale-matcha relative overflow-hidden opacity-60">
             <KanjiWatermark kanji="極" className="right-2 -top-10 text-matcha" />
             <div className="absolute top-4 right-4 z-20 bg-ink text-cream font-mono-label text-xs tracking-widest uppercase px-4 py-2">
               Sold Out
@@ -152,122 +288,6 @@ const Products = () => {
                 <p className="font-body text-sm text-ink/40 mt-4">
                   Next batch expected soon. Contact us to reserve.
                 </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Matcha Standard */}
-          <div className="bg-pale-matcha relative overflow-hidden">
-            <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
-              {/* Left: carousel */}
-              <div className="p-6 lg:p-8">
-                <ProductCarousel images={MATCHA_IMAGES} />
-              </div>
-              {/* Right: details */}
-              <div className="p-6 lg:p-8 flex flex-col justify-center">
-                <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
-                  SHIZUOKA · JAPAN
-                </p>
-                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha Standard Grade</h3>
-                <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
-                  Stone-ground tencha from Shizuoka. Vibrant green colour that pops in every latte — perfect for your customers' Instagram. Smooth, full-bodied taste with no bitterness. Built for high-volume café service.
-                </p>
-
-                <div className="bg-cream p-6 mb-4">
-                  <p className="font-heading text-3xl text-ink font-bold">
-                    €{MATCHA_PRICE}{" "}
-                    <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
-                  </p>
-                  <div className="mt-2 space-y-0.5">
-                    <p className="font-body text-sm text-ink/50">
-                      VAT (23%): €{(MATCHA_PRICE * VAT_RATE).toFixed(2)}
-                    </p>
-                    <p className="font-body text-sm text-ink font-semibold">
-                      €{(MATCHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
-                      <span className="font-normal text-ink/50">(incl. VAT)</span>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Quantity */}
-                <div className="flex items-center justify-between mb-4">
-                  <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
-                    Quantity (kg)
-                  </p>
-                  <KgStepper value={matchaKg} onChange={setMatchaKg} />
-                </div>
-
-                {matchaKg > 0 && (
-                  <div className="bg-ink/5 p-4">
-                    <div className="flex justify-between font-body text-sm text-ink/70">
-                      <span>{matchaKg} kg × €{MATCHA_PRICE}</span>
-                      <span className="font-heading font-bold text-ink">€{matchaTotal.toFixed(2)}</span>
-                    </div>
-                  </div>
-                )}
-
-                <p className="font-body text-sm text-ink/60 mt-4">
-                  The go-to matcha for cafés: rich colour, great taste, easy to work with. Makes every latte look and taste the way it should.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Houjicha */}
-          <div className="bg-warm-cream relative overflow-hidden">
-            <KanjiWatermark kanji="焙" className="right-2 -top-10 text-gold" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
-              {/* Left: carousel */}
-              <div className="p-6 lg:p-8">
-                <ProductCarousel images={HOUJICHA_IMAGES} />
-              </div>
-              {/* Right: details */}
-              <div className="p-6 lg:p-8 flex flex-col justify-center">
-              <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold/60 mb-2">
-                MIYAZAKI · JAPAN
-              </p>
-              <h3 className="font-heading text-3xl text-ink font-bold mb-2">Houjicha</h3>
-              <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
-                Roasted Japanese green tea. Warm, toasty, naturally low in caffeine.
-              </p>
-
-              <div className="bg-cream p-6 mb-4">
-                <p className="font-heading text-3xl text-ink font-bold">
-                  €{HOUJICHA_PRICE}{" "}
-                  <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
-                </p>
-                <div className="mt-2 space-y-0.5">
-                  <p className="font-body text-sm text-ink/50">
-                    VAT (23%): €{(HOUJICHA_PRICE * VAT_RATE).toFixed(2)}
-                  </p>
-                  <p className="font-body text-sm text-ink font-semibold">
-                    €{(HOUJICHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
-                    <span className="font-normal text-ink/50">(incl. VAT)</span>
-                  </p>
-                </div>
-              </div>
-
-              {/* Quantity */}
-              <div className="flex items-center justify-between mb-4">
-                <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
-                  Quantity (kg)
-                </p>
-                <KgStepper value={houjiKg} onChange={setHoujiKg} />
-              </div>
-
-              {houjiKg > 0 && (
-                <div className="bg-ink/5 p-4">
-                  <div className="flex justify-between font-body text-sm text-ink/70">
-                    <span>{houjiKg} kg × €{HOUJICHA_PRICE}</span>
-                    <span className="font-heading font-bold text-ink">€{houjiTotal.toFixed(2)}</span>
-                  </div>
-                </div>
-              )}
-
-              <p className="font-body text-sm text-ink/60 mt-4">
-                Ideal for houjicha lattes and evening drinks. A unique addition to your menu with almost no competition in most cafés.
-              </p>
               </div>
             </div>
           </div>
