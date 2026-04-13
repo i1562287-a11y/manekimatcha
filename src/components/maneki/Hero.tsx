@@ -14,7 +14,7 @@ const Hero = () => {
             Direct Import · Japan
           </p>
           <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-ink leading-[1.1] mb-8">
-            Japanese matcha that proves itself.
+            From Japanese farms to your matcha latte.
           </h1>
 
           <div className="flex flex-col sm:flex-row gap-4">
