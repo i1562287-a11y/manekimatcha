@@ -1,26 +1,30 @@
 
 
-## Hero Section: Photo Integration
+## Ребренд: Maneki Matcha → Nokari Matcha
 
-### What changes
+Глобальная замена бренда во всех файлах. Японский текст: **招き猫 → 野狩**.
 
-**Right panel** — replace the dark "Product Passport" block with a full-bleed matcha powder photo (the one already saved at `src/assets/products/matcha/matcha-powder.png`). The Product Passport specs move into a compact overlay strip at the bottom of the image (semi-transparent ink background), keeping the data visible but secondary to the visual.
+### Замены по файлам
 
-This gives the hero a strong product-first impression — powder on dark, text on cream — classic split layout.
+| Файл | Что меняется |
+|------|-------------|
+| `index.html` | Title, og:title, twitter:title, meta author — "Maneki Matcha" → "Nokari Matcha" |
+| `Navbar.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha" |
+| `Footer.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", copyright |
+| `Hero.tsx` | alt текст |
+| `Contact.tsx` | "The cat beckons. We deliver." → "Quality speaks. We deliver.", "Maneki Matcha products" → "Nokari Matcha products" |
+| `WhySection.tsx` | "Why Maneki" → "Why Nokari", "Maneki vs. Generic" → "Nokari vs. Generic", колонка "Maneki" → "Nokari", ключи `maneki` в данных |
+| `WhoWeServe.tsx` | "Maneki gives you…" → "Nokari gives you…", "Maneki supplies…" → "Nokari supplies…" |
+| `KanjiWatermark.tsx` | Дефолтный kanji остаётся 抹茶 (это про матчу, не про бренд) |
+| `Order.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha" |
+| `PaymentSuccess.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", "Back to Maneki" → "Back to Nokari" |
+| `PaymentCancelled.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", "Back to Maneki" → "Back to Nokari" |
+| `.lovable/memory/index.md` | Обновить название проекта |
 
-### Farm photo for background/secondary use
+### Что НЕ меняется
+- Папка `src/components/maneki/` — переименование сломает все импорты без пользы
+- Цвета, шрифты, вёрстка — без изменений
+- CSS-переменные `matcha`, `cream` и т.д. — это цвета, не бренд
 
-You don't need it in the hero itself, but it would work great as a full-width background for the **TrustBlock** or **JapanTrust** section (parallax-style, dimmed).
-
-**Ideal size:** 1920 x 1080 px (landscape, 16:9)
-
-**Scene I'd want:**
-> Rows of tea bushes (tencha) on a misty hillside in Shizuoka, early morning light, soft fog between the rows. No people, no signage. Muted greens and warm golden light. Photographic style — not illustration. Think editorial travel photography: shallow atmosphere, natural haze, quiet and contemplative.
-
-### Technical steps
-
-1. Import `matcha-powder.png` into `Hero.tsx`
-2. Replace the right-side `<div className="bg-ink ...">` with an image container — `object-cover`, sharp corners, full height
-3. Move Product Passport specs into a small overlay bar at the bottom of the image (absolute positioned, `bg-ink/80 backdrop-blur`, horizontal layout on desktop, stacked on mobile)
-4. Adjust responsive behavior: on mobile, image stacks above text at ~50vh height
+~30 текстовых замен, 11 файлов.
 
