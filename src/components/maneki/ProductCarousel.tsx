@@ -3,10 +3,9 @@ import useEmblaCarousel from "embla-carousel-react";
 
 interface ProductCarouselProps {
   images: { src: string; alt: string }[];
-  accentColor?: string;
 }
 
-const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, accentColor = "bg-matcha" }) => {
+const ProductCarousel: React.FC<ProductCarouselProps> = ({ images }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -30,7 +29,8 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, accentColor =
   if (images.length === 0) return null;
 
   return (
-    <div className="mb-6">
+    <div className="flex flex-col gap-3">
+      {/* Main image */}
       <div ref={emblaRef} className="overflow-hidden">
         <div className="flex">
           {images.map((img, i) => (
@@ -47,19 +47,26 @@ const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, accentColor =
           ))}
         </div>
       </div>
+      {/* Thumbnails */}
       {images.length > 1 && (
-        <div className="flex justify-center gap-2 mt-3">
-          {images.map((_, i) => (
+        <div className="flex gap-2">
+          {images.map((img, i) => (
             <button
               key={i}
               onClick={() => scrollTo(i)}
-              className={`w-2 h-2 transition-all ${
+              className={`flex-1 aspect-square overflow-hidden border-2 transition-all ${
                 i === selectedIndex
-                  ? `${accentColor} scale-125`
-                  : "bg-ink/20 hover:bg-ink/40"
+                  ? "border-matcha opacity-100"
+                  : "border-transparent opacity-50 hover:opacity-80"
               }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
+              aria-label={`View ${img.alt}`}
+            >
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="w-full h-full object-cover"
+              />
+            </button>
           ))}
         </div>
       )}
