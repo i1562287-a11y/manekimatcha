@@ -169,9 +169,9 @@ const Products = () => {
           </div>
 
           {/* Houjicha */}
-          <div className="bg-warm-cream p-8 lg:p-10 relative overflow-hidden">
+          <div className="bg-warm-cream relative overflow-hidden">
             <KanjiWatermark kanji="焙" className="right-2 -top-10 text-gold" />
-            <div className="relative z-10">
+            <div className="relative z-10 p-8 lg:p-10">
               <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold/60 mb-2">
                 MIYAZAKI · JAPAN
               </p>
