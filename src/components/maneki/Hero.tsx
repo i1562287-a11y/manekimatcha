@@ -1,11 +1,10 @@
-import KanjiWatermark from "./KanjiWatermark";
+import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
 
 const specs = [
-  { label: "Origin", value: "Japan · Shizuoka Prefecture" },
-  { label: "Product", value: "Stone-ground tencha (matcha) · Roasted bancha (houjicha)" },
-  { label: "Importer", value: "Vechirka LDA · VAT PT 517639475" },
-  { label: "Compliance", value: "Certificate of Origin · Phytosanitary · EU food safety" },
-  { label: "Shipping", value: "CIF Lisbon via sea freight · consolidated per batch" },
+  { label: "Origin", value: "Japan · Shizuoka" },
+  { label: "Importer", value: "Vechirka LDA · PT 517639475" },
+  { label: "Compliance", value: "CoO · Phyto · EU food" },
+  { label: "Shipping", value: "CIF Lisbon · sea freight" },
 ];
 
 const Hero = () => {
@@ -56,21 +55,28 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right — Dark specs panel */}
-        <div className="bg-ink text-cream p-8 lg:p-12 relative overflow-hidden flex flex-col justify-center">
-          <KanjiWatermark kanji="猫" className="right-4 top-4 text-cream" />
-          <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-8">
-            Product Passport
-          </p>
-          <div className="space-y-6 relative z-10">
-            {specs.map((spec) => (
-              <div key={spec.label} className="border-b border-cream/10 pb-4">
-                <p className="font-mono-label text-xs tracking-widest uppercase text-cream/40 mb-1">
-                  {spec.label}
-                </p>
-                <p className="font-body text-sm text-cream/90">{spec.value}</p>
-              </div>
-            ))}
+        {/* Right — Product image with overlay specs */}
+        <div className="relative overflow-hidden bg-ink flex items-center justify-center min-h-[50vh] lg:min-h-0">
+          <img
+            src={matchaPowder}
+            alt="Maneki Matcha powder close-up"
+            className="w-full h-full object-cover absolute inset-0"
+          />
+          {/* Product Passport overlay */}
+          <div className="absolute bottom-0 left-0 right-0 bg-ink/80 backdrop-blur-sm p-4 lg:p-5 z-10">
+            <p className="font-mono-label text-[0.6rem] tracking-[0.3em] uppercase text-gold mb-3">
+              Product Passport
+            </p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {specs.map((spec) => (
+                <div key={spec.label}>
+                  <p className="font-mono-label text-[0.55rem] tracking-widest uppercase text-cream/40 mb-0.5">
+                    {spec.label}
+                  </p>
+                  <p className="font-body text-xs text-cream/90">{spec.value}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
