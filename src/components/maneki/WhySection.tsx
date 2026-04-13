@@ -24,13 +24,13 @@ const reasons = [
 ];
 
 const comparisonRows = [
-  { feature: "Farm traceability", maneki: "✓ Named farm", others: "✗ Blend / unknown" },
-  { feature: "Certificate of Origin", maneki: "✓ Every batch", others: "✗ Rarely provided" },
-  { feature: "HS code on invoice", maneki: "✓ 0902.10.00", others: "✗ Often missing" },
-  { feature: "Seasonal freshness", maneki: "✓ Current harvest", others: "✗ Old stock" },
-  { feature: "PT-compliant labels", maneki: "✓ Included", others: "✗ Your problem" },
-  { feature: "Pricing transparency", maneki: "✓ Per-kg, no markup layers", others: "✗ Opaque" },
-  { feature: "MOQ", maneki: "✓ From 1 kg", others: "✗ 5–25 kg typical" },
+  { feature: "Farm traceability", nokari: "✓ Named farm", others: "✗ Blend / unknown" },
+  { feature: "Certificate of Origin", nokari: "✓ Every batch", others: "✗ Rarely provided" },
+  { feature: "HS code on invoice", nokari: "✓ 0902.10.00", others: "✗ Often missing" },
+  { feature: "Seasonal freshness", nokari: "✓ Current harvest", others: "✗ Old stock" },
+  { feature: "PT-compliant labels", nokari: "✓ Included", others: "✗ Your problem" },
+  { feature: "Pricing transparency", nokari: "✓ Per-kg, no markup layers", others: "✗ Opaque" },
+  { feature: "MOQ", nokari: "✓ From 1 kg", others: "✗ 5–25 kg typical" },
 ];
 
 const WhySection = () => {
@@ -42,7 +42,7 @@ const WhySection = () => {
         {/* Left — Reasons */}
         <div>
           <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha mb-4">
-            Why Maneki
+            Why Nokari
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-ink font-bold mb-12">
             Four reasons this isn't your usual supplier pitch.
@@ -66,19 +66,19 @@ const WhySection = () => {
         {/* Right — Comparison Table */}
         <div className="bg-ink p-8 lg:p-10 self-start">
           <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-6">
-            Maneki vs. Generic Suppliers
+            Nokari vs. Generic Suppliers
           </p>
           <div className="space-y-0">
             {/* Header */}
             <div className="grid grid-cols-3 gap-4 pb-3 border-b border-cream/10 mb-1">
               <span className="font-mono-label text-xs tracking-widest uppercase text-cream/40">Feature</span>
-              <span className="font-mono-label text-xs tracking-widest uppercase text-gold">Maneki</span>
+              <span className="font-mono-label text-xs tracking-widest uppercase text-gold">Nokari</span>
               <span className="font-mono-label text-xs tracking-widest uppercase text-cream/40">Others</span>
             </div>
             {comparisonRows.map((row, i) => (
               <div key={i} className="grid grid-cols-3 gap-4 py-3 border-b border-cream/5">
                 <span className="font-body text-sm text-cream/70">{row.feature}</span>
-                <span className="font-body text-sm text-matcha">{row.maneki}</span>
+                <span className="font-body text-sm text-matcha">{row.nokari}</span>
                 <span className="font-body text-sm text-cream/30">{row.others}</span>
               </div>
             ))}

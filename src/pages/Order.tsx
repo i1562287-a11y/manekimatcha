@@ -132,7 +132,7 @@ const Order = () => {
       {/* Navbar */}
       <nav className="border-b border-cream/10 px-6 py-4">
         <Link to="/" className="font-heading text-xl text-cream hover:text-gold transition-colors">
-          招き猫 Maneki Matcha
+          野狩 Nokari Matcha
         </Link>
       </nav>
 

@@ -8,9 +8,9 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-2xl">招き猫</span>
+              <span className="text-2xl">野狩</span>
               <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">
-                Maneki Matcha
+                Nokari Matcha
               </span>
             </div>
             <p className="font-body text-sm text-cream/40 max-w-xs">
@@ -54,7 +54,7 @@ const Footer = () => {
 
         <div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="font-body text-xs text-cream/30">
-            © {year} Maneki Matcha by Vechirka LDA. All rights reserved.
+            © {year} Nokari Matcha by Vechirka LDA. All rights reserved.
           </p>
           <div className="flex gap-6">
             <a href="#" className="font-body text-xs text-cream/30 hover:text-gold transition-colors">

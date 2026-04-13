@@ -62,7 +62,7 @@ const Contact = () => {
             Get Started
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-cream font-bold mb-4">
-            The cat beckons.<br />We deliver.
+            Quality speaks.<br />We deliver.
           </h2>
           <p className="font-body text-cream/70 mb-10 max-w-md">
             Request a sample kit and discover what farm-traceable Japanese tea tastes like 
@@ -138,7 +138,7 @@ const Contact = () => {
           </button>
 
           <p className="font-body text-xs text-cream/30 text-center">
-            By submitting, you agree to be contacted about Maneki Matcha products. 
+            By submitting, you agree to be contacted about Nokari Matcha products. 
             We don't share your data with third parties.
           </p>
         </form>
