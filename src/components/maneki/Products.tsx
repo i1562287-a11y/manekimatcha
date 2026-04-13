@@ -109,56 +109,62 @@ const Products = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-8">
           {/* Matcha */}
-          <div className="bg-pale-matcha p-8 lg:p-10 relative overflow-hidden">
+          <div className="bg-pale-matcha relative overflow-hidden">
             <KanjiWatermark kanji="抹" className="right-2 -top-10 text-matcha" />
-            <div className="relative z-10">
-              <ProductCarousel images={MATCHA_IMAGES} accentColor="bg-matcha" />
-              <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
-                SHIZUOKA · JAPAN
-              </p>
-              <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha</h3>
-              <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
-                Stone-ground tencha. Clean umami, vibrant green, stable in daily café service.
-              </p>
-
-              <div className="bg-cream p-6 mb-4">
-                <p className="font-heading text-3xl text-ink font-bold">
-                  €{MATCHA_PRICE}{" "}
-                  <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
-                </p>
-                <div className="mt-2 space-y-0.5">
-                  <p className="font-body text-sm text-ink/50">
-                    VAT (23%): €{(MATCHA_PRICE * VAT_RATE).toFixed(2)}
-                  </p>
-                  <p className="font-body text-sm text-ink font-semibold">
-                    €{(MATCHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
-                    <span className="font-normal text-ink/50">(incl. VAT)</span>
-                  </p>
-                </div>
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2">
+              {/* Left: carousel */}
+              <div className="p-6 lg:p-8">
+                <ProductCarousel images={MATCHA_IMAGES} />
               </div>
-
-              {/* Quantity */}
-              <div className="flex items-center justify-between mb-4">
-                <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
-                  Quantity (kg)
+              {/* Right: details */}
+              <div className="p-6 lg:p-8 flex flex-col justify-center">
+                <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-matcha/60 mb-2">
+                  SHIZUOKA · JAPAN
                 </p>
-                <KgStepper value={matchaKg} onChange={setMatchaKg} />
-              </div>
+                <h3 className="font-heading text-3xl text-ink font-bold mb-2">Matcha</h3>
+                <p className="font-body text-sm text-ink/60 mb-6 max-w-sm">
+                  Stone-ground tencha. Clean umami, vibrant green, stable in daily café service.
+                </p>
 
-              {matchaKg > 0 && (
-                <div className="bg-ink/5 p-4">
-                  <div className="flex justify-between font-body text-sm text-ink/70">
-                    <span>{matchaKg} kg × €{MATCHA_PRICE}</span>
-                    <span className="font-heading font-bold text-ink">€{matchaTotal.toFixed(2)}</span>
+                <div className="bg-cream p-6 mb-4">
+                  <p className="font-heading text-3xl text-ink font-bold">
+                    €{MATCHA_PRICE}{" "}
+                    <span className="font-body text-base font-normal text-ink/50">/ kg (ex VAT)</span>
+                  </p>
+                  <div className="mt-2 space-y-0.5">
+                    <p className="font-body text-sm text-ink/50">
+                      VAT (23%): €{(MATCHA_PRICE * VAT_RATE).toFixed(2)}
+                    </p>
+                    <p className="font-body text-sm text-ink font-semibold">
+                      €{(MATCHA_PRICE * (1 + VAT_RATE)).toFixed(2)} / kg{" "}
+                      <span className="font-normal text-ink/50">(incl. VAT)</span>
+                    </p>
                   </div>
                 </div>
-              )}
 
-              <p className="font-body text-sm text-ink/60 mt-4">
-                Designed for cafés: consistent taste, easy to work with, perfect for matcha lattes and iced drinks.
-              </p>
+                {/* Quantity */}
+                <div className="flex items-center justify-between mb-4">
+                  <p className="font-mono-label text-xs tracking-widest uppercase text-ink/40">
+                    Quantity (kg)
+                  </p>
+                  <KgStepper value={matchaKg} onChange={setMatchaKg} />
+                </div>
+
+                {matchaKg > 0 && (
+                  <div className="bg-ink/5 p-4">
+                    <div className="flex justify-between font-body text-sm text-ink/70">
+                      <span>{matchaKg} kg × €{MATCHA_PRICE}</span>
+                      <span className="font-heading font-bold text-ink">€{matchaTotal.toFixed(2)}</span>
+                    </div>
+                  </div>
+                )}
+
+                <p className="font-body text-sm text-ink/60 mt-4">
+                  Designed for cafés: consistent taste, easy to work with, perfect for matcha lattes and iced drinks.
+                </p>
+              </div>
             </div>
           </div>
 
