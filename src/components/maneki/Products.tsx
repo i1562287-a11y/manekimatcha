@@ -172,18 +172,19 @@ const Products = () => {
                   </div>
                 )}
 
-                {matchaKg > 0 && (
-                  <button
-                    onClick={() => {
+                <button
+                  onClick={() => {
+                    if (matchaKg === 0) setMatchaKg(1);
+                    setTimeout(() => {
                       const el = document.getElementById("order-summary");
                       el?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="flex items-center justify-center gap-2 bg-matcha text-cream px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink transition-colors"
-                  >
-                    <ShoppingCart size={16} />
-                    Add to Order
-                  </button>
-                )}
+                    }, 100);
+                  }}
+                  className="flex items-center justify-center gap-2 bg-matcha text-cream px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink transition-colors"
+                >
+                  <ShoppingCart size={16} />
+                  Add to Order
+                </button>
 
                 <p className="font-body text-sm text-ink/60 mt-4">
                   The go-to matcha for cafés: rich colour, great taste, easy to work with. Makes every latte look and taste the way it should.
@@ -240,18 +241,19 @@ const Products = () => {
                   </div>
                 )}
 
-                {houjiKg > 0 && (
-                  <button
-                    onClick={() => {
+                <button
+                  onClick={() => {
+                    if (houjiKg === 0) setHoujiKg(1);
+                    setTimeout(() => {
                       const el = document.getElementById("order-summary");
                       el?.scrollIntoView({ behavior: "smooth" });
-                    }}
-                    className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink hover:text-cream transition-colors"
-                  >
-                    <ShoppingCart size={16} />
-                    Add to Order
-                  </button>
-                )}
+                    }, 100);
+                  }}
+                  className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink hover:text-cream transition-colors"
+                >
+                  <ShoppingCart size={16} />
+                  Add to Order
+                </button>
 
                 <p className="font-body text-sm text-ink/60 mt-4">
                   Ideal for houjicha lattes and evening drinks. A unique addition to your menu with almost no competition in most cafés.
@@ -284,6 +286,13 @@ const Products = () => {
                     Price on request
                   </p>
                 </div>
+
+                <button
+                  disabled
+                  className="flex items-center justify-center gap-2 bg-ink/20 text-ink/40 px-6 py-3 font-mono-label text-sm tracking-widest uppercase cursor-not-allowed"
+                >
+                  Sold Out
+                </button>
 
                 <p className="font-body text-sm text-ink/40 mt-4">
                   Next batch expected soon. Contact us to reserve.
