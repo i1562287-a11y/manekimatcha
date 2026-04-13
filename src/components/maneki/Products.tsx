@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import KanjiWatermark from "./KanjiWatermark";
 import ProductCarousel from "./ProductCarousel";
 import { useFadeUp } from "./useFadeUp";
-import { Minus, Plus, FileText, CreditCard, MessageCircle } from "lucide-react";
+import { Minus, Plus, FileText, CreditCard, MessageCircle, ShoppingCart } from "lucide-react";
 
 import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
 import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
