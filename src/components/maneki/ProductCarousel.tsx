@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 interface ProductCarouselProps {
@@ -6,7 +6,7 @@ interface ProductCarouselProps {
   accentColor?: string;
 }
 
-const ProductCarousel = ({ images, accentColor = "bg-matcha" }: ProductCarouselProps) => {
+const ProductCarousel: React.FC<ProductCarouselProps> = ({ images, accentColor = "bg-matcha" }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
