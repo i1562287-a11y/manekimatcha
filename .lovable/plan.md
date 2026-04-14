@@ -1,27 +1,20 @@
 
 
-## Add Mood Photography to Site
+## OG-image: продуктовое фото для превью ссылки
 
-Four beautiful photos available — tea farm, processing, matcha bowl, leaf picking. The goal is to add atmosphere without overloading. Here's where they fit best:
+Сейчас в `index.html` стоит скриншот сайта как `og:image`. Нужно заменить на продуктовое фото матчи (загруженный шарик матчи).
 
-### Placement Strategy
+### Проблема
 
-**1. Hero section** — Replace current matcha-powder product shot with `shot_003.png` (farmer on tea field with misty mountains). This is the strongest hero image — cinematic, emotional, tells the "from Japanese farms" story instantly. The product photos already live in the Products section.
+OG-image должен быть доступен по публичному URL. Файлы из `src/assets/` бандлятся Vite с хешами — их URL непредсказуем. Нужно положить картинку в `public/` — тогда она будет доступна по фиксированному пути.
 
-**2. JapanTrust section** — Add a full-width mood image above the three cards. Use `shot_002.png` (tea processing workshop). This section is about craft, traceability, and the Japan standard — the processing photo reinforces that perfectly. Rendered as a wide horizontal band with `object-cover`, ~400px height.
+### План
 
-**3. WhySection** — Add `shot_002-2.png` (hands picking tea leaves) as a small accent image below the "Why Nokari" heading, before the four reasons. Compact, square-ish crop. Adds a tactile, human element to the text-heavy section.
+1. Скопировать загруженное фото `ChatGPT_Image_13_апр._2026_г._16_31_43-2.png` → `public/og-image.png`
+2. В `index.html` заменить текущие `og:image` и `twitter:image` URL на `/og-image.png` (относительный путь — браузеры и соцсети резолвят его от домена)
 
-**4. Skip** `mood_05_wabi.png` (matcha bowl) — the Products section already has matcha-cup photos in the carousel. Adding another bowl shot would be redundant.
-
-### Files Changed
-
-| File | Change |
-|------|--------|
-| `src/assets/mood/` | Copy 3 images: `shot_003.png`, `shot_002.png`, `shot_002-2.png` |
-| `Hero.tsx` | Import `shot_003` instead of `matchaPowder`; update alt text |
-| `JapanTrust.tsx` | Import `shot_002`; add full-width image band above the 3 cards |
-| `WhySection.tsx` | Import `shot_002-2`; add small image between heading and reasons list |
-
-Three photos, three sections. No section gets more than one image. Page stays clean.
+| Файл | Изменение |
+|------|-----------|
+| `public/og-image.png` | Новый файл — продуктовое фото матчи |
+| `index.html` | Обновить 2 meta-тега `og:image` и 2 `twitter:image` на `/og-image.png` |
 
