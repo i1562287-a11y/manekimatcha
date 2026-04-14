@@ -1,4 +1,5 @@
 import { useFadeUp } from "./useFadeUp";
+import moodPicking from "@/assets/mood/shot_002-2.png";
 
 const reasons = [
   {
@@ -47,6 +48,14 @@ const WhySection = () => {
           <h2 className="font-heading text-4xl md:text-5xl text-ink font-bold mb-12">
             Four reasons this isn't your usual supplier pitch.
           </h2>
+
+          <div className="mb-10 overflow-hidden">
+            <img
+              src={moodPicking}
+              alt="Hands picking Japanese tea leaves"
+              className="w-full h-[240px] object-cover"
+            />
+          </div>
 
           <div className="space-y-10">
             {reasons.map((r) => (

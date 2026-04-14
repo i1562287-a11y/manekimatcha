@@ -1,4 +1,4 @@
-import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
+import heroImage from "@/assets/mood/shot_003.png";
 
 const Hero = () => {
   const scrollTo = (id: string) => {
@@ -36,8 +36,8 @@ const Hero = () => {
         {/* Right — Image */}
         <div className="relative overflow-hidden bg-ink order-1 lg:order-2 aspect-square lg:aspect-auto lg:min-h-[500px]">
           <img
-            src={matchaPowder}
-            alt="Nokari Matcha powder close-up"
+            src={heroImage}
+            alt="Japanese tea farmer in misty mountain fields"
             className="w-full h-full object-cover absolute inset-0"
           />
         </div>
