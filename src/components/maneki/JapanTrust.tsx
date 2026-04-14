@@ -1,4 +1,5 @@
 import { useFadeUp } from "./useFadeUp";
+import moodProcessing from "@/assets/mood/shot_002.png";
 
 const cards = [
   {
@@ -34,6 +35,14 @@ const JapanTrust = () => {
           <h2 className="font-heading text-4xl md:text-5xl text-ink font-bold">
             Why Japan. Why this way.
           </h2>
+        </div>
+
+        <div className="mb-12 overflow-hidden">
+          <img
+            src={moodProcessing}
+            alt="Traditional Japanese tea processing workshop"
+            className="w-full h-[400px] object-cover"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
