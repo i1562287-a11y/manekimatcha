@@ -1,30 +1,27 @@
 
 
-## Ребренд: Maneki Matcha → Nokari Matcha
+## Add Mood Photography to Site
 
-Глобальная замена бренда во всех файлах. Японский текст: **招き猫 → 野狩**.
+Four beautiful photos available — tea farm, processing, matcha bowl, leaf picking. The goal is to add atmosphere without overloading. Here's where they fit best:
 
-### Замены по файлам
+### Placement Strategy
 
-| Файл | Что меняется |
-|------|-------------|
-| `index.html` | Title, og:title, twitter:title, meta author — "Maneki Matcha" → "Nokari Matcha" |
-| `Navbar.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha" |
-| `Footer.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", copyright |
-| `Hero.tsx` | alt текст |
-| `Contact.tsx` | "The cat beckons. We deliver." → "Quality speaks. We deliver.", "Maneki Matcha products" → "Nokari Matcha products" |
-| `WhySection.tsx` | "Why Maneki" → "Why Nokari", "Maneki vs. Generic" → "Nokari vs. Generic", колонка "Maneki" → "Nokari", ключи `maneki` в данных |
-| `WhoWeServe.tsx` | "Maneki gives you…" → "Nokari gives you…", "Maneki supplies…" → "Nokari supplies…" |
-| `KanjiWatermark.tsx` | Дефолтный kanji остаётся 抹茶 (это про матчу, не про бренд) |
-| `Order.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha" |
-| `PaymentSuccess.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", "Back to Maneki" → "Back to Nokari" |
-| `PaymentCancelled.tsx` | 招き猫 → 野狩, "Maneki Matcha" → "Nokari Matcha", "Back to Maneki" → "Back to Nokari" |
-| `.lovable/memory/index.md` | Обновить название проекта |
+**1. Hero section** — Replace current matcha-powder product shot with `shot_003.png` (farmer on tea field with misty mountains). This is the strongest hero image — cinematic, emotional, tells the "from Japanese farms" story instantly. The product photos already live in the Products section.
 
-### Что НЕ меняется
-- Папка `src/components/maneki/` — переименование сломает все импорты без пользы
-- Цвета, шрифты, вёрстка — без изменений
-- CSS-переменные `matcha`, `cream` и т.д. — это цвета, не бренд
+**2. JapanTrust section** — Add a full-width mood image above the three cards. Use `shot_002.png` (tea processing workshop). This section is about craft, traceability, and the Japan standard — the processing photo reinforces that perfectly. Rendered as a wide horizontal band with `object-cover`, ~400px height.
 
-~30 текстовых замен, 11 файлов.
+**3. WhySection** — Add `shot_002-2.png` (hands picking tea leaves) as a small accent image below the "Why Nokari" heading, before the four reasons. Compact, square-ish crop. Adds a tactile, human element to the text-heavy section.
+
+**4. Skip** `mood_05_wabi.png` (matcha bowl) — the Products section already has matcha-cup photos in the carousel. Adding another bowl shot would be redundant.
+
+### Files Changed
+
+| File | Change |
+|------|--------|
+| `src/assets/mood/` | Copy 3 images: `shot_003.png`, `shot_002.png`, `shot_002-2.png` |
+| `Hero.tsx` | Import `shot_003` instead of `matchaPowder`; update alt text |
+| `JapanTrust.tsx` | Import `shot_002`; add full-width image band above the 3 cards |
+| `WhySection.tsx` | Import `shot_002-2`; add small image between heading and reasons list |
+
+Three photos, three sections. No section gets more than one image. Page stays clean.
 
