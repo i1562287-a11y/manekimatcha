@@ -1,17 +1,31 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingCart, Globe } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useTranslation, Locale } from "@/i18n/LanguageContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const navLinks = [
-  { label: "Products & Pricing", href: "#products" },
-  { label: "Compliance", href: "#compliance" },
-  { label: "Contact", href: "#contact" },
+const languages: { code: Locale; flag: string; label: string }[] = [
+  { code: "en", flag: "🇬🇧", label: "EN" },
+  { code: "pt", flag: "🇵🇹", label: "PT" },
+  { code: "es", flag: "🇪🇸", label: "ES" },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { totalItems, setDrawerOpen } = useCart();
+  const { t, locale, setLocale } = useTranslation();
+
+  const navLinks = [
+    { label: t("nav.products"), href: "#products" },
+    { label: t("nav.compliance"), href: "#compliance" },
+    { label: t("nav.contact"), href: "#contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -23,6 +37,8 @@ const Navbar = () => {
     setMobileOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
+
+  const currentLang = languages.find((l) => l.code === locale)!;
 
   return (
     <>
@@ -51,11 +67,32 @@ const Navbar = () => {
                 {link.label}
               </button>
             ))}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1.5 font-mono-label text-xs tracking-widest uppercase text-ink/70 hover:text-ink transition-colors focus:outline-none">
+                <Globe size={14} />
+                <span>{currentLang.flag} {currentLang.label}</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-cream border-ink/10 min-w-0">
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setLocale(lang.code)}
+                    className={`font-mono-label text-xs tracking-widest cursor-pointer ${
+                      locale === lang.code ? "text-matcha font-bold" : "text-ink/70"
+                    }`}
+                  >
+                    {lang.flag} {lang.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <button
               onClick={() => handleClick("#contact")}
               className="bg-matcha text-cream px-5 py-2.5 font-mono-label text-xs tracking-widest uppercase hover:bg-ink transition-colors"
             >
-              Request Samples
+              {t("nav.request_samples")}
             </button>
             <button
               onClick={() => setDrawerOpen(true)}
@@ -105,11 +142,28 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+
+          <div className="flex gap-4">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => { setLocale(lang.code); setMobileOpen(false); }}
+                className={`font-mono-label text-sm tracking-widest px-3 py-2 border ${
+                  locale === lang.code
+                    ? "border-matcha text-matcha bg-pale-matcha"
+                    : "border-ink/20 text-ink/60"
+                }`}
+              >
+                {lang.flag} {lang.label}
+              </button>
+            ))}
+          </div>
+
           <button
             onClick={() => handleClick("#contact")}
             className="bg-matcha text-cream px-8 py-3 font-mono-label text-sm tracking-widest uppercase mt-4"
           >
-            Request Samples
+            {t("nav.request_samples")}
           </button>
         </div>
       )}

@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useCart } from "@/context/CartContext";
+import { useTranslation } from "@/i18n/LanguageContext";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -21,9 +22,9 @@ const Order = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { items: cartItems, clearCart } = useCart();
+  const { t } = useTranslation();
   const state = location.state as OrderState | null;
 
-  // Use location state if available, otherwise fall back to cart context
   const orderSource: OrderItem[] = state?.items?.length ? state.items : cartItems;
 
   const [form, setForm] = useState({
@@ -60,50 +61,31 @@ const Order = () => {
       if (form.paymentMethod === "card") {
         const { data, error } = await supabase.functions.invoke("create-checkout-session", {
           body: {
-            name: form.name,
-            business: form.business,
-            vatNumber: form.vatNumber,
-            outsidePortugal: form.outsidePortugal,
-            country: form.country,
-            email: form.email,
-            phone: form.phone,
-            items: activeItems,
+            name: form.name, business: form.business, vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal, country: form.country,
+            email: form.email, phone: form.phone, items: activeItems,
           },
         });
         if (error) throw error;
-        if (data?.url) {
-          clearCart();
-          window.location.href = data.url;
-          return;
-        }
+        if (data?.url) { clearCart(); window.location.href = data.url; return; }
         throw new Error("No checkout URL returned");
       } else {
         const { error } = await supabase.functions.invoke("send-order-telegram", {
           body: {
-            name: form.name,
-            business: form.business,
-            vatNumber: form.vatNumber,
-            outsidePortugal: form.outsidePortugal,
-            country: form.country,
-            email: form.email,
-            phone: form.phone,
-            paymentMethod: form.paymentMethod,
-            items: activeItems,
-            totalExVat,
-            vat,
-            totalInclVat,
+            name: form.name, business: form.business, vatNumber: form.vatNumber,
+            outsidePortugal: form.outsidePortugal, country: form.country,
+            email: form.email, phone: form.phone, paymentMethod: form.paymentMethod,
+            items: activeItems, totalExVat, vat, totalInclVat,
           },
         });
         if (error) throw error;
         clearCart();
-        toast.success(
-          `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
-        );
+        toast.success(t("order.toast_success", { email: form.email }) + (form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""));
         navigate("/", { replace: true });
       }
     } catch (err) {
       console.error("Order submit error:", err);
-      toast.error("Failed to send order. Please try again or contact us directly.");
+      toast.error(t("order.toast_error"));
     } finally {
       setSubmitting(false);
     }
@@ -111,9 +93,7 @@ const Order = () => {
 
   const renderInput = (field: { key: string; label: string; type: string; required: boolean }) => (
     <div key={field.key}>
-      <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
-        {field.label}
-      </label>
+      <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">{field.label}</label>
       <input
         type={field.type}
         required={field.required}
@@ -125,31 +105,27 @@ const Order = () => {
   );
 
   const textFields = [
-    { key: "name", label: "Your Name", type: "text", required: true },
-    { key: "business", label: "Business Name", type: "text", required: false },
+    { key: "name", label: t("order.name"), type: "text", required: true },
+    { key: "business", label: t("order.business"), type: "text", required: false },
   ];
 
   const contactFields = [
-    { key: "email", label: "Email", type: "email", required: true },
-    { key: "phone", label: "Phone / WhatsApp", type: "tel", required: false },
+    { key: "email", label: t("order.email"), type: "email", required: true },
+    { key: "phone", label: t("order.phone"), type: "tel", required: false },
   ];
 
   return (
     <div className="min-h-screen bg-ink flex flex-col">
       <nav className="border-b border-cream/10 px-6 py-4">
-        <Link to="/" className="font-heading text-xl text-cream hover:text-gold transition-colors">
-          野狩 Nokari Matcha
-        </Link>
+        <Link to="/" className="font-heading text-xl text-cream hover:text-gold transition-colors">野狩 Nokari Matcha</Link>
       </nav>
 
       <div className="flex-1 py-12 px-6">
         <div className="max-w-lg mx-auto">
-          <h1 className="font-heading text-2xl text-cream mb-8">Request Invoice</h1>
+          <h1 className="font-heading text-2xl text-cream mb-8">{t("order.title")}</h1>
 
           <div className="bg-cream/5 border border-cream/10 p-5 mb-8">
-            <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-3">
-              Order Summary
-            </p>
+            <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-3">{t("order.summary")}</p>
             {activeItems.map((item) => (
               <div key={item.name} className="flex justify-between font-body text-sm text-cream/80 mb-1">
                 <span>{item.kg} kg × {item.name}</span>
@@ -158,20 +134,18 @@ const Order = () => {
             ))}
             <div className="border-t border-cream/10 mt-3 pt-3 space-y-1">
               <div className="flex justify-between font-body text-sm text-cream/50">
-                <span>Subtotal (ex VAT)</span>
+                <span>{t("order.subtotal")}</span>
                 <span>€{totalExVat.toFixed(2)}</span>
               </div>
               <div className="flex justify-between font-body text-sm text-cream/50">
-                <span>{form.outsidePortugal ? "VAT (reverse charge)" : "VAT (23%)"}</span>
+                <span>{form.outsidePortugal ? t("order.vat_reverse") : t("order.vat_23")}</span>
                 <span>€{vat.toFixed(2)}</span>
               </div>
               {form.outsidePortugal && (
-                <p className="font-body text-xs text-gold/70 italic">
-                  EU reverse charge — Art. 138 VAT Directive
-                </p>
+                <p className="font-body text-xs text-gold/70 italic">{t("order.vat_note")}</p>
               )}
               <div className="flex justify-between font-heading text-lg text-cream font-bold">
-                <span>Total</span>
+                <span>{t("order.total")}</span>
                 <span>€{totalInclVat.toFixed(2)}</span>
               </div>
             </div>
@@ -182,7 +156,7 @@ const Order = () => {
 
             <div>
               <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
-                {form.outsidePortugal ? "VAT Number (EU)" : "NIF / VAT Number"}
+                {form.outsidePortugal ? t("order.vat_number_eu") : t("order.vat_number")}
               </label>
               <input
                 type="text"
@@ -196,28 +170,24 @@ const Order = () => {
             <label className="flex items-center gap-3 cursor-pointer group">
               <Checkbox
                 checked={form.outsidePortugal}
-                onCheckedChange={(checked) =>
-                  setForm({ ...form, outsidePortugal: checked === true, country: "" })
-                }
+                onCheckedChange={(checked) => setForm({ ...form, outsidePortugal: checked === true, country: "" })}
                 className="border-cream/30 data-[state=checked]:bg-gold data-[state=checked]:border-gold rounded-none h-5 w-5"
               />
               <span className="font-body text-sm text-cream/70 group-hover:text-cream transition-colors">
-                Company outside Portugal{" "}
-                <span className="text-cream/40">(EU reverse charge — 0% VAT)</span>
+                {t("order.outside_pt")}{" "}
+                <span className="text-cream/40">{t("order.outside_pt_note")}</span>
               </span>
             </label>
 
             {form.outsidePortugal && (
               <div>
-                <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
-                  Country
-                </label>
+                <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">{t("order.country")}</label>
                 <input
                   type="text"
                   required
                   value={form.country}
                   onChange={(e) => setForm({ ...form, country: e.target.value })}
-                  placeholder="e.g. Germany, France, Spain"
+                  placeholder={t("order.country_placeholder")}
                   className="w-full bg-cream/5 border border-cream/10 text-cream px-4 py-3 font-body text-sm focus:outline-none focus:border-gold placeholder:text-cream/20 rounded-none"
                 />
               </div>
@@ -226,19 +196,17 @@ const Order = () => {
             {contactFields.map(renderInput)}
 
             <div>
-              <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-3">
-                Preferred Payment
-              </label>
+              <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-3">{t("order.payment")}</label>
               <RadioGroup
                 value={form.paymentMethod}
                 onValueChange={(v) => setForm({ ...form, paymentMethod: v })}
                 className="grid grid-cols-2 gap-2"
               >
                 {[
-                  { value: "bank-transfer", label: "Bank Transfer" },
-                  { value: "mbway", label: "MB Way" },
-                  { value: "multibanco", label: "Multibanco" },
-                  { value: "card", label: "Card" },
+                  { value: "bank-transfer", label: t("order.bank_transfer") },
+                  { value: "mbway", label: t("order.mbway") },
+                  { value: "multibanco", label: t("order.multibanco") },
+                  { value: "card", label: t("order.card") },
                 ].map((opt) => (
                   <label
                     key={opt.value}
@@ -261,10 +229,10 @@ const Order = () => {
               className="w-full bg-gold text-ink py-3.5 font-mono-label text-sm tracking-widest uppercase hover:bg-cream transition-colors disabled:opacity-50"
             >
               {submitting
-                ? "Processing..."
+                ? t("order.processing")
                 : form.paymentMethod === "card"
-                ? "Proceed to Payment"
-                : "Send Order Request"}
+                ? t("order.pay_now")
+                : t("order.send")}
             </button>
           </form>
         </div>
