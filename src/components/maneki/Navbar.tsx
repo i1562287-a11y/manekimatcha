@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { label: "Products", href: "#products" },
@@ -11,6 +12,7 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { totalItems, setDrawerOpen } = useCart();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -56,14 +58,40 @@ const Navbar = () => {
             >
               Request Samples
             </button>
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="relative text-ink/70 hover:text-ink transition-colors p-1"
+              aria-label="Open cart"
+            >
+              <ShoppingCart size={22} />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gold text-ink text-[10px] font-mono-label font-bold w-5 h-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
           </div>
 
-          <button
-            className="md:hidden text-ink"
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden flex items-center gap-4">
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="relative text-ink/70 hover:text-ink transition-colors p-1"
+              aria-label="Open cart"
+            >
+              <ShoppingCart size={22} />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gold text-ink text-[10px] font-mono-label font-bold w-5 h-5 flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+            <button
+              className="text-ink"
+              onClick={() => setMobileOpen(!mobileOpen)}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
 
