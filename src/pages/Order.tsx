@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { useCart } from "@/context/CartContext";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -19,7 +20,11 @@ interface OrderState {
 const Order = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { items: cartItems, clearCart } = useCart();
   const state = location.state as OrderState | null;
+
+  // Use location state if available, otherwise fall back to cart context
+  const orderSource: OrderItem[] = state?.items?.length ? state.items : cartItems;
 
   const [form, setForm] = useState({
     name: "",
@@ -34,14 +39,14 @@ const Order = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!state?.items?.length) {
+    if (!orderSource.length) {
       navigate("/", { replace: true });
     }
-  }, [state, navigate]);
+  }, [orderSource, navigate]);
 
-  if (!state?.items?.length) return null;
+  if (!orderSource.length) return null;
 
-  const activeItems = state.items.filter((i) => i.kg > 0);
+  const activeItems = orderSource.filter((i) => i.kg > 0);
   const totalExVat = activeItems.reduce((s, i) => s + i.kg * i.pricePerKg, 0);
   const vat = form.outsidePortugal ? 0 : totalExVat * 0.23;
   const totalInclVat = totalExVat + vat;
@@ -67,6 +72,7 @@ const Order = () => {
         });
         if (error) throw error;
         if (data?.url) {
+          clearCart();
           window.location.href = data.url;
           return;
         }
@@ -89,6 +95,7 @@ const Order = () => {
           },
         });
         if (error) throw error;
+        clearCart();
         toast.success(
           `Order received! Invoice will be sent to ${form.email}${form.vatNumber ? ` (VAT: ${form.vatNumber})` : ""}`
         );
@@ -129,19 +136,16 @@ const Order = () => {
 
   return (
     <div className="min-h-screen bg-ink flex flex-col">
-      {/* Navbar */}
       <nav className="border-b border-cream/10 px-6 py-4">
         <Link to="/" className="font-heading text-xl text-cream hover:text-gold transition-colors">
           野狩 Nokari Matcha
         </Link>
       </nav>
 
-      {/* Content */}
       <div className="flex-1 py-12 px-6">
         <div className="max-w-lg mx-auto">
           <h1 className="font-heading text-2xl text-cream mb-8">Request Invoice</h1>
 
-          {/* Order Summary */}
           <div className="bg-cream/5 border border-cream/10 p-5 mb-8">
             <p className="font-mono-label text-xs tracking-[0.3em] uppercase text-gold mb-3">
               Order Summary
@@ -173,11 +177,9 @@ const Order = () => {
             </div>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {textFields.map(renderInput)}
 
-            {/* VAT / NIF */}
             <div>
               <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-1">
                 {form.outsidePortugal ? "VAT Number (EU)" : "NIF / VAT Number"}
@@ -191,7 +193,6 @@ const Order = () => {
               />
             </div>
 
-            {/* Outside Portugal */}
             <label className="flex items-center gap-3 cursor-pointer group">
               <Checkbox
                 checked={form.outsidePortugal}
@@ -224,7 +225,6 @@ const Order = () => {
 
             {contactFields.map(renderInput)}
 
-            {/* Payment Method */}
             <div>
               <label className="font-mono-label text-xs tracking-widest uppercase text-cream/40 block mb-3">
                 Preferred Payment
