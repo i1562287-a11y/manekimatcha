@@ -71,11 +71,11 @@ const Contact = () => {
 
           <div className="space-y-4 mb-10">
             <a
-              href="tel:+3920164126"
+              href="tel:+351920164126"
               className="flex items-center gap-4 text-cream/80 hover:text-gold transition-colors"
             >
               <span className="font-mono-label text-xs tracking-widest uppercase">Manager</span>
-              <span className="font-body text-sm">+39 20 164 126</span>
+              <span className="font-body text-sm">+351 920 164 126</span>
             </a>
           </div>
 
