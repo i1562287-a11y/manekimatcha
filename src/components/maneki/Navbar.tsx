@@ -3,8 +3,7 @@ import { Menu, X, ShoppingCart } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 
 const navLinks = [
-  { label: "Products", href: "#products" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Products & Pricing", href: "#products" },
   { label: "Compliance", href: "#compliance" },
   { label: "Contact", href: "#contact" },
 ];
