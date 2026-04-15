@@ -1,68 +1,48 @@
+import { useTranslation } from "@/i18n/LanguageContext";
+
 const Footer = () => {
   const year = new Date().getFullYear();
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { label: t("footer.products"), href: "#products" },
+    { label: t("footer.pricing"), href: "#pricing" },
+    { label: t("footer.compliance"), href: "#compliance" },
+    { label: t("footer.contact"), href: "#contact" },
+  ];
 
   return (
     <footer className="bg-ink py-16">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="text-2xl">野狩</span>
-              <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">
-                Nokari Matcha
-              </span>
+              <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">Nokari Matcha</span>
             </div>
-            <p className="font-body text-sm text-cream/40 max-w-xs">
-              All prices ex-works Lisbon warehouse.<br />
-              MOQ: 1 kg.<br />
-              Bulk orders (5+ kg) available on request.
-            </p>
+            <p className="font-body text-sm text-cream/40 max-w-xs whitespace-pre-line">{t("footer.prices_note")}</p>
           </div>
 
-          {/* Nav */}
           <div>
-            <p className="font-mono-label text-xs tracking-widest uppercase text-cream/30 mb-4">
-              Navigation
-            </p>
+            <p className="font-mono-label text-xs tracking-widest uppercase text-cream/30 mb-4">{t("footer.nav_title")}</p>
             <div className="space-y-2">
-              {["Products", "Pricing", "Compliance", "Contact"].map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  className="block font-body text-sm text-cream/60 hover:text-gold transition-colors"
-                >
-                  {link}
-                </a>
+              {navLinks.map((link) => (
+                <a key={link.href} href={link.href} className="block font-body text-sm text-cream/60 hover:text-gold transition-colors">{link.label}</a>
               ))}
             </div>
           </div>
 
-          {/* Legal */}
           <div>
-            <p className="font-mono-label text-xs tracking-widest uppercase text-cream/30 mb-4">
-              Legal
-            </p>
-            <p className="font-body text-sm text-cream/40 leading-relaxed">
-              Vechirka LDA<br />
-              VAT PT 517639475<br />
-              Registered food importer<br />
-              Portugal
-            </p>
+            <p className="font-mono-label text-xs tracking-widest uppercase text-cream/30 mb-4">{t("footer.legal_title")}</p>
+            <p className="font-body text-sm text-cream/40 leading-relaxed whitespace-pre-line">{t("footer.legal_body")}</p>
           </div>
         </div>
 
         <div className="border-t border-cream/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="font-body text-xs text-cream/30">
-            © {year} Nokari Matcha by Vechirka LDA. All rights reserved.
-          </p>
+          <p className="font-body text-xs text-cream/30">{t("footer.copyright", { year: String(year) })}</p>
           <div className="flex gap-6">
-            <a href="#" className="font-body text-xs text-cream/30 hover:text-gold transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="font-body text-xs text-cream/30 hover:text-gold transition-colors">
-              Terms of Service
-            </a>
+            <a href="#" className="font-body text-xs text-cream/30 hover:text-gold transition-colors">{t("footer.privacy")}</a>
+            <a href="#" className="font-body text-xs text-cream/30 hover:text-gold transition-colors">{t("footer.terms")}</a>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 import CartDrawer from "@/components/maneki/CartDrawer";
 import Index from "./pages/Index.tsx";
 import PaymentSuccess from "./pages/PaymentSuccess.tsx";
@@ -19,16 +20,18 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <CartProvider>
-          <CartDrawer />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/payment-success" element={<PaymentSuccess />} />
-            <Route path="/payment-cancelled" element={<PaymentCancelled />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </CartProvider>
+        <LanguageProvider>
+          <CartProvider>
+            <CartDrawer />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/order" element={<Order />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/payment-cancelled" element={<PaymentCancelled />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CartProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
