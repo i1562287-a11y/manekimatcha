@@ -1,83 +1,57 @@
 
 
-## План: FAQ блок для Nokari Matcha
+## План: липкий CTA "Request Samples"
 
-### Где разместить
-
-**Рекомендую: между `Compliance` и `JapanTrust`** (после блока с документами, перед философией Японии).
-
-Почему:
-- Compliance отвечает на формальные вопросы → FAQ закрывает оставшиеся практические сомнения покупателя
-- Идёт перед эмоциональным `JapanTrust` (shinrai/genzen/chokusetsu) — логика "сначала факты, потом доверие"
-- Перед Contact'ом покупатель уже без сомнений → выше конверсия в заявку
-
-Альтернативы (хуже):
-- После Hero — слишком рано, человек ещё не знает продукт
-- Перед Footer — слишком поздно, утомлённый читатель пропустит
-
-### Меню
-
-Добавить пункт **FAQ** в navbar между `Compliance` и `Contact`:
-`Products & Pricing · Compliance · FAQ · Contact · [Request Samples]`
-
-На мобильном: тот же порядок в выпадающем меню.
-
-### Структура блока
-
-4 категории как accordion (раскрывающиеся):
-1. **Product & Quality** — 5 вопросов
-2. **For Cafés & Operations** — 5 вопросов  
-3. **Documents & Compliance** — 3 вопроса
-4. **Trust & Partnership** — 3 вопроса
-
-Используем существующий компонент `src/components/ui/accordion.tsx` (Radix).
+### Мобильный (<768px)
+Добавить **fixed bottom bar** на всю ширину с кнопкой "Request Samples" + цена-якорь.
+- Появляется после скролла за Hero (~600px), исчезает когда виден Contact-блок (через IntersectionObserver).
+- Высота ~64px, фон `bg-cream/95 backdrop-blur` + `border-t border-ink/10` + лёгкая тень сверху.
+- Кнопка `bg-matcha text-cream` на всю ширину минус padding.
+- Слева мелким моно-лейблом: "From €0.47/cup" — даёт контекст почему стоит кликнуть.
+- Учесть safe-area-inset-bottom для iPhone (`pb-[env(safe-area-inset-bottom)]`).
 
 ```text
-┌─ FAQ Section ──────────────────────────────┐
-│                                            │
-│  FAQ                                       │
-│  Everything your purchasing manager...     │
-│  No registration. No sales call...         │
-│                                            │
-│  ── Product & Quality ────────────────     │
-│  ▸ What's the difference between JP/CN?   │
-│  ▸ What is a Batch ID?                    │
-│  ...                                       │
-│                                            │
-│  ── For Cafés & Operations ──────────      │
-│  ▸ Do you provide an SOP?                 │
-│  ...                                       │
-└────────────────────────────────────────────┘
+┌─────────────────────────────────┐
+│ FROM €0.47/CUP  [Request Samples]│  ← fixed bottom
+└─────────────────────────────────┘
 ```
 
-### Дизайн
+### Десктоп (≥768px) — моё предложение
 
-- Кремовый фон секции (как соседние)
-- Категории — секционные заголовки (mono-label, gold), под ними accordion items
-- Вопрос: Shippori Mincho, ink, средний размер
-- Ответ: Archivo Narrow, обычный текст, более тёмно-серый
-- Sharp corners (как везде в проекте)
-- Hover на вопросе — лёгкая matcha-зелёная подсветка слева (border-left)
-- Кандзи watermark 質 ("quality") в углу секции
+**Вариант: floating pill в правом нижнем углу** (рекомендую).
+- Компактная "таблетка" position:fixed bottom-6 right-6.
+- Белый/кремовый фон с тенью + matcha-кнопка внутри.
+- Появляется после Hero, прячется в Contact.
+- Не перекрывает контент (как навбар сверху), не такой агрессивный как full-width bar.
+- Можно добавить иконку 🍵 или стрелку.
 
-### Локализация
+```text
+                          ┌──────────────────┐
+                          │ 🍵 Request Samples│  ← floating
+                          └──────────────────┘
+```
 
-Все 16 вопросов и ответов в 3 языках (EN/PT/ES) → ~100 новых ключей в i18n словари.
+Альтернативы (хуже):
+- Sticky навбар уже есть → дублирующий CTA снизу избыточен на десктопе → но на длинной странице рука уходит от навбара. Floating pill решает.
+- Full-width bottom bar на десктопе — слишком навязчиво для B2B-эстетики бренда.
 
-Ключи: `faq.cat1.title`, `faq.q1.q`, `faq.q1.a`, ...
+### Видимость
+
+Логика появления (общая для mobile+desktop):
+- Скрыт пока в Hero (id="hero")
+- Появляется после Hero
+- Скрывается когда виден Contact (id="contact") — там уже есть форма, не надо дублировать
+- Плавный fade in/out (opacity transition 300ms)
 
 ### Файлы
 
 | Файл | Изменение |
 |------|-----------|
-| `src/components/maneki/FAQ.tsx` | **Новый** — секция с accordion |
-| `src/components/maneki/Navbar.tsx` | +пункт FAQ (desktop + mobile) |
-| `src/pages/Index.tsx` | Импорт + размещение между Compliance и JapanTrust |
-| `src/i18n/locales/en.json` | +~100 ключей |
-| `src/i18n/locales/pt.json` | +~100 ключей (перевод) |
-| `src/i18n/locales/es.json` | +~100 ключей (перевод) |
+| `src/components/maneki/StickyCTA.tsx` | **Новый** — компонент с IntersectionObserver, рендерит mobile bar и desktop pill |
+| `src/pages/Index.tsx` | Импорт + вставить перед `<Footer />` |
+| `src/i18n/locales/{en,pt,es}.json` | +1 ключ `sticky.price_anchor` ("From €0.47/cup" / переводы) |
 
 ### Объём
 
-1 новый компонент + 1 правка навбара + 1 правка Index + 3 словаря.
+1 новый компонент + 1 правка Index + 3 ключа в словари. Никаких правок навбара или существующих секций.
 
