@@ -1,6 +1,7 @@
 {
   "nav.products": "Produtos e Preços",
   "nav.compliance": "Conformidade",
+  "nav.faq": "FAQ",
   "nav.contact": "Contacto",
   "nav.request_samples": "Pedir Amostras",
 
@@ -269,5 +270,50 @@
   "order.pay_now": "Prosseguir para Pagamento",
   "order.send": "Enviar Pedido",
   "order.toast_success": "Pedido recebido! A fatura será enviada para {email}",
-  "order.toast_error": "Falha ao enviar pedido. Tente novamente ou contacte-nos diretamente."
+  "order.toast_error": "Falha ao enviar pedido. Tente novamente ou contacte-nos diretamente.",
+
+  "faq.tag": "FAQ",
+  "faq.headline": "Tudo o que o seu gestor de compras vai perguntar. Respondido.",
+  "faq.sub": "Sem registo. Sem chamada comercial antes de ter a informação.",
+
+  "faq.cat1.title": "Produto e Qualidade",
+  "faq.cat2.title": "Para Cafés e Operações",
+  "faq.cat3.title": "Documentos e Conformidade",
+  "faq.cat4.title": "Confiança e Parceria",
+
+  "faq.q1.q": "Qual é a diferença entre matcha japonês e chinês?",
+  "faq.q1.a": "O matcha japonês é cultivado à sombra durante 20–30 dias antes da colheita, usando folhas tencha, e depois moído em pedra. O matcha chinês é tipicamente cultivado ao sol, moído industrialmente e frequentemente corrigido na cor com corante E141. A diferença vê-se na chávena — e é óbvia no leite.",
+  "faq.q2.q": "O que é um Batch ID e porque é que o meu café precisa de um?",
+  "faq.q2.a": "Cada lote enviado pela Nokari traz um ID único ligado a uma fazenda específica, época de colheita e documentação completa. Se um cliente perguntar de onde vem — pode mostrar. Se um regulador perguntar — a mesma resposta.",
+  "faq.q3.q": "Porque é que o vosso matcha muda de lote para lote?",
+  "faq.q3.a": "Porque selecionamos a melhor fazenda em cada época em vez de fixar um único fornecedor o ano todo. Pense em vinho natural — produtor específico, colheita específica. A qualidade é sempre superior a um produto de \"média consistente\" fixa.",
+  "faq.q4.q": "Como sei que o matcha não oxidou no transporte?",
+  "faq.q4.a": "A cor é o primeiro indicador. Verde-jade vibrante significa fresco. Azeitona ou amarelado significa oxidado. Enviamos em embalagem hermética com nitrogénio, com data de produção claramente marcada em cada unidade.",
+  "faq.q5.q": "Qual é a quantidade mínima de encomenda?",
+  "faq.q5.a": "A partir de 500g para um primeiro teste. A partir de 1kg para encomenda standard. A partir de 5kg para preços de grossista.",
+
+  "faq.q6.q": "Fornecem um SOP para matcha latte?",
+  "faq.q6.a": "Sim. Cada encomenda inclui um cartão de preparação com proporções exatas, temperatura da água, técnica de peneiração e os erros mais comuns dos baristas — resolvidos.",
+  "faq.q7.q": "Os nossos baristas queixam-se de grumos. É problema do pó?",
+  "faq.q7.a": "Normalmente é técnica ou temperatura da água, não o pó. O nosso cartão SOP resolve 95% destes casos. Se não resolver — escreva-nos e resolvemos juntos.",
+  "faq.q8.q": "Quanto custa uma dose de matcha latte com o vosso produto?",
+  "faq.q8.a": "Ao preço standard com dose de 3g — €0,47 por chávena. A um preço de carta de €5–6, isso é mais de 90% de margem.",
+  "faq.q9.q": "Em quanto tempo entregam em Portugal?",
+  "faq.q9.a": "24–48 horas após confirmação da encomenda. Clientes regulares têm alocação prioritária quando as quantidades de lote são limitadas.",
+  "faq.q10.q": "Posso experimentar uma amostra antes da primeira encomenda?",
+  "faq.q10.a": "Sim. O kit de amostras Nokari custa €25 e inclui matcha e houjicha. O valor total é creditado na sua primeira encomenda.",
+
+  "faq.q11.q": "Fornecem certificados de origem?",
+  "faq.q11.a": "Sim. Certificado de origem, certificado fitossanitário e ficha técnica do produto vêm incluídos em cada lote.",
+  "faq.q12.q": "Quem trata da rotulagem em português — vocês ou nós?",
+  "faq.q12.a": "Nós. Cada produto é enviado com rotulagem conforme os requisitos da ASAE e da lei alimentar portuguesa. Nada extra do vosso lado.",
+  "faq.q13.q": "O vosso matcha é certificado biológico?",
+  "faq.q13.a": "O lote atual é livre de pesticidas com documentação completa, mas não tem certificado biológico. Se a certificação biológica for um requisito obrigatório para o vosso espaço — contacte-nos e discutimos opções para o próximo lote.",
+
+  "faq.q14.q": "Mudam de fazenda todas as épocas — não é instável?",
+  "faq.q14.a": "É o oposto. Não estamos presos a um produtor — escolhemos quem está no pico de qualidade neste momento. Se uma fazenda teve uma colheita fraca, não a aceitamos. Recebe sempre o melhor produto disponível, não um \"medianamente fiável\".",
+  "faq.q15.q": "E se encomendar e o produto não funcionar para nós?",
+  "faq.q15.a": "Contacte-nos dentro de 7 dias. Substituímos o lote ou encontramos uma solução. Uma parceria B2B não é uma transação única.",
+  "faq.q16.q": "Trabalham apenas com Portugal?",
+  "faq.q16.a": "Portugal é o foco atual. Espanha é o próximo passo. Se está sediado em Espanha e quer ser dos primeiros — entre em contacto e discutimos condições."
 }

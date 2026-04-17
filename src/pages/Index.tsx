@@ -8,6 +8,7 @@ import WhySection from "@/components/maneki/WhySection";
 import Products from "@/components/maneki/Products";
 import Pricing from "@/components/maneki/Pricing";
 import Compliance from "@/components/maneki/Compliance";
+import FAQ from "@/components/maneki/FAQ";
 import JapanTrust from "@/components/maneki/JapanTrust";
 import WhoWeServe from "@/components/maneki/WhoWeServe";
 import Contact from "@/components/maneki/Contact";
@@ -27,6 +28,7 @@ const Index = () => (
     <Products />
     <Pricing />
     <Compliance />
+    <FAQ />
     <JapanTrust />
     <WhoWeServe />
     <Contact />

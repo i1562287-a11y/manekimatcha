@@ -1,6 +1,7 @@
 {
   "nav.products": "Productos y Precios",
   "nav.compliance": "Cumplimiento",
+  "nav.faq": "FAQ",
   "nav.contact": "Contacto",
   "nav.request_samples": "Pedir Muestras",
 
@@ -269,5 +270,50 @@
   "order.pay_now": "Proceder al Pago",
   "order.send": "Enviar Solicitud de Pedido",
   "order.toast_success": "¡Pedido recibido! La factura se enviará a {email}",
-  "order.toast_error": "Error al enviar el pedido. Inténtalo de nuevo o contáctanos directamente."
+  "order.toast_error": "Error al enviar el pedido. Inténtalo de nuevo o contáctanos directamente.",
+
+  "faq.tag": "FAQ",
+  "faq.headline": "Todo lo que tu responsable de compras va a preguntar. Respondido.",
+  "faq.sub": "Sin registro. Sin llamada comercial antes de tener la información.",
+
+  "faq.cat1.title": "Producto y Calidad",
+  "faq.cat2.title": "Para Cafeterías y Operaciones",
+  "faq.cat3.title": "Documentos y Cumplimiento",
+  "faq.cat4.title": "Confianza y Colaboración",
+
+  "faq.q1.q": "¿Cuál es la diferencia entre matcha japonés y chino?",
+  "faq.q1.a": "El matcha japonés se cultiva a la sombra durante 20–30 días antes de la cosecha usando hojas tencha, y luego se muele en piedra. El matcha chino se cultiva normalmente al sol, se muele industrialmente y a menudo se corrige el color con colorante E141. La diferencia se ve en la taza — y es obvia en la leche.",
+  "faq.q2.q": "¿Qué es un Batch ID y por qué lo necesita mi cafetería?",
+  "faq.q2.a": "Cada lote que envía Nokari lleva un ID único vinculado a una granja específica, temporada de cosecha y documentación completa. Si un cliente pregunta de dónde viene — puedes mostrarlo. Si un regulador pregunta — la misma respuesta.",
+  "faq.q3.q": "¿Por qué cambia vuestro matcha de un lote a otro?",
+  "faq.q3.a": "Porque seleccionamos la mejor granja cada temporada en lugar de fijar un único proveedor todo el año. Piensa en vino natural — productor específico, cosecha específica. La calidad siempre es superior a un producto de \"media consistente\" fijo.",
+  "faq.q4.q": "¿Cómo sé que el matcha no se ha oxidado en tránsito?",
+  "faq.q4.a": "El color es el primer indicador. Verde jade vibrante significa fresco. Oliva o amarillento significa oxidado. Enviamos en envase hermético con nitrógeno, con la fecha de producción claramente marcada en cada unidad.",
+  "faq.q5.q": "¿Cuál es la cantidad mínima de pedido?",
+  "faq.q5.a": "Desde 500g para una primera prueba. Desde 1kg para un pedido estándar. Desde 5kg para precios de mayorista.",
+
+  "faq.q6.q": "¿Proporcionáis un SOP para matcha latte?",
+  "faq.q6.a": "Sí. Cada pedido incluye una tarjeta de preparación con proporciones exactas, temperatura del agua, técnica de tamizado y los errores más comunes de baristas — resueltos.",
+  "faq.q7.q": "Nuestros baristas se quejan de grumos. ¿Es problema del polvo?",
+  "faq.q7.a": "Normalmente es técnica o temperatura del agua, no el polvo. Nuestra tarjeta SOP resuelve el 95% de estos casos. Si no — escríbenos y lo resolvemos juntos.",
+  "faq.q8.q": "¿Cuánto cuesta una ración de matcha latte con vuestro producto?",
+  "faq.q8.a": "A precio estándar con dosis de 3g — €0,47 por taza. A un precio de carta de €5–6, eso es más del 90% de margen.",
+  "faq.q9.q": "¿En cuánto tiempo entregáis en Portugal?",
+  "faq.q9.a": "24–48 horas tras la confirmación del pedido. Los clientes habituales tienen asignación prioritaria cuando las cantidades de lote son limitadas.",
+  "faq.q10.q": "¿Puedo probar una muestra antes del primer pedido?",
+  "faq.q10.a": "Sí. El kit de muestras Nokari cuesta €25 e incluye matcha y houjicha. El importe total se acredita en tu primer pedido.",
+
+  "faq.q11.q": "¿Proporcionáis certificados de origen?",
+  "faq.q11.a": "Sí. Certificado de origen, certificado fitosanitario y ficha técnica del producto vienen incluidos en cada lote.",
+  "faq.q12.q": "¿Quién se encarga del etiquetado en portugués — vosotros o nosotros?",
+  "faq.q12.a": "Nosotros. Cada producto se envía con etiquetado conforme a los requisitos de ASAE y la ley alimentaria portuguesa. Nada extra por vuestra parte.",
+  "faq.q13.q": "¿Vuestro matcha está certificado como ecológico?",
+  "faq.q13.a": "El lote actual está libre de pesticidas con documentación completa, pero no tiene certificado ecológico. Si la certificación ecológica es un requisito imprescindible para tu local — contáctanos y discutimos opciones para el próximo lote.",
+
+  "faq.q14.q": "Cambiáis de granja cada temporada — ¿no es inestable?",
+  "faq.q14.a": "Es lo contrario. No estamos atados a un productor — elegimos al que esté en su pico de calidad ahora mismo. Si una granja ha tenido una cosecha floja, no la aceptamos. Siempre recibes el mejor producto disponible, no uno \"fiablemente medio\".",
+  "faq.q15.q": "¿Y si pido y el producto no nos funciona?",
+  "faq.q15.a": "Contáctanos en 7 días. Reemplazamos el lote o encontramos una solución. Una colaboración B2B no es una transacción única.",
+  "faq.q16.q": "¿Trabajáis solo con Portugal?",
+  "faq.q16.a": "Portugal es el foco actual. España es el siguiente. Si estás en España y quieres ser de los primeros — contáctanos y discutimos condiciones."
 }
