@@ -33,48 +33,47 @@ const JapanVsChina = () => {
         </div>
 
         {/* Comparison table */}
-        <div className="overflow-x-auto">
-          <div className="min-w-[640px]">
-            {/* Header row */}
-            <div className="grid grid-cols-12 mb-1">
-              <div className="col-span-4 px-4 py-4">
-                <span className="font-mono-label text-xs md:text-sm tracking-widest uppercase text-ink/40">
-                  {t("vs.col_feature")}
+        <div>
+          {/* Header row */}
+          <div className="grid grid-cols-12 mb-1">
+            <div className="col-span-12 md:col-span-4 px-3 md:px-4 py-3 md:py-4 hidden md:block">
+              <span className="font-mono-label text-xs md:text-sm tracking-widest uppercase text-ink/40">
+                {t("vs.col_feature")}
+              </span>
+            </div>
+            <div className="col-span-6 md:col-span-4 bg-matcha px-3 md:px-4 py-3 md:py-4">
+              <span className="font-mono-label text-[11px] md:text-sm tracking-widest uppercase text-cream font-bold">
+                {t("vs.col_jp")}
+              </span>
+            </div>
+            <div className="col-span-6 md:col-span-4 bg-[hsl(0,55%,28%)] px-3 md:px-4 py-3 md:py-4">
+              <span className="font-mono-label text-[11px] md:text-sm tracking-widest uppercase text-cream font-bold">
+                {t("vs.col_cn")}
+              </span>
+            </div>
+          </div>
+
+          {/* Body rows */}
+          {rows.map((row, i) => (
+            <div key={i} className="grid grid-cols-12">
+              {/* Feature label — full width on mobile (above the colored cells) */}
+              <div className="col-span-12 md:col-span-4 px-3 md:px-4 pt-4 pb-2 md:py-5 md:border-b md:border-ink/10 md:flex md:items-center bg-cream">
+                <span className="font-mono-label md:font-body text-[11px] md:text-base tracking-widest md:tracking-normal uppercase md:normal-case text-ink/50 md:text-ink/70 md:font-medium">
+                  {row.feature}
                 </span>
               </div>
-              <div className="col-span-4 bg-matcha px-4 py-4">
-                <span className="font-mono-label text-xs md:text-sm tracking-widest uppercase text-cream font-bold">
-                  {t("vs.col_jp")}
+              <div className="col-span-6 md:col-span-4 bg-matcha/95 px-3 md:px-4 py-4 md:py-5 border-b border-cream/10 flex items-start md:items-center">
+                <span className="font-body text-sm md:text-base text-cream leading-snug">
+                  {row.jp}
                 </span>
               </div>
-              <div className="col-span-4 bg-[hsl(0,55%,28%)] px-4 py-4">
-                <span className="font-mono-label text-xs md:text-sm tracking-widest uppercase text-cream font-bold">
-                  {t("vs.col_cn")}
+              <div className="col-span-6 md:col-span-4 bg-[hsl(0,55%,28%)]/95 px-3 md:px-4 py-4 md:py-5 border-b border-cream/10 flex items-start md:items-center">
+                <span className="font-body text-sm md:text-base text-cream/90 leading-snug">
+                  {row.cn}
                 </span>
               </div>
             </div>
-
-            {/* Body rows */}
-            {rows.map((row, i) => (
-              <div key={i} className="grid grid-cols-12">
-                <div className="col-span-4 px-4 py-5 border-b border-ink/10 flex items-center">
-                  <span className="font-body text-sm md:text-base text-ink/70 font-medium">
-                    {row.feature}
-                  </span>
-                </div>
-                <div className="col-span-4 bg-matcha/95 px-4 py-5 border-b border-cream/10 flex items-center">
-                  <span className="font-body text-sm md:text-base text-cream leading-snug">
-                    {row.jp}
-                  </span>
-                </div>
-                <div className="col-span-4 bg-[hsl(0,55%,28%)]/95 px-4 py-5 border-b border-cream/10 flex items-center">
-                  <span className="font-body text-sm md:text-base text-cream/90 leading-snug">
-                    {row.cn}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* Dark CTA block AFTER table */}
