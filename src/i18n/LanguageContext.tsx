@@ -53,8 +53,17 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useTranslation = () => {
+const fallbackT = (key: string, vars?: Record<string, string | number>): string => {
+  let str = dictionaries.en[key] ?? key;
+  if (vars) Object.entries(vars).forEach(([k, v]) => { str = str.replace(`{${k}}`, String(v)); });
+  return str;
+};
+
+export const useTranslation = (): LanguageContextType => {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useTranslation must be used within LanguageProvider");
+  if (!ctx) {
+    // HMR-safe fallback: avoids crashes during hot reloads when provider tree hasn't remounted yet
+    return { locale: "en", setLocale: () => {}, t: fallbackT };
+  }
   return ctx;
 };
