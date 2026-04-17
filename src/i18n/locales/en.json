@@ -1,6 +1,7 @@
 {
   "nav.products": "Products & Pricing",
   "nav.compliance": "Compliance",
+  "nav.faq": "FAQ",
   "nav.contact": "Contact",
   "nav.request_samples": "Request Samples",
 
@@ -269,5 +270,50 @@
   "order.pay_now": "Proceed to Payment",
   "order.send": "Send Order Request",
   "order.toast_success": "Order received! Invoice will be sent to {email}",
-  "order.toast_error": "Failed to send order. Please try again or contact us directly."
+  "order.toast_error": "Failed to send order. Please try again or contact us directly.",
+
+  "faq.tag": "FAQ",
+  "faq.headline": "Everything your purchasing manager will ask. Answered.",
+  "faq.sub": "No registration required. No sales call before you get the information.",
+
+  "faq.cat1.title": "Product & Quality",
+  "faq.cat2.title": "For Cafés & Operations",
+  "faq.cat3.title": "Documents & Compliance",
+  "faq.cat4.title": "Trust & Partnership",
+
+  "faq.q1.q": "What's the difference between Japanese and Chinese matcha?",
+  "faq.q1.a": "Japanese matcha is shade-grown for 20–30 days before harvest using tencha leaves, then stone-ground. Chinese matcha is typically sun-grown, industrially milled, and often colour-corrected with E141 dye. The difference is visible in the cup — and obvious in milk.",
+  "faq.q2.q": "What is a Batch ID and why does my café need one?",
+  "faq.q2.a": "Every batch Nokari ships carries a unique ID linked to a specific farm, harvest season, and full documentation set. If a customer asks where it's from — you can show them. If a regulator asks — same answer.",
+  "faq.q3.q": "Why does your matcha change from batch to batch?",
+  "faq.q3.a": "Because we select the best farm each season rather than locking in one supplier year-round. Think natural wine — specific producer, specific harvest. The quality is always higher than a fixed \"consistent average\" product.",
+  "faq.q4.q": "How do I know the matcha hasn't oxidised in transit?",
+  "faq.q4.a": "Colour is the first indicator. Vibrant jade green means fresh. Olive or yellowish means oxidised. We ship in hermetically sealed, nitrogen-flushed packaging with the production date clearly marked on every unit.",
+  "faq.q5.q": "What is your minimum order quantity?",
+  "faq.q5.a": "From 500g for a first trial. From 1kg for a standard order. From 5kg for wholesale pricing.",
+
+  "faq.q6.q": "Do you provide a matcha latte SOP?",
+  "faq.q6.a": "Yes. Every order includes a preparation card with exact ratios, water temperature, sifting technique, and the most common barista mistakes — solved.",
+  "faq.q7.q": "Our baristas complain about clumping. Is that a powder problem?",
+  "faq.q7.a": "Usually it's technique or water temperature, not the powder. Our SOP card resolves 95% of these cases. If it doesn't — message us and we'll work through it together.",
+  "faq.q8.q": "What does one matcha latte serving cost with your product?",
+  "faq.q8.a": "At standard pricing with a 3g dose — €0.47 per cup. At a menu price of €5–6, that's over 90% margin.",
+  "faq.q9.q": "How fast do you deliver within Portugal?",
+  "faq.q9.a": "24–48 hours after order confirmation. Regular clients get priority allocation when batch quantities are limited.",
+  "faq.q10.q": "Can I try a sample before committing to a first order?",
+  "faq.q10.a": "Yes. The Nokari sample kit is €25 and includes both matcha and houjicha. The full amount is credited against your first order.",
+
+  "faq.q11.q": "Do you provide certificates of origin?",
+  "faq.q11.a": "Yes. Certificate of origin, phytosanitary certificate, and product specification sheet are included with every batch.",
+  "faq.q12.q": "Who handles Portuguese-language labelling — you or us?",
+  "faq.q12.a": "We do. Every product ships with labelling compliant with ASAE requirements and Portuguese food law. Nothing extra on your end.",
+  "faq.q13.q": "Is your matcha organic-certified?",
+  "faq.q13.a": "The current batch is pesticide-free with full documentation, but does not carry an organic certificate. If organic certification is a hard requirement for your venue — reach out and we'll discuss options for the next batch.",
+
+  "faq.q14.q": "You change farms every season — isn't that unstable?",
+  "faq.q14.a": "It's the opposite. We're not locked into one producer — we choose whoever is at their quality peak right now. If a farm had a weak harvest, we don't take it. You always get the best available product, not a \"reliably average\" one.",
+  "faq.q15.q": "What if I order and the product doesn't work for us?",
+  "faq.q15.a": "Contact us within 7 days. We'll either replace the batch or find a solution. A B2B partnership isn't a one-time transaction.",
+  "faq.q16.q": "Do you only work with Portugal?",
+  "faq.q16.a": "Portugal is the current focus. Spain is next. If you're based in Spain and want to be first in — get in touch and we'll discuss terms."
 }
