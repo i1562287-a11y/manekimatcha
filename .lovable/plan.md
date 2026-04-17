@@ -1,67 +1,48 @@
 
 
-## i18n: Переключатель языков EN / PT / ES
+## План: переработка секции Japanese vs China
 
-### Подход
+### 1. Перестановка
+- На мобильном: таблица сверху, тёмный блок (призыв + кнопка) — снизу.
+- На десктопе: таблица слева/широкая, тёмный блок справа/снизу — призыв ПОСЛЕ таблицы по визуальному порядку.
+- Решение: убрать split-grid, сделать вертикальный stack: `Заголовок секции (компактный) → Таблица (full-width) → Тёмный CTA-блок снизу`.
 
-Лёгкая i18n без внешних библиотек — JSON-словари + React Context. Язык определяется автоматически по `navigator.language`, сохраняется в `localStorage`. Переключатель в navbar.
+### 2. Читаемость таблицы
+- Увеличить размер текста: фичи и значения с `text-xs md:text-sm` → `text-sm md:text-base`.
+- Заголовки колонок: `text-[10px] md:text-xs` → `text-xs md:text-sm`.
+- Увеличить вертикальные отступы строк: `py-4` → `py-5`.
 
-### Архитектура
+### 3. Цветовое выделение колонок
+- **Японская колонка** — зелёный фон (matcha-green), контрастный кремовый текст. Применяется к ячейке целиком, по всей высоте.
+- **Китайская колонка** — красный/винный фон, контрастный светлый текст.
+- Заголовки колонок остаются над цветными зонами, но с цветными бэкграундами тоже.
+- Фича-колонка слева — нейтральная (как сейчас).
 
 ```text
-src/i18n/
-  locales/
-    en.json    ← все строки сайта
-    pt.json
-    es.json
-  LanguageContext.tsx   ← контекст + хук useTranslation()
+┌─────────────┬──────────────┬─────────────┐
+│ FEATURE     │ JAPANESE 🟢   │ CHINESE 🔴   │
+├─────────────┼──────────────┼─────────────┤
+│ Leaf variety│ Tencha...    │ Camellia... │
+│ ...         │ ...          │ ...         │
+└─────────────┴──────────────┴─────────────┘
 ```
 
-**LanguageContext** предоставляет:
-- `t(key)` — получить строку по ключу (с fallback на EN)
-- `locale` — текущий язык
-- `setLocale(lang)` — сменить язык
+### 4. Новые строки
+Добавить 2 строки в таблицу:
+- **Color source** — Natural chlorophyll from shade-growing / Often E141 dye or spirulina additive
+- **Color stability in milk** — Stays green / Turns grey-brown under heat
 
-### Словари
+Уже есть похожая `vs.row.color` ("Color stability") — переименовать в "Color stability in milk" и добавить новую `vs.row.color_source`.
 
-Все текстовые строки из ~12 компонентов (Hero, Navbar, Products, WhySection, TrustBlock, TrustStrip, BatchBadge, Compliance, JapanTrust, WhoWeServe, Contact, Footer, CartDrawer, Pricing) выносятся в JSON. Ключи — плоские, по секциям:
+### 5. Файлы
+| Файл | Изменения |
+|------|-----------|
+| `src/components/maneki/JapanVsChina.tsx` | Реструктура: stack-layout, цветные колонки, увеличенный текст, новая строка |
+| `src/i18n/locales/en.json` | +2 ключа (color_source + переименование), обновить color строку |
+| `src/i18n/locales/pt.json` | То же самое на PT |
+| `src/i18n/locales/es.json` | То же самое на ES |
 
-```json
-{
-  "hero.tagline": "Direct Import · Japan",
-  "hero.headline": "From Japanese farms to your matcha latte.",
-  "hero.cta_samples": "Request Samples",
-  "hero.cta_products": "See Products",
-  "nav.products": "Products & Pricing",
-  "nav.compliance": "Compliance",
-  "nav.contact": "Contact",
-  "cart.title": "Your Order",
-  "cart.empty": "Your order is empty.\nBrowse products above to get started.",
-  ...
-}
-```
-
-### Переключатель в Navbar
-
-Компактный dropdown с флагами: 🇬🇧 EN / 🇵🇹 PT / 🇪🇸 ES — между навигацией и кнопкой "Request Samples". На мобильном — в мобильном меню.
-
-### Автоопределение языка
-
-При первом визите: `navigator.language` → если начинается с `pt` → PT, `es` → ES, иначе EN. Сохраняется в `localStorage('nokari-lang')`.
-
-### Файлы
-
-| Файл | Действие |
-|------|----------|
-| `src/i18n/locales/en.json` | Создать — все строки на EN |
-| `src/i18n/locales/pt.json` | Создать — перевод на PT |
-| `src/i18n/locales/es.json` | Создать — перевод на ES |
-| `src/i18n/LanguageContext.tsx` | Создать — контекст, хук `useTranslation`, автодетект |
-| `src/App.tsx` | Обернуть в `LanguageProvider` |
-| `src/components/maneki/Navbar.tsx` | Добавить dropdown переключатель |
-| Все секции (Hero, Products, WhySection, TrustBlock, TrustStrip, BatchBadge, Compliance, JapanTrust, WhoWeServe, Contact, Footer, CartDrawer, Pricing) | Заменить хардкод строки на `t('key')` |
-
-### Объём
-
-~13 компонентов на рефакторинг + 3 JSON-словаря (~150-200 ключей каждый). Без маршрутизации по URL — чисто клиентское переключение.
+### 6. Цвета (из существующей палитры)
+- Японская колонка: `bg-matcha` (#2D6A4F) + `text-cream`
+- Китайская колонка: `bg-red-900` или новый винный — использую tailwind `bg-red-900/95` + `text-cream`. Если нужен брендовый — можно добавить в tailwind config, но проще использовать `bg-[#7A1F1F]` для тёплого винного оттенка, гармоничного с палитрой.
 
