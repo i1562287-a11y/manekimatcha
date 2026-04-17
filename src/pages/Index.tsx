@@ -14,6 +14,7 @@ import WhoWeServe from "@/components/maneki/WhoWeServe";
 import Contact from "@/components/maneki/Contact";
 import Footer from "@/components/maneki/Footer";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
+import StickyCTA from "@/components/maneki/StickyCTA";
 
 const Index = () => (
   <>
@@ -33,6 +34,7 @@ const Index = () => (
     <WhoWeServe />
     <Contact />
     <Footer />
+    <StickyCTA />
   </>
 );
 
