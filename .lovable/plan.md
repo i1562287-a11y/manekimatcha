@@ -1,48 +1,83 @@
 
 
-## План: переработка секции Japanese vs China
+## План: FAQ блок для Nokari Matcha
 
-### 1. Перестановка
-- На мобильном: таблица сверху, тёмный блок (призыв + кнопка) — снизу.
-- На десктопе: таблица слева/широкая, тёмный блок справа/снизу — призыв ПОСЛЕ таблицы по визуальному порядку.
-- Решение: убрать split-grid, сделать вертикальный stack: `Заголовок секции (компактный) → Таблица (full-width) → Тёмный CTA-блок снизу`.
+### Где разместить
 
-### 2. Читаемость таблицы
-- Увеличить размер текста: фичи и значения с `text-xs md:text-sm` → `text-sm md:text-base`.
-- Заголовки колонок: `text-[10px] md:text-xs` → `text-xs md:text-sm`.
-- Увеличить вертикальные отступы строк: `py-4` → `py-5`.
+**Рекомендую: между `Compliance` и `JapanTrust`** (после блока с документами, перед философией Японии).
 
-### 3. Цветовое выделение колонок
-- **Японская колонка** — зелёный фон (matcha-green), контрастный кремовый текст. Применяется к ячейке целиком, по всей высоте.
-- **Китайская колонка** — красный/винный фон, контрастный светлый текст.
-- Заголовки колонок остаются над цветными зонами, но с цветными бэкграундами тоже.
-- Фича-колонка слева — нейтральная (как сейчас).
+Почему:
+- Compliance отвечает на формальные вопросы → FAQ закрывает оставшиеся практические сомнения покупателя
+- Идёт перед эмоциональным `JapanTrust` (shinrai/genzen/chokusetsu) — логика "сначала факты, потом доверие"
+- Перед Contact'ом покупатель уже без сомнений → выше конверсия в заявку
+
+Альтернативы (хуже):
+- После Hero — слишком рано, человек ещё не знает продукт
+- Перед Footer — слишком поздно, утомлённый читатель пропустит
+
+### Меню
+
+Добавить пункт **FAQ** в navbar между `Compliance` и `Contact`:
+`Products & Pricing · Compliance · FAQ · Contact · [Request Samples]`
+
+На мобильном: тот же порядок в выпадающем меню.
+
+### Структура блока
+
+4 категории как accordion (раскрывающиеся):
+1. **Product & Quality** — 5 вопросов
+2. **For Cafés & Operations** — 5 вопросов  
+3. **Documents & Compliance** — 3 вопроса
+4. **Trust & Partnership** — 3 вопроса
+
+Используем существующий компонент `src/components/ui/accordion.tsx` (Radix).
 
 ```text
-┌─────────────┬──────────────┬─────────────┐
-│ FEATURE     │ JAPANESE 🟢   │ CHINESE 🔴   │
-├─────────────┼──────────────┼─────────────┤
-│ Leaf variety│ Tencha...    │ Camellia... │
-│ ...         │ ...          │ ...         │
-└─────────────┴──────────────┴─────────────┘
+┌─ FAQ Section ──────────────────────────────┐
+│                                            │
+│  FAQ                                       │
+│  Everything your purchasing manager...     │
+│  No registration. No sales call...         │
+│                                            │
+│  ── Product & Quality ────────────────     │
+│  ▸ What's the difference between JP/CN?   │
+│  ▸ What is a Batch ID?                    │
+│  ...                                       │
+│                                            │
+│  ── For Cafés & Operations ──────────      │
+│  ▸ Do you provide an SOP?                 │
+│  ...                                       │
+└────────────────────────────────────────────┘
 ```
 
-### 4. Новые строки
-Добавить 2 строки в таблицу:
-- **Color source** — Natural chlorophyll from shade-growing / Often E141 dye or spirulina additive
-- **Color stability in milk** — Stays green / Turns grey-brown under heat
+### Дизайн
 
-Уже есть похожая `vs.row.color` ("Color stability") — переименовать в "Color stability in milk" и добавить новую `vs.row.color_source`.
+- Кремовый фон секции (как соседние)
+- Категории — секционные заголовки (mono-label, gold), под ними accordion items
+- Вопрос: Shippori Mincho, ink, средний размер
+- Ответ: Archivo Narrow, обычный текст, более тёмно-серый
+- Sharp corners (как везде в проекте)
+- Hover на вопросе — лёгкая matcha-зелёная подсветка слева (border-left)
+- Кандзи watermark 質 ("quality") в углу секции
 
-### 5. Файлы
-| Файл | Изменения |
+### Локализация
+
+Все 16 вопросов и ответов в 3 языках (EN/PT/ES) → ~100 новых ключей в i18n словари.
+
+Ключи: `faq.cat1.title`, `faq.q1.q`, `faq.q1.a`, ...
+
+### Файлы
+
+| Файл | Изменение |
 |------|-----------|
-| `src/components/maneki/JapanVsChina.tsx` | Реструктура: stack-layout, цветные колонки, увеличенный текст, новая строка |
-| `src/i18n/locales/en.json` | +2 ключа (color_source + переименование), обновить color строку |
-| `src/i18n/locales/pt.json` | То же самое на PT |
-| `src/i18n/locales/es.json` | То же самое на ES |
+| `src/components/maneki/FAQ.tsx` | **Новый** — секция с accordion |
+| `src/components/maneki/Navbar.tsx` | +пункт FAQ (desktop + mobile) |
+| `src/pages/Index.tsx` | Импорт + размещение между Compliance и JapanTrust |
+| `src/i18n/locales/en.json` | +~100 ключей |
+| `src/i18n/locales/pt.json` | +~100 ключей (перевод) |
+| `src/i18n/locales/es.json` | +~100 ключей (перевод) |
 
-### 6. Цвета (из существующей палитры)
-- Японская колонка: `bg-matcha` (#2D6A4F) + `text-cream`
-- Китайская колонка: `bg-red-900` или новый винный — использую tailwind `bg-red-900/95` + `text-cream`. Если нужен брендовый — можно добавить в tailwind config, но проще использовать `bg-[#7A1F1F]` для тёплого винного оттенка, гармоничного с палитрой.
+### Объём
+
+1 новый компонент + 1 правка навбара + 1 правка Index + 3 словаря.
 
