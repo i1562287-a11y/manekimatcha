@@ -1,57 +1,37 @@
 
 
-## План: липкий CTA "Request Samples"
+## План: ссылка на Instagram @nokari.matcha
 
-### Мобильный (<768px)
-Добавить **fixed bottom bar** на всю ширину с кнопкой "Request Samples" + цена-якорь.
-- Появляется после скролла за Hero (~600px), исчезает когда виден Contact-блок (через IntersectionObserver).
-- Высота ~64px, фон `bg-cream/95 backdrop-blur` + `border-t border-ink/10` + лёгкая тень сверху.
-- Кнопка `bg-matcha text-cream` на всю ширину минус padding.
-- Слева мелким моно-лейблом: "From €0.47/cup" — даёт контекст почему стоит кликнуть.
-- Учесть safe-area-inset-bottom для iPhone (`pb-[env(safe-area-inset-bottom)]`).
+### Куда добавить
 
-```text
-┌─────────────────────────────────┐
-│ FROM €0.47/CUP  [Request Samples]│  ← fixed bottom
-└─────────────────────────────────┘
-```
+**Footer** — стандартное место для соцсетей, не отвлекает от основного CTA. В колонку с логотипом/описанием бренда (первая колонка), под текстом про цены.
 
-### Десктоп (≥768px) — моё предложение
+Дополнительно: **Contact** секция — рядом с email/телефоном, как альтернативный канал связи.
 
-**Вариант: floating pill в правом нижнем углу** (рекомендую).
-- Компактная "таблетка" position:fixed bottom-6 right-6.
-- Белый/кремовый фон с тенью + matcha-кнопка внутри.
-- Появляется после Hero, прячется в Contact.
-- Не перекрывает контент (как навбар сверху), не такой агрессивный как full-width bar.
-- Можно добавить иконку 🍵 или стрелку.
+### Что добавить
 
-```text
-                          ┌──────────────────┐
-                          │ 🍵 Request Samples│  ← floating
-                          └──────────────────┘
-```
+1. **Footer** (`src/components/maneki/Footer.tsx`):
+   - Под параграфом `prices_note` в первой колонке добавить блок "Follow":
+   - Иконка Instagram (lucide-react `Instagram`) + `@nokari.matcha`
+   - Ссылка: `https://instagram.com/nokari.matcha`, `target="_blank"`, `rel="noopener noreferrer"`
+   - Стиль: `text-cream/60 hover:text-gold transition-colors`, mono-label
 
-Альтернативы (хуже):
-- Sticky навбар уже есть → дублирующий CTA снизу избыточен на десктопе → но на длинной странице рука уходит от навбара. Floating pill решает.
-- Full-width bottom bar на десктопе — слишком навязчиво для B2B-эстетики бренда.
+2. **Contact** (`src/components/maneki/Contact.tsx`) — проверю текущую структуру, добавлю Instagram строкой к email/whatsapp.
 
-### Видимость
+### Локализация
 
-Логика появления (общая для mobile+desktop):
-- Скрыт пока в Hero (id="hero")
-- Появляется после Hero
-- Скрывается когда виден Contact (id="contact") — там уже есть форма, не надо дублировать
-- Плавный fade in/out (opacity transition 300ms)
+- Ключ `footer.follow` ("Follow" / "Seguir" / "Seguir") в EN/PT/ES
+- Handle `@nokari.matcha` не локализуется
 
 ### Файлы
 
 | Файл | Изменение |
 |------|-----------|
-| `src/components/maneki/StickyCTA.tsx` | **Новый** — компонент с IntersectionObserver, рендерит mobile bar и desktop pill |
-| `src/pages/Index.tsx` | Импорт + вставить перед `<Footer />` |
-| `src/i18n/locales/{en,pt,es}.json` | +1 ключ `sticky.price_anchor` ("From €0.47/cup" / переводы) |
+| `src/components/maneki/Footer.tsx` | + блок Instagram под prices_note |
+| `src/components/maneki/Contact.tsx` | + строка с Instagram (после проверки структуры) |
+| `src/i18n/locales/{en,pt,es}.json` | + ключ `footer.follow` |
 
 ### Объём
 
-1 новый компонент + 1 правка Index + 3 ключа в словари. Никаких правок навбара или существующих секций.
+2 правки компонентов + 3 ключа в словари.
 
