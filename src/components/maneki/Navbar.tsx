@@ -24,6 +24,7 @@ const Navbar = () => {
   const navLinks = [
     { label: t("nav.products"), href: "#products" },
     { label: t("nav.compliance"), href: "#compliance" },
+    { label: t("nav.faq"), href: "#faq" },
     { label: t("nav.contact"), href: "#contact" },
   ];
 
