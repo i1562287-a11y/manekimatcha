@@ -1,5 +1,6 @@
 import Navbar from "@/components/maneki/Navbar";
 import Hero from "@/components/maneki/Hero";
+import JapanVsChina from "@/components/maneki/JapanVsChina";
 import BatchBadge from "@/components/maneki/BatchBadge";
 import TrustBlock from "@/components/maneki/TrustBlock";
 import TrustStrip from "@/components/maneki/TrustStrip";
@@ -18,6 +19,7 @@ const Index = () => (
     <NoiseOverlay />
     <Navbar />
     <Hero />
+    <JapanVsChina />
     <BatchBadge />
     <TrustBlock />
     <TrustStrip />
