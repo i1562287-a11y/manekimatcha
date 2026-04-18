@@ -48,13 +48,13 @@
     --white: 40 33% 98%;
 
     --sidebar-background: 39 33% 94%;
-    --sidebar-foreground: 147 30% 14%;
-    --sidebar-primary: 153 28% 36%;
+    --sidebar-foreground: 210 15% 12%;
+    --sidebar-primary: 82 35% 52%;
     --sidebar-primary-foreground: 39 33% 94%;
-    --sidebar-accent: 138 28% 94%;
-    --sidebar-accent-foreground: 147 30% 14%;
+    --sidebar-accent: 82 40% 94%;
+    --sidebar-accent-foreground: 210 15% 12%;
     --sidebar-border: 36 15% 82%;
-    --sidebar-ring: 153 28% 36%;
+    --sidebar-ring: 82 35% 52%;
   }
 }
 
