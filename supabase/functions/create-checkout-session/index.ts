@@ -6,32 +6,50 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
-const CHAT_ID = 190824720;
+const FALLBACK_CHAT_ID = '190824720';
 
 const MATCHA_PRICE_ID = 'price_1TJX58AevJyEcAFOUuSOJMqU';
 const HOUJICHA_PRICE_ID = 'price_1TJX5MAevJyEcAFOKm7lr3vS';
 
+function getChatIds(): string[] {
+  const raw = Deno.env.get('TELEGRAM_CHAT_IDS') || FALLBACK_CHAT_ID;
+  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+}
+
+// Sends to all configured chat IDs. Returns the message_id of the first chat (used as the "primary" reference for webhook updates).
 async function sendTelegram(text: string): Promise<number | null> {
   const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
   const TELEGRAM_API_KEY = Deno.env.get('TELEGRAM_API_KEY');
   if (!LOVABLE_API_KEY || !TELEGRAM_API_KEY) return null;
 
-  try {
-    const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
-        'X-Connection-Api-Key': TELEGRAM_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
-    });
-    const data = await response.json();
-    return data?.result?.message_id ?? null;
-  } catch (e) {
-    console.error('Telegram send error:', e);
-    return null;
+  const chatIds = getChatIds();
+  let firstMessageId: number | null = null;
+
+  for (const chatId of chatIds) {
+    try {
+      const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+          'X-Connection-Api-Key': TELEGRAM_API_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        console.error(`Telegram send to ${chatId} failed [${response.status}]:`, data);
+        continue;
+      }
+      if (firstMessageId === null) {
+        firstMessageId = data?.result?.message_id ?? null;
+      }
+    } catch (e) {
+      console.error(`Telegram send to ${chatId} error:`, e);
+    }
   }
+
+  return firstMessageId;
 }
 
 Deno.serve(async (req) => {
