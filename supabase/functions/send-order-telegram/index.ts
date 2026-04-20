@@ -4,7 +4,15 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
-const CHAT_ID = 190824720;
+const FALLBACK_CHAT_ID = '190824720';
+
+function getChatIds(): string[] {
+  const raw = Deno.env.get('TELEGRAM_CHAT_IDS') || FALLBACK_CHAT_ID;
+  return raw
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -31,10 +39,8 @@ Deno.serve(async (req) => {
     let text: string;
 
     if (rawText) {
-      // Pre-formatted message (e.g. sample kit request)
       text = rawText;
     } else {
-      // Order message
       if (!items || items.length === 0) {
         return new Response(JSON.stringify({ error: 'Missing items' }), {
           status: 400,
@@ -73,26 +79,44 @@ Deno.serve(async (req) => {
         .join('\n');
     }
 
-    const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
-        'X-Connection-Api-Key': TELEGRAM_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text,
-        parse_mode: 'HTML',
-      }),
-    });
+    const chatIds = getChatIds();
+    const results: Array<{ chat_id: string; ok: boolean; error?: string }> = [];
 
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(`Telegram API failed [${response.status}]: ${JSON.stringify(data)}`);
+    for (const chatId of chatIds) {
+      try {
+        const response = await fetch(`${GATEWAY_URL}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+            'X-Connection-Api-Key': TELEGRAM_API_KEY,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text,
+            parse_mode: 'HTML',
+          }),
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          console.error(`Telegram send to ${chatId} failed [${response.status}]:`, data);
+          results.push({ chat_id: chatId, ok: false, error: JSON.stringify(data) });
+        } else {
+          results.push({ chat_id: chatId, ok: true });
+        }
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : 'unknown';
+        console.error(`Telegram send to ${chatId} threw:`, msg);
+        results.push({ chat_id: chatId, ok: false, error: msg });
+      }
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    const anyOk = results.some((r) => r.ok);
+    if (!anyOk) {
+      throw new Error(`All Telegram sends failed: ${JSON.stringify(results)}`);
+    }
+
+    return new Response(JSON.stringify({ success: true, results }), {
       status: 200,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
