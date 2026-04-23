@@ -27,8 +27,8 @@ const PREMIUM_IMAGES = [
 ];
 
 const HOUJICHA_IMAGES = [
-  { src: houjichaPowder, alt: "Houjicha powder close-up" },
-  { src: houjiPackFront, alt: "Houjicha package front" },
+  { src: houjichaPowder, alt: "Hojicha powder close-up" },
+  { src: houjiPackFront, alt: "Hojicha package front" },
 ];
 
 const MATCHA_PRICE = 155;
