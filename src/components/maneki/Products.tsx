@@ -27,8 +27,8 @@ const PREMIUM_IMAGES = [
 ];
 
 const HOUJICHA_IMAGES = [
-  { src: houjichaPowder, alt: "Houjicha powder close-up" },
-  { src: houjiPackFront, alt: "Houjicha package front" },
+  { src: houjichaPowder, alt: "Hojicha powder close-up" },
+  { src: houjiPackFront, alt: "Hojicha package front" },
 ];
 
 const MATCHA_PRICE = 155;
@@ -133,7 +133,7 @@ const Products = () => {
                 </div>
 
                 <button
-                  onClick={() => addItem("Houjicha", HOUJICHA_PRICE)}
+                  onClick={() => addItem("Hojicha", HOUJICHA_PRICE)}
                   className="flex items-center justify-center gap-2 bg-gold text-ink px-6 py-3 font-mono-label text-sm tracking-widest uppercase hover:bg-ink hover:text-cream transition-colors"
                 >
                   <ShoppingCart size={16} />
