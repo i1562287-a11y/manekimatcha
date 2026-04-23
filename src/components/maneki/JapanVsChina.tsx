@@ -46,7 +46,7 @@ const JapanVsChina = () => {
                 {t("vs.col_jp")}
               </span>
             </div>
-            <div className="col-span-6 md:col-span-4 bg-[hsl(0,55%,28%)] px-3 md:px-4 py-3 md:py-4">
+            <div className="col-span-6 md:col-span-4 bg-[hsl(15,25%,32%)] px-3 md:px-4 py-3 md:py-4">
               <span className="font-mono-label text-[11px] md:text-sm tracking-widest uppercase text-cream font-bold">
                 {t("vs.col_cn")}
               </span>
@@ -67,7 +67,7 @@ const JapanVsChina = () => {
                   {row.jp}
                 </span>
               </div>
-              <div className="col-span-6 md:col-span-4 bg-[hsl(0,55%,28%)]/95 px-3 md:px-4 py-4 md:py-5 border-b border-cream/10 flex items-start md:items-center">
+              <div className="col-span-6 md:col-span-4 bg-[hsl(15,25%,32%)]/95 px-3 md:px-4 py-4 md:py-5 border-b border-cream/10 flex items-start md:items-center">
                 <span className="font-body text-sm md:text-base text-cream/90 leading-snug">
                   {row.cn}
                 </span>
