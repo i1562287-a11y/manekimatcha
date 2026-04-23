@@ -21,12 +21,12 @@ const Index = () => (
     <NoiseOverlay />
     <Navbar />
     <Hero />
+    <Products />
     <JapanVsChina />
     <BatchBadge />
     <TrustBlock />
     <TrustStrip />
     <WhySection />
-    <Products />
     <Pricing />
     <Compliance />
     <FAQ />
