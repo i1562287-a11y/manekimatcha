@@ -22,6 +22,7 @@ const Navbar = () => {
   const { t, locale, setLocale } = useTranslation();
 
   const navLinks = [
+    { label: "Shop", href: "/shop" },
     { label: t("nav.products"), href: "#products" },
     { label: t("nav.compliance"), href: "#compliance" },
     { label: t("nav.faq"), href: "#faq" },
@@ -36,6 +37,14 @@ const Navbar = () => {
 
   const handleClick = (href: string) => {
     setMobileOpen(false);
+    if (href.startsWith("/")) {
+      window.location.href = href;
+      return;
+    }
+    if (window.location.pathname !== "/") {
+      window.location.href = "/" + href;
+      return;
+    }
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
