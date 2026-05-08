@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
+import { fbqTrack } from "@/lib/fbpixel";
 
 export interface CartItem {
   name: string;
@@ -39,6 +40,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         );
       }
       return [...prev, { name, kg, pricePerKg }];
+    });
+    fbqTrack("AddToCart", {
+      content_name: name,
+      content_type: "product",
+      value: kg * pricePerKg,
+      currency: "EUR",
+      contents: [{ id: name, quantity: kg, item_price: pricePerKg }],
     });
     setDrawerOpen(true);
   }, []);

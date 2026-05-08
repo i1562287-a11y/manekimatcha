@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ShoppingCart, Star, Truck, Check } from "lucide-react";
 import Navbar from "@/components/maneki/Navbar";
 import Footer from "@/components/maneki/Footer";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
 import ProductCarousel from "@/components/maneki/ProductCarousel";
 import { useCart } from "@/context/CartContext";
+import { fbqTrack } from "@/lib/fbpixel";
 
 import matchaPowder from "@/assets/products/matcha/matcha-powder.png";
 import matchaCup from "@/assets/products/matcha/matcha-cup.jpg";
@@ -36,6 +37,16 @@ const VARIANTS: Variant[] = [
 const Shop = () => {
   const [selected, setSelected] = useState<Variant>(VARIANTS[0]);
   const { addItem, setDrawerOpen } = useCart();
+
+  useEffect(() => {
+    fbqTrack("ViewContent", {
+      content_name: "Matcha 30g",
+      content_type: "product",
+      content_ids: ["matcha-30g"],
+      value: BASE_PRICE,
+      currency: "EUR",
+    });
+  }, []);
 
   const subtotal = BASE_PRICE * selected.qty;
   const discountAmount = subtotal * selected.discount;
