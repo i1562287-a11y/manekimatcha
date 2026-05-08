@@ -1,14 +1,19 @@
 import { useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { CheckCircle2, ArrowLeft, Mail } from "lucide-react";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
+import { fbqTrack } from "@/lib/fbpixel";
 
 const PaymentSuccess = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    const value = parseFloat(searchParams.get("amount") || "") || undefined;
+    const currency = searchParams.get("currency") || "EUR";
+    fbqTrack("Purchase", value ? { value, currency } : { currency, value: 0 });
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-ink text-cream relative flex flex-col">
