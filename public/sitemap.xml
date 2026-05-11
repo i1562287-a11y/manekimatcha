@@ -2,43 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nokarimatcha.eu/</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://nokarimatcha.eu/shop</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://nokarimatcha.eu/order</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nokarimatcha.eu/blog</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://nokarimatcha.eu/blog/what-makes-uji-matcha-different</loc>
-    <lastmod>2026-04-02</lastmod>
+    <loc>https://nokarimatcha.eu/blog/japanese-matcha-guide-european-cafes</loc>
+    <lastmod>2026-05-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nokarimatcha.eu/blog/the-perfect-matcha-latte</loc>
-    <lastmod>2026-04-18</lastmod>
+    <loc>https://nokarimatcha.eu/blog/matcha-grades-explained-ceremonial-culinary-cafe</loc>
+    <lastmod>2026-05-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://nokarimatcha.eu/blog/ceremonial-vs-culinary-matcha</loc>
-    <lastmod>2026-05-04</lastmod>
+    <loc>https://nokarimatcha.eu/blog/l-theanine-matcha-vs-coffee-energy-science</loc>
+    <lastmod>2026-05-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
