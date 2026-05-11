@@ -20,7 +20,7 @@ export const blogPosts: BlogPost[] = [
     title: "What Makes Japanese Matcha Different: A Buyer's Guide for European Cafés",
     excerpt:
       "Three years ago, a café owner in Porto called us asking why their matcha latte tasted like seaweed. This guide is for café owners and HoReCa buyers who want to get it right — not just buy a green powder and call it matcha.",
-    featuredImage: "/blog/images/matcha-buyer-guide-hero.jpg",
+    featuredImage: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80",
     publishedAt: "2026-05-12",
     category: "B2B",
     tags: ["matcha wholesale", "matcha for cafes", "horeca", "japanese matcha", "sourcing"],
@@ -47,7 +47,7 @@ export const blogPosts: BlogPost[] = [
     title: "Matcha Grades Explained: Ceremonial, Premium & Culinary — What Your Café Actually Needs",
     excerpt:
       "Here's something the matcha industry doesn't advertise: there are no official, universally enforced matcha grade standards anywhere in the world. 'Ceremonial grade' is a marketing term. Here's what it actually means.",
-    featuredImage: "/blog/images/matcha-grades-hero.jpg",
+    featuredImage: "https://images.unsplash.com/photo-1582192730841-2a682d7375f9?w=1200&q=80",
     publishedAt: "2026-05-14",
     category: "B2B",
     tags: ["matcha grades", "ceremonial matcha", "culinary matcha", "cafe grade", "matcha quality"],
@@ -74,7 +74,7 @@ export const blogPosts: BlogPost[] = [
     title: "The L-Theanine Effect: Why Matcha Energy Is Different From Coffee",
     excerpt:
       "The claim is all over matcha marketing: calm energy, focused alertness, no crash. It sounds like wellness copywriting. It's not. There's actual biochemistry here, and it's specific enough to be interesting.",
-    featuredImage: "/blog/images/ltheanine-hero.jpg",
+    featuredImage: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=1200&q=80",
     publishedAt: "2026-05-16",
     category: "Science",
     tags: ["l-theanine", "matcha health benefits", "matcha vs coffee", "caffeine", "focus"],
@@ -101,7 +101,7 @@ export const blogPosts: BlogPost[] = [
     title: "How to Make a Perfect Matcha Latte: The Barista Method",
     excerpt:
       "The matcha latte that put you off matcha was almost certainly made wrong. Not the wrong ingredient — the wrong method. Here's the professional technique that fixes everything.",
-    featuredImage: "/blog/images/matcha-latte-barista-hero.jpg",
+    featuredImage: "https://images.unsplash.com/photo-1515823662972-da6a2e4d3002?w=1200&q=80",
     publishedAt: "2026-05-18",
     category: "Recipes",
     tags: ["matcha latte recipe", "how to make matcha latte", "matcha latte", "barista matcha", "matcha preparation"],
@@ -174,7 +174,7 @@ export const blogPosts: BlogPost[] = [
     title: "Uji, Nishio, Kagoshima: Japan's Matcha Regions and What They Mean for Your Menu",
     excerpt:
       "Uji, Nishio, Kagoshima — Japan's three matcha regions aren't interchangeable. Each has a character formed over decades or centuries of tradition. Here's what the differences actually mean for your café menu.",
-    featuredImage: "/blog/images/japan-matcha-regions-hero.jpg",
+    featuredImage: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=1200&q=80",
     publishedAt: "2026-05-20",
     category: "Culture",
     tags: ["japanese matcha regions", "uji matcha", "nishio matcha", "kagoshima matcha", "matcha origin", "japanese matcha"],
