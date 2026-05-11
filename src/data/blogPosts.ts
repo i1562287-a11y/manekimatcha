@@ -168,6 +168,64 @@ export const blogPosts: BlogPost[] = [
       <p><a href="https://nokarimatcha.eu/contact">Get a café-grade sample pack →</a></p>
     `,
   },
+  {
+    id: "5",
+    slug: "japan-matcha-regions-uji-nishio-kagoshima",
+    title: "Uji, Nishio, Kagoshima: Japan's Matcha Regions and What They Mean for Your Menu",
+    excerpt:
+      "Uji, Nishio, Kagoshima — Japan's three matcha regions aren't interchangeable. Each has a character formed over decades or centuries of tradition. Here's what the differences actually mean for your café menu.",
+    featuredImage: "/blog/images/japan-matcha-regions-hero.jpg",
+    publishedAt: "2026-05-20",
+    category: "Culture",
+    tags: ["japanese matcha regions", "uji matcha", "nishio matcha", "kagoshima matcha", "matcha origin", "japanese matcha"],
+    readTime: 7,
+    metaTitle: "Japan's Matcha Regions Explained: Uji vs Nishio vs Kagoshima (2026)",
+    metaDescription:
+      "The real differences between Japan's three major matcha-growing regions — what they produce, why it matters, and how to use regional origin on your café menu.",
+    content: `
+      <h2>Uji, Kyoto: The Original</h2>
+      <p>Uji sits about 15 kilometres south of Kyoto, in a river basin with a microclimate that tea producers have cultivated for over 800 years. The region has morning fog, mild temperatures moderated by proximity to the Uji River, and soils with a specific mineral profile that contributes to flavour.</p>
+      <p><strong>What Uji matcha tastes like:</strong> Complex. The characteristic profile is deep umami, a round sweetness, and a long, clean finish with minimal bitterness. High-grade Uji matcha can have a layered quality — different notes appearing as it cools — that's unusual in any tea category.</p>
+      <p><strong>The terroir factor:</strong> Uji has Protected Geographical Indication (PGI) status in Japan — only matcha grown and processed in the designated area can carry the name. This is the same legal protection that governs Champagne in Europe. Much matcha labelled "Uji-style" or "Uji blend" in export markets is not Uji origin — it's a marketing reference, not a legal designation.</p>
+      <p><strong>For cafés:</strong> Uji ceremonial grade is appropriate for a dedicated matcha service — whisked tea prepared traditionally, served without milk. For latte service, the premium is largely wasted in milk drinks. Supply can be limited after poor harvests, and prices have risen sharply as international demand has increased.</p>
+
+      <h2>Nishio, Aichi: The Workhorse of Quality</h2>
+      <p>Nishio produces approximately 60% of Japan's total matcha output by volume. That might make it sound like the industrial option — it isn't. Nishio is to Japanese matcha what Napa Valley is to Californian wine: high volume and high quality aren't mutually exclusive when the infrastructure has been optimised over generations.</p>
+      <p>The Yahagi River basin has sandy, well-drained soils and a stable climate that produces consistent yields of high-quality tencha (the shade-grown leaf that becomes matcha after stone-grinding). The region has been growing tea since the 15th century, and the current farming infrastructure reflects that accumulated knowledge.</p>
+      <p><strong>What Nishio matcha tastes like:</strong> Clean, vivid, and well-balanced. The umami is present but less complex than Uji's — which is actually a strength in milk-based drinks. That cleaner character shows better in lattes than the more layered Uji profile, which can read as slightly astringent when cut with oat milk.</p>
+      <p><strong>For cafés:</strong> Nishio is where most well-positioned European wholesale matcha for café use comes from. It hits the combination café menus actually need: vivid green that photographs well, consistent flavour that performs in milk, reliable supply, and economics that make the drink profitable. Premium café-grade Nishio runs €20–€40/kg wholesale — roughly half the cost of comparable Uji, with comparable or better latte performance.</p>
+      <p><strong>The consistency advantage:</strong> Nishio's larger production base means when you reorder, the next bag will taste like the previous one. With very small Uji producers, variation between harvest years can be significant.</p>
+
+      <h2>Kagoshima: The New Frontier</h2>
+      <p>Kagoshima sits at the southern tip of Kyushu — a substantially warmer climate than either Uji or Nishio, with volcanic soil from the active Sakurajima caldera. Tea cultivation in Kagoshima expanded significantly in the 1970s and 1980s; matcha production infrastructure developed largely in the 2000s and 2010s.</p>
+      <p><strong>What Kagoshima matcha tastes like:</strong> Bright, with a fresh grassy character and less depth than longer-established regions. The volcanic soil contributes a slight mineral quality. Bitterness tends to be slightly higher than Nishio at equivalent grades.</p>
+      <p><strong>The altitude factor:</strong> Kagoshima's warmer climate produces faster-growing leaves with higher catechin content (more antioxidants) but lower amino acid content (less L-theanine, less umami sweetness). This is a different profile, not an inferior one.</p>
+      <p><strong>For cafés:</strong> Good Kagoshima culinary or café grade is a legitimate product for high-volume applications — baking, blended drinks, large-throughput settings. Typically €12–€22/kg wholesale. Several producers are investing seriously in quality improvement and the gap with Nishio is narrowing for mid-grade products.</p>
+
+      <h2>Region Comparison at a Glance</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Uji (Kyoto)</th><th>Nishio (Aichi)</th><th>Kagoshima</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>History</td><td>800+ years</td><td>500+ years</td><td>50+ years (matcha)</td></tr>
+          <tr><td>Climate</td><td>Cool, foggy</td><td>Mild, stable</td><td>Warm, subtropical</td></tr>
+          <tr><td>Soil</td><td>Clay loam, river basin</td><td>Sandy, alluvial</td><td>Volcanic</td></tr>
+          <tr><td>Flavour</td><td>Complex umami, layered</td><td>Clean, balanced, vivid</td><td>Bright, grassy</td></tr>
+          <tr><td>L-theanine</td><td>Highest</td><td>High</td><td>Moderate</td></tr>
+          <tr><td>Best use</td><td>Ceremonial service</td><td>Core café grade, lattes</td><td>Culinary, baking</td></tr>
+          <tr><td>Wholesale price</td><td>€45–€120/kg</td><td>€18–€45/kg</td><td>€10–€25/kg</td></tr>
+        </tbody>
+      </table>
+
+      <h2>How to Use Regional Origin on Your Menu</h2>
+      <p><strong>The transparent approach:</strong> Name the region. "Nishio matcha latte" or "Single-origin Uji matcha" gives customers something to discover and positions your café as knowledgeable rather than just selling a green drink.</p>
+      <p><strong>The story approach:</strong> A brief menu description: <em>"Grown in Nishio, Aichi — the same river valley that has produced Japan's finest matcha for 500 years."</em> It's not overselling. It's providing context that makes the drink more interesting.</p>
+      <p>Both approaches require that you know what you're serving — meaning your supplier can tell you the origin, harvest year, and ideally cultivar. If they can't, the story falls apart.</p>
+      <p>Regional origin is a signal of traceability. Traceability is a signal of quality. Quality, communicated clearly, justifies a price that makes your matcha programme sustainable.</p>
+      <p><a href="https://nokarimatcha.eu/contact">Request a regional tasting kit →</a></p>
+    `,
+  },
 ];
 
 export const getPostBySlug = (slug: string): BlogPost | undefined =>
