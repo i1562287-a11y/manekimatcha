@@ -8,6 +8,8 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import CartDrawer from "@/components/maneki/CartDrawer";
 import Index from "./pages/Index.tsx";
 import Shop from "./pages/Shop.tsx";
+import Blog from "./pages/Blog.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 import PaymentSuccess from "./pages/PaymentSuccess.tsx";
 import PaymentCancelled from "./pages/PaymentCancelled.tsx";
 import Order from "./pages/Order.tsx";
@@ -27,6 +29,8 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/order" element={<Order />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="/payment-cancelled" element={<PaymentCancelled />} />
