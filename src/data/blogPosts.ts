@@ -95,6 +95,79 @@ export const blogPosts: BlogPost[] = [
       <p>For a café, the practical implication is that matcha occupies a different drinking moment than coffee. It is the 3 pm drink for someone who already had two espressos and does not want a third. It is the morning drink for guests who say they "can't do coffee anymore." It is genuinely useful for shift workers, students and anyone managing anxiety alongside a need to focus — and the data supports framing it that way honestly. What it is not: a stimulant-free drink, a cure for ADHD, or a weight-loss supplement. The honest pitch — "smoother, longer, gentler caffeine because of an amino acid only tea contains" — is more interesting than the wellness-influencer version, and it is the one that builds repeat customers.</p>
     `,
   },
+  {
+    id: "4",
+    slug: "perfect-matcha-latte-barista-method",
+    title: "How to Make a Perfect Matcha Latte: The Barista Method",
+    excerpt:
+      "The matcha latte that put you off matcha was almost certainly made wrong. Not the wrong ingredient — the wrong method. Here's the professional technique that fixes everything.",
+    featuredImage: "/blog/images/matcha-latte-barista-hero.jpg",
+    publishedAt: "2026-05-18",
+    category: "Recipes",
+    tags: ["matcha latte recipe", "how to make matcha latte", "matcha latte", "barista matcha", "matcha preparation"],
+    readTime: 6,
+    metaTitle: "Perfect Matcha Latte Recipe: The Barista Technique (Step-by-Step)",
+    metaDescription:
+      "The professional method for a matcha latte that actually tastes good — right ratio, right temperature, right milk technique. No bitterness, no lumps.",
+    content: `
+      <h2>What You Actually Need</h2>
+      <p><strong>Essential:</strong></p>
+      <ul>
+        <li>Matcha powder: 2–3g (premium or café grade)</li>
+        <li>Hot water: 60–70ml at 75–80°C</li>
+        <li>Milk of choice: 150–180ml</li>
+        <li>A small whisk or electric frother</li>
+        <li>A fine-mesh sieve</li>
+      </ul>
+      <p>Use premium or café-grade matcha, not ceremonial. Ceremonial grade is designed for straight whisked tea — its delicate flavour is largely lost in milk.</p>
+
+      <h2>The Method, Step by Step</h2>
+
+      <h3>1. Sift the matcha</h3>
+      <p>Put your sieve over the bowl or cup. Measure 2–3g of matcha and sift it through. Do not skip this step. Matcha clumps — even fresh, well-stored powder will have micro-clumps that don't dissolve. Sifting breaks them apart before you add liquid.</p>
+
+      <h3>2. Build a paste first</h3>
+      <p>Add 15–20ml of your hot water to the sifted powder. Using a whisk or small electric frother, work it into a smooth, bright green paste with no visible lumps.</p>
+      <p>This is the core technique. Adding all the water at once dilutes the powder before it fully hydrates. Starting with a small amount forces complete dissolution and zero graininess.</p>
+      <p>The paste should look like a smooth, slightly glossy dark green. If it's grainy, your water was too hot — above 85°C destroys L-theanine and creates bitterness.</p>
+
+      <h3>3. Add the rest of the water</h3>
+      <p>Add the remaining hot water (up to 60–70ml total) and whisk briefly. You should have a vibrant green liquid with a thin foam layer on top.</p>
+
+      <h3>4. Texture your milk</h3>
+      <p>Steam or froth 150–180ml of milk to silky, microfoamed texture — around 60–65°C.</p>
+      <p><strong>Oat milk is the default choice</strong> for matcha. Its mild sweetness complements matcha's grassiness. Barista editions (Oatly Barista, Minor Figures) steam much better than standard versions.</p>
+      <p>Avoid almond milk: the thin texture separates and the flavour clashes with matcha.</p>
+
+      <h3>5. Combine</h3>
+      <p>Pour steamed milk over the matcha base. For iced: add ice to a tall glass, pour matcha base over ice, then add cold milk. Stir once.</p>
+
+      <h2>Ratios: The Professional Cheat Sheet</h2>
+      <table>
+        <thead>
+          <tr><th>Drink</th><th>Matcha</th><th>Hot Water</th><th>Milk</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Standard hot latte</td><td>2g</td><td>60ml</td><td>160ml</td></tr>
+          <tr><td>Strong latte</td><td>3g</td><td>60ml</td><td>150ml</td></tr>
+          <tr><td>Iced latte</td><td>2–3g</td><td>40ml</td><td>180ml over ice</td></tr>
+          <tr><td>Double matcha</td><td>4g</td><td>70ml</td><td>170ml</td></tr>
+        </tbody>
+      </table>
+
+      <h2>The Three Mistakes That Ruin Matcha Lattes</h2>
+      <p><strong>1. Water too hot.</strong> Boiling water scalds the catechins and destroys the amino acids that produce sweetness. Keep water between 75–80°C. If you don't have a temperature-controlled kettle, let boiling water sit for 3–4 minutes.</p>
+      <p><strong>2. No sifting, no paste stage.</strong> Adding unsifted powder directly to liquid guarantees clumps. The drink looks speckled and has uneven flavour.</p>
+      <p><strong>3. Too much milk, too little matcha.</strong> Many café recipes under-dose to reduce cost. 1.5g in 200ml of milk makes a vaguely green drink that tastes mostly of oat milk. Use minimum 2g per drink.</p>
+
+      <h2>Scaling for Café Volume</h2>
+      <p><strong>Pre-sift in bulk.</strong> Every morning, sift a day's supply into a dry, airtight container.</p>
+      <p><strong>Make a matcha concentrate.</strong> Whisk 10g of matcha with 200ml of hot water. Store for up to 4 hours. Use 30–40ml per drink, top with milk. Consistent results, faster service.</p>
+
+      <p>The perfect matcha latte isn't complicated — it's just precise. Sift, paste, dissolve, milk.</p>
+      <p><a href="https://nokarimatcha.eu/contact">Get a café-grade sample pack →</a></p>
+    `,
+  },
 ];
 
 export const getPostBySlug = (slug: string): BlogPost | undefined =>
