@@ -6,7 +6,7 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
-const FALLBACK_CHAT_ID = '190824720';
+const FALLBACK_CHAT_ID = '190824720,-5168374810';
 
 const MATCHA_PRICE_ID = 'price_1TJX58AevJyEcAFOUuSOJMqU';
 const HOUJICHA_PRICE_ID = 'price_1TJX5MAevJyEcAFOKm7lr3vS';

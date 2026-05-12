@@ -4,7 +4,7 @@ const corsHeaders = {
 };
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
-const FALLBACK_CHAT_ID = '190824720';
+const FALLBACK_CHAT_ID = '190824720,-5168374810';
 
 function getChatIds(): string[] {
   const raw = Deno.env.get('TELEGRAM_CHAT_IDS') || FALLBACK_CHAT_ID;
