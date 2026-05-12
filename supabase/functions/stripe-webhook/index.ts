@@ -1,12 +1,21 @@
 import Stripe from "https://esm.sh/stripe@18.5.0";
 
 const GATEWAY_URL = 'https://connector-gateway.lovable.dev/telegram';
-const CHAT_ID = 190824720;
+const FALLBACK_CHAT_IDS = '190824720,-5168374810';
+
+function getChatIds(): string[] {
+  const raw = Deno.env.get('TELEGRAM_CHAT_IDS') || FALLBACK_CHAT_IDS;
+  return raw.split(',').map((s) => s.trim()).filter(Boolean);
+}
 
 async function editTelegram(messageId: number, text: string) {
   const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
   const TELEGRAM_API_KEY = Deno.env.get('TELEGRAM_API_KEY');
   if (!LOVABLE_API_KEY || !TELEGRAM_API_KEY) return;
+
+  const chatIds = getChatIds();
+  const primary = chatIds[0];
+  const others = chatIds.slice(1);
 
   try {
     await fetch(`${GATEWAY_URL}/editMessageText`, {
@@ -16,10 +25,26 @@ async function editTelegram(messageId: number, text: string) {
         'X-Connection-Api-Key': TELEGRAM_API_KEY,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ chat_id: CHAT_ID, message_id: messageId, text, parse_mode: 'HTML' }),
+      body: JSON.stringify({ chat_id: primary, message_id: messageId, text, parse_mode: 'HTML' }),
     });
   } catch (e) {
     console.error('Telegram edit error:', e);
+  }
+
+  for (const chatId of others) {
+    try {
+      await fetch(`${GATEWAY_URL}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+          'X-Connection-Api-Key': TELEGRAM_API_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+      });
+    } catch (e) {
+      console.error(`Telegram send to ${chatId} error:`, e);
+    }
   }
 }
 
@@ -28,18 +53,20 @@ async function sendTelegram(text: string) {
   const TELEGRAM_API_KEY = Deno.env.get('TELEGRAM_API_KEY');
   if (!LOVABLE_API_KEY || !TELEGRAM_API_KEY) return;
 
-  try {
-    await fetch(`${GATEWAY_URL}/sendMessage`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${LOVABLE_API_KEY}`,
-        'X-Connection-Api-Key': TELEGRAM_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'HTML' }),
-    });
-  } catch (e) {
-    console.error('Telegram send error:', e);
+  for (const chatId of getChatIds()) {
+    try {
+      await fetch(`${GATEWAY_URL}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+          'X-Connection-Api-Key': TELEGRAM_API_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'HTML' }),
+      });
+    } catch (e) {
+      console.error(`Telegram send to ${chatId} error:`, e);
+    }
   }
 }
 
