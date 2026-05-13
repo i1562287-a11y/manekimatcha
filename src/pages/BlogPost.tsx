@@ -4,13 +4,21 @@ import Footer from "@/components/maneki/Footer";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
 import { blogPosts, getPostBySlug } from "@/data/blogPosts";
 import { useSeo } from "@/lib/seo";
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+import { useTranslation } from "@/i18n/LanguageContext";
+import { useBlogTranslation } from "@/hooks/useBlogTranslation";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = slug ? getPostBySlug(slug) : undefined;
+  const original = slug ? getPostBySlug(slug) : undefined;
+  const { locale } = useTranslation();
+  const { post } = useBlogTranslation(original);
+
+  const formatDate = (iso: string) =>
+    new Date(iso).toLocaleDateString(locale === "en" ? "en-GB" : locale, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
 
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const url = post ? `${origin}/blog/${post.slug}` : "";

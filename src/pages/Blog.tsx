@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
 import Navbar from "@/components/maneki/Navbar";
 import Footer from "@/components/maneki/Footer";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
+import BlogCard from "@/components/maneki/BlogCard";
 import { blogPosts } from "@/data/blogPosts";
 import { useSeo } from "@/lib/seo";
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+import { useTranslation } from "@/i18n/LanguageContext";
 
 const Blog = () => {
+  const { locale } = useTranslation();
   useSeo({
     title: "Journal — Notes on Matcha, Origin & Craft | Nokari",
     description:
@@ -49,36 +48,7 @@ const Blog = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-ink/10 border border-ink/10">
             {blogPosts.map((post) => (
-              <article key={post.id} className="bg-cream">
-                <Link to={`/blog/${post.slug}`} className="block group h-full">
-                  <div className="aspect-[4/3] overflow-hidden bg-warm-cream">
-                    <img
-                      src={post.featuredImage}
-                      alt={post.title}
-                      loading="lazy"
-                      width={1280}
-                      height={832}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6 lg:p-8">
-                    <div className="flex items-center gap-3 font-mono-label text-[10px] tracking-[0.25em] uppercase text-ink/50 mb-4">
-                      <span className="text-matcha">{post.category}</span>
-                      <span>·</span>
-                      <span>{post.readTime} min read</span>
-                    </div>
-                    <h2 className="font-heading text-2xl text-ink font-bold leading-snug mb-3 group-hover:text-matcha transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="font-body text-base text-ink/70 leading-relaxed mb-5">
-                      {post.excerpt}
-                    </p>
-                    <p className="font-mono-label text-[10px] tracking-[0.25em] uppercase text-ink/40">
-                      {formatDate(post.publishedAt)}
-                    </p>
-                  </div>
-                </Link>
-              </article>
+              <BlogCard key={post.id} post={post} locale={locale} />
             ))}
           </div>
         </div>
