@@ -1,3 +1,4 @@
+import { Instagram } from "lucide-react";
 import { useTranslation } from "@/i18n/LanguageContext";
 
 const Footer = () => {
@@ -20,7 +21,17 @@ const Footer = () => {
               <span className="text-2xl">野狩</span>
               <span className="font-mono-label text-sm tracking-[0.2em] uppercase text-cream font-medium">Nokari Matcha</span>
             </div>
-            <p className="font-body text-sm text-cream/40 max-w-xs whitespace-pre-line">{t("footer.prices_note")}</p>
+            <p className="font-body text-sm text-cream/40 max-w-xs whitespace-pre-line mb-5">{t("footer.prices_note")}</p>
+            <a
+              href="https://www.instagram.com/nokari.matcha/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Nokari Matcha on Instagram"
+              className="inline-flex items-center gap-2 font-mono-label text-xs tracking-widest uppercase text-cream/60 hover:text-gold transition-colors"
+            >
+              <Instagram size={16} />
+              @nokari.matcha
+            </a>
           </div>
 
           <div>
