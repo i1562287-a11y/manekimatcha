@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
 import Navbar from "@/components/maneki/Navbar";
 import Footer from "@/components/maneki/Footer";
 import NoiseOverlay from "@/components/maneki/NoiseOverlay";
+import BlogCard from "@/components/maneki/BlogCard";
 import { blogPosts } from "@/data/blogPosts";
 import { useSeo } from "@/lib/seo";
-
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+import { useTranslation } from "@/i18n/LanguageContext";
 
 const Blog = () => {
+  const { locale } = useTranslation();
   useSeo({
     title: "Journal — Notes on Matcha, Origin & Craft | Nokari",
     description:
