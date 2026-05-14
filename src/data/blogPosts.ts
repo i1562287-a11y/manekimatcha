@@ -15,6 +15,20 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "test",
+    slug: "test-deploy-check",
+    title: "TEST DEPLOY CHECK — delete me",
+    excerpt: "Temporary stub to verify Vercel auto-deploy pipeline. Will be removed immediately.",
+    category: "B2B",
+    readTime: 1,
+    publishedAt: "2026-05-14",
+    featuredImage: "https://images.pexels.com/photos/6933428/pexels-photo-6933428.jpeg?auto=compress&cs=tinysrgb&w=1260",
+    metaTitle: "TEST | Nokari Journal",
+    metaDescription: "Test deploy check.",
+    tags: ["test"],
+    content: `<p>Test stub for Vercel deploy verification.</p>`,
+  },
+  {
     id: "6",
     slug: "matcha-wholesale-pricing-europe-2026",
     title: "Matcha Wholesale Pricing in Europe: What You Should Actually Pay in 2026",
