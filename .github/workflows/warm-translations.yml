@@ -1,0 +1,28 @@
+name: Warm Blog Translations
+
+# Прогріває кеш PT/ES перекладів після того, як ти додаєш/міняєш статті в blogPosts.ts.
+# Без цього перший відвідувач PT/ES версії чекає 5-15 секунд на генерацію через Gemini.
+# З цим — переклади вже в БД до того, як хтось відкриє сторінку.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/data/blogPosts.ts"
+  workflow_dispatch: # дозволяє запустити вручну з GitHub UI
+
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Warm translations for all posts (pt + es)
+        env:
+          SUPABASE_URL: https://aqkvpzwvncnpzmogpvyo.supabase.co
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: bun run scripts/warm-translations.ts
