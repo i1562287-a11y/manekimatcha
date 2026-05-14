@@ -15,6 +15,110 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "6",
+    slug: "matcha-wholesale-pricing-europe-2026",
+    title: "Matcha Wholesale Pricing in Europe: What You Should Actually Pay in 2026",
+    excerpt: "Most matcha buyers in Europe are either overpaying or sourcing the wrong grade. Here's the honest 2026 pricing reference — in EUR, by application — and the questions every café buyer should be asking their supplier.",
+    category: "B2B",
+    readTime: 7,
+    publishedAt: "2026-05-14",
+    featuredImage: "https://images.pexels.com/photos/6933428/pexels-photo-6933428.jpeg?auto=compress&cs=tinysrgb&w=1260",
+    metaTitle: "Matcha Wholesale Pricing Europe 2026 | Nokari Journal",
+    metaDescription: "Real EUR price benchmarks for matcha wholesale in Europe 2026. Latte grade, ceremonial, culinary — what cafés should actually pay and red-flag thresholds.",
+    tags: ["wholesale", "B2B", "pricing", "europe", "sourcing"],
+    content: `<p>Your supplier just sent a revised price list. Ceremonial grade: €185/kg. Premium latte grade: €92/kg. Culinary grade: €48/kg. Is that fair? Are you overpaying? And what exactly should a 12-seat café in Lisbon or a bakery chain in Berlin be budgeting for matcha in 2026?</p>
+
+<p>These are questions most buyers never get a straight answer to — because the matcha industry, like most specialty food trades, runs on information asymmetry. Suppliers benefit when buyers don't know the market. This article fixes that.</p>
+
+<h2>What Actually Happened to Matcha Prices (And Why They Won't Go Back)</h2>
+
+<p>If you bought matcha in 2023 and compared it to what you're paying now, the difference is jarring. Wholesale prices for premium grades surged 40–60% between 2024 and 2025 and haven't reversed. Here's the honest version of why:</p>
+
+<p>The 2024–2025 "matcha shock" was a compound event. Record spring heatwaves in Kyoto collapsed tencha yields by roughly 40% in the highest-grade Uji plots. Simultaneously, Japanese producers had already depleted their reserve frozen tencha stocks from the previous year — a critical buffer they traditionally use to stabilise quality across seasons. And at exactly this moment, global demand surged 200–1,300% depending on the market segment, with major beverage corporations entering pre-harvest forward contracts and removing volume from the open market.</p>
+
+<p>The result: Kyoto Prefecture tencha auction prices climbed 116% year-over-year in 2025. And the cost-side drivers — energy, fertiliser, shade-net infrastructure, ageing rural labour — have now integrated permanently into the supply structure. Industry analysts across Japan are unanimous: <strong>2023 price levels will not return</strong>. Plan your budgets around current 2026 pricing as the new floor, with 5–8% annual inflation expected going forward.</p>
+
+<h2>The 2026 Price Reference for European Buyers (in EUR)</h2>
+
+<p>Most published pricing guides anchor on USD and assume direct import from Japan. European café buyers don't operate that way — they source through EU distributors, pay in euros, and receive stock that has already cleared customs. Here's a realistic EUR reference for 2026 European distributor pricing:</p>
+
+<table>
+  <thead>
+    <tr><th>Grade</th><th>1–5 kg</th><th>10–25 kg</th><th>50 kg+</th><th>Best for</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Standard Ceremonial</td><td>€160–€290/kg</td><td>€130–€220/kg</td><td>€110–€180/kg</td><td>Koicha, tea service, premium RTD</td></tr>
+    <tr><td>Premium Latte / Barista</td><td>€75–€120/kg</td><td>€65–€95/kg</td><td>€55–€80/kg</td><td>Matcha lattes, café drinks</td></tr>
+    <tr><td>Culinary (High-End)</td><td>€45–€70/kg</td><td>€38–€58/kg</td><td>€32–€48/kg</td><td>Pastry, baking, desserts</td></tr>
+    <tr><td>Industrial / Ingredient</td><td>€28–€45/kg</td><td>€20–€32/kg</td><td>€15–€25/kg</td><td>RTD manufacturing, supplements</td></tr>
+  </tbody>
+</table>
+
+<p>These ranges reflect EU distributor pricing with customs already cleared. Direct import from Japan (for buyers ordering 100 kg+ annually) runs 25–35% lower — but adds logistics complexity, minimum lead times of 3–6 weeks, and the requirement to handle JAS compliance documentation yourself.</p>
+
+<p><strong>The 2026 red-flag thresholds:</strong> If anyone offers you ceremonial-grade below €95/kg or latte-grade below €55/kg at any volume, ask for the Certificate of Origin, current-lot lab testing, and harvest year declaration immediately. Legitimate suppliers provide these without friction. The price floor for genuine Japanese matcha has a structural floor — and offers far below it almost always mean Chinese-origin product mislabelled, sencha powder sold as matcha, or aged inventory with oxidised chlorophyll and degraded aroma.</p>
+
+<h2>The Trade Secret Most Buyers Miss: Grade Engineering</h2>
+
+<p>Here's what separates experienced matcha buyers from beginners: <strong>the grade you need depends entirely on the application, not prestige</strong>.</p>
+
+<p>In a milk-based latte with 18–25cl of oat or cow milk, blind tasting studies consistently show that customers cannot distinguish €90/kg latte-grade matcha from €200/kg ceremonial-grade matcha. The dairy proteins bind to the tannins and flatten the flavour differentiation that makes ceremonial grade worth the premium in a traditional bowl of koicha.</p>
+
+<p>The practical implication: a café serving 40 matcha lattes per day uses approximately 120g of matcha — about €11/day at latte grade (€90/kg) versus €24/day at ceremonial (€200/kg). That's €4,700/year in unnecessary cost on a single café location, for a product difference that your customers are statistically unlikely to notice.</p>
+
+<p>Grade engineering is not about cutting corners — it is about matching specification to application:</p>
+
+<ul>
+  <li><strong>Latte service:</strong> Premium latte grade (€65–€95/kg) is the correct specification. It is blended from late first-flush and early second-flush tencha, designed to hold up against milk, and produces a cleaner cup at extraction ratios typical for café service.</li>
+  <li><strong>Bakery and pastry:</strong> High-end culinary grade (€38–€58/kg) retains vivid green colour under heat better than some ceremonial grades and reduces your ingredient COGS by 30–40%.</li>
+  <li><strong>Ceremonial bowls and high-end tea menus:</strong> This is where ceremonial grade earns its price. Served traditionally with water at 70–75°C, the umami depth and L-theanine profile of shade-grown first-flush tencha is irreplaceable and fully justifiable at €130–€220/kg.</li>
+</ul>
+
+<h2>EU Import Context: What You're Actually Paying For</h2>
+
+<p>Unlike the United States, where a 10% Section 122 tariff on Japanese agricultural products took effect in early 2026, the European Union maintains a <strong>0% import duty on matcha (HS code 0902.10 and 0902.20)</strong>. This is a structural advantage European buyers hold over US counterparts — one that has widened the landed-cost gap between markets in 2026.</p>
+
+<p>EU food safety compliance for matcha adds its own layer of documentation requirements, however. Every commercial shipment requires a Certificate of Conformity verifying pesticide residue limits below EU MRL thresholds — which are significantly stricter than Japan's own JAS standards. For European buyers sourcing directly from Japan, insist on EU MRL testing (not just JAS certification) as a contractual requirement. For buyers sourcing through EU-based distributors, this should already be handled upstream — but it is worth confirming once before establishing a long-term supplier relationship.</p>
+
+<h2>First Order Advice for Small European Cafés</h2>
+
+<p>You're running a 15-seat speciality café in Porto, Brussels, or Vienna. You want to add a matcha latte to your menu. What do you actually order?</p>
+
+<p>Start with 1–2 kg of premium latte grade from a European importer or distributor with clear origin documentation. At 3g per drink (the standard barista ratio for a 20cl latte), 1 kg gives you approximately 333 servings. At a retail price of €5.50 per latte, that's €1,830 in revenue from a €75–€90 ingredient cost — a 96%+ gross margin on matcha ingredient alone before labour and overhead.</p>
+
+<p>Test the product over 4–6 weeks. Note which days sell best, whether customers reorder, and whether your barista team is happy with the solubility and colour. Then commit to a 5 kg order to access the first volume discount tier, which typically reduces your per-kg cost by 10–15%. At 25 kg — roughly annual volume for a busy single-location café — you access mid-tier wholesale pricing and should be establishing a formal annual supply agreement.</p>
+
+<p>Avoid the two most common small-café sourcing mistakes: (1) buying ceremonial grade for lattes because it "sounds premium," and (2) sourcing from a retail brand instead of a B2B importer. Retail matcha brands, even premium ones, carry 40–80% retail margin built into their pricing. A dedicated B2B supplier removes that margin and passes it to your operation.</p>
+
+<h2>Kagoshima vs. Uji in 2026: The Practical Answer</h2>
+
+<p>If your current supplier is quoting Uji-origin for all grades, ask them specifically whether the latte and culinary grades are actually tencha from Uji — or whether the premium is a brand story applied to Kagoshima-origin material.</p>
+
+<p>In 2025, Kagoshima surpassed Shizuoka to become Japan's largest first-flush tencha producer, and its flat terrain enables large-scale mechanisation that delivers consistent, high-quality matcha at 20–30% below Uji pricing. For latte and culinary applications, Kagoshima-origin matcha from a reputable producer is objectively the better value specification in 2026. Uji remains the correct choice for ceremonial service, where the heritage terroir, stone-milling tradition, and L-theanine profile command their premium.</p>
+
+<p>At <a href="https://nokarimatcha.eu">Nokari</a>, our sourcing covers both origins — matched to application. If you want to know exactly which region and harvest your matcha comes from, we'll tell you, because traceability isn't a sales pitch: it's the baseline of a serious B2B relationship.</p>
+
+<h2>What to Ask Any Matcha Supplier in 2026</h2>
+
+<p>Before committing to a wholesale supplier relationship, these five questions cut through most of the noise:</p>
+
+<ul>
+  <li>What is the harvest year and milling date of the current lot?</li>
+  <li>Can you provide EU MRL pesticide compliance documentation for this specific lot?</li>
+  <li>What is the origin prefecture and specific farm or co-operative?</li>
+  <li>Is this stone-milled or jet-milled, and what is the particle size specification?</li>
+  <li>What is your minimum order quantity, and at what volume do pricing tiers change?</li>
+</ul>
+
+<p>A supplier who hesitates on any of these questions is not the supplier you want for consistent menu quality and regulatory compliance in the EU market.</p>
+
+<p>For the full picture on how different Japanese origins affect what lands in your cup, see our breakdown of <a href="/blog/japan-matcha-regions-uji-nishio-kagoshima">Uji, Nishio, and Kagoshima — and what the differences mean for your menu</a>. And if you're still sorting out the grade question, our <a href="/blog/matcha-grades-explained-ceremonial-culinary-cafe">grades explained guide</a> covers the full spectrum from ceremonial through culinary in practical café terms.</p>
+
+<p>Ready to benchmark your current supplier against 2026 market pricing, or curious what sample quantities look like for your operation? <a href="https://nokarimatcha.eu/contact">Get in touch</a> — we can usually turn a pricing conversation around in 24 hours.</p>
+
+<p>One last thought: if your current supplier can't tell you which harvest season their matcha comes from, is that really someone you want stocking your shelves?</p>`,
+  },
+  {
     id: "1",
     slug: "japanese-matcha-guide-european-cafes",
     title: "What Makes Japanese Matcha Different: A Buyer's Guide for European Cafés",
