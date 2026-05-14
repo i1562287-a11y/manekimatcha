@@ -1,86 +1,80 @@
-# Авто-деплой за 1-3 хвилини після push
+# Повністю автоматичний деплой — одноразово 15 хв і забув назавжди
 
-## Проблема
+## Чесна правда
 
-Зараз: push у GitHub → Lovable синхронізує код, але щоб **frontend** оновився на `nokarimatcha.eu`, треба **руками** натиснути **Publish → Update** в Lovable. Це by design — Lovable не публікує автоматично і не має публічного API для тригеру publish.
+**Без жодного одноразового налаштування — неможливо.** Lovable хостинг буквально вимагає, щоб людина натискала "Update". Це не баг — це їхня архітектура. Вийти з цього можна тільки переїздом на хостинг з Git-інтеграцією (Vercel / Cloudflare Pages / Netlify).
 
-Висновок: щоб отримати auto-publish за 1-3 хв без кліків, треба **винести frontend хостинг з Lovable**. Backend (Supabase / edge functions) залишається без змін.
+**АЛЕ:** після одноразового налаштування (15 хв твого часу) ти **більше ніколи не торкаєшся комп'ютера**. Claude Cowork пушить → через 90 секунд стаття на `nokarimatcha.eu`. Forever.
 
-## Рекомендований варіант — Vercel
+Тобто вибір такий:
+- 🔴 **Зараз:** нічого не робити → кожна стаття вимагає твого кліку в Lovable
+- 🟢 **15 хв одноразово:** налаштувати Vercel → нуль участі назавжди
 
-**Чому Vercel, а не альтернативи:**
-- Найшвидший build для Vite-проектів (~60-90 сек на цей проект)
-- Безкоштовний tier покриває з запасом (100 GB bandwidth/міс)
-- Атомарні деплої з instant rollback
-- Auto SSL, edge CDN, preview-деплої для PR
+Третього варіанту немає. Я перевірив — Lovable не має API/webhook для авто-публікації.
 
-**Альтернативи (теж підійдуть):**
-- **Cloudflare Pages** — безкоштовний, без ліміту на bandwidth, build трошки повільніший
-- **Netlify** — аналог Vercel, дещо повільніший build
+## Найшвидший шлях до "забув назавжди" — Vercel (15 хв одноразово)
 
-GitHub Pages не підходить: SPA fallback треба руками, немає env-змінних під час build.
+### Що робиш ти (з телефону можна)
 
-## Як буде працювати
+**Крок 1 — Vercel акаунт (2 хв)**
+- Відкрий [vercel.com/signup](https://vercel.com/signup) → **Continue with GitHub** → авторизуй
 
-```text
-   Claude push у GitHub (main)
-            │
-            ├──► Lovable sync (для подальших правок в редакторі)
-            │
-            ├──► Vercel build & deploy (60-90 сек) ──► nokarimatcha.eu
-            │
-            └──► GitHub Action warm-translations (~30 сек паралельно)
+**Крок 2 — Імпорт проекту (3 хв)**
+- На [vercel.com/new](https://vercel.com/new) → знайди репо `nokari-matcha` → **Import**
+- Vercel сам визначить Vite. Розгорни **Environment Variables** і встав три (copy-paste):
+
+```
+VITE_SUPABASE_PROJECT_ID=aqkvpzwvncnpzmogpvyo
+VITE_SUPABASE_URL=https://aqkvpzwvncnpzmogpvyo.supabase.co
+VITE_SUPABASE_PUBLISHABLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxa3Zwend2bmNucHptb2dwdnlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1NTM4NTksImV4cCI6MjA5MTEyOTg1OX0.fnDcNT0b6cQgjY4yb5TCVKjfv_esJ6uKheg1cb8mRWA
 ```
 
-Усе автоматично. Загальний час від push до публічного оновлення: **~2 хвилини**.
+- **Deploy** → за 90 сек отримаєш `nokari-matcha-xxx.vercel.app`. Відкрий, перевір що блог працює.
 
-## Що міняється
+**Крок 3 — Перенос домену (10 хв, з них 5 хв чекати)**
 
-**Зміни в проекті — мінімальні:**
-- ➕ Додаємо `vercel.json` з SPA-fallback (1 файл, ~10 рядків)
-- ➕ Edge functions Supabase працюють далі без змін (вони деплояться автоматично через Lovable Cloud)
-- ➕ `.env` змінні (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`) додаються в Vercel UI
+В Vercel: **Project → Settings → Domains** → **Add** → введи `nokarimatcha.eu` і окремо `www.nokarimatcha.eu`. Vercel покаже які DNS-записи створити.
 
-**Що НЕ міняється:**
-- Lovable Cloud (Supabase) залишається бекендом
-- Усі edge functions, БД, Stripe webhook, Telegram бот — без змін
-- Можна продовжувати редагувати в Lovable редакторі (зміни синкаються у GitHub → Vercel підхопить)
+В Lovable: **Project Settings → Domains** → видали `nokarimatcha.eu` (інакше буде конфлікт).
 
-## Що треба від тебе (одноразово, ~15 хв)
+У DNS-провайдера, де ти купував домен (скажи мені який — Cloudflare, GoDaddy, Namecheap, OVH чи інший — я дам точні скріншот-інструкції):
+- Видалити старий `A` запис на Lovable IP `185.158.133.1`
+- Додати новий `A @ → 76.76.21.21` (Vercel)
+- Додати `CNAME www → cname.vercel-dns.com`
 
-1. **Створити акаунт на vercel.com** (Sign in with GitHub)
-2. **Import Project** → вибрати репо `nokari-matcha` → Framework: Vite (auto-detected)
-3. **Environment Variables** — додати 3 змінні з твого `.env`:
-   - `VITE_SUPABASE_PROJECT_ID` = `aqkvpzwvncnpzmogpvyo`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY` = `eyJhbGc...` (з `.env`)
-   - `VITE_SUPABASE_URL` = `https://aqkvpzwvncnpzmogpvyo.supabase.co`
-4. Натиснути **Deploy** → отримаєш `nokari-matcha.vercel.app` (тестовий URL, перевіриш що все працює)
-5. **Перенести custom domain `nokarimatcha.eu`:**
-   - В Lovable: **Project Settings → Domains → Remove** (або залишити для редиректу)
-   - В Vercel: **Settings → Domains → Add `nokarimatcha.eu`**
-   - У свого DNS-провайдера (де куплений домен) поміняти `A`/`CNAME` записи на ті, що покаже Vercel
-   - SSL Vercel випустить автоматично за 1-5 хв
+Через ~5 хв SSL випишеться сам, домен запрацює на Vercel.
 
-## Що зроблю я в коді
+**Крок 4 — Все. Більше нічого ніколи.**
 
-1. Створити `vercel.json`:
-   ```json
-   {
-     "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-     "framework": "vite"
-   }
-   ```
-2. Перевірити що `package.json` має правильні `build` і `preview` скрипти (вже є — Vite дефолт)
-3. Оновити `CLAUDE.md` — описати новий workflow без ручного Publish
-4. Оновити `.github/workflows/warm-translations.yml` — додати очікування завершення Vercel-деплою (опціонально, через `vercel-action`), щоб переклади гарантовано були готові ДО того, як юзери побачать нову версію
+## Як це виглядає після налаштування
 
-## Альтернатива (якщо не хочеш чіпати домен)
+```text
+Claude Cowork (за чашкою кави, без тебе)
+    │
+    └─► git push до main
+            │
+            ├──► Vercel автоматично:
+            │      • bun install
+            │      • bun run build  
+            │      • деплой на nokarimatcha.eu
+            │      = 60-90 секунд, без твоєї участі
+            │
+            └──► GitHub Action warm-translations:
+                   • прогріває PT/ES переклади
+                   = 30 секунд, паралельно
+```
 
-Залишити Lovable-хостинг, але прийняти що треба тиснути "Update". Тоді можу додати:
-- **GitHub Action notification** — після push надсилає тобі повідомлення в Telegram "Стаття готова, натисни Publish в Lovable"
-- Це **не** скоротить час до публікації, але прибере ризик забути натиснути
+Ти можеш бути на пляжі, в літаку, спати. Стаття зʼявиться сама.
 
-## Питання до тебе
+## Альтернативи (для повноти)
 
-Чи готовий перенести `nokarimatcha.eu` з Lovable-хостингу на Vercel? Це єдиний шлях до 1-3 хв автодеплою. Якщо так — я зроблю `vercel.json` і дам покрокову інструкцію по DNS.
+- **Cloudflare Pages** — теж автоматично, безкоштовно, навіть без ліміту трафіку. Той самий принцип одноразового підключення (~15 хв). Якщо твій домен вже на Cloudflare — це навіть простіше, бо DNS в одному місці.
+- **Netlify** — аналог Vercel, нічим суттєво не відрізняється.
 
+Якщо в тебе домен **уже на Cloudflare** — скажи, я переключу план на Cloudflare Pages, буде ще на 5 хв швидше (DNS не міняти, тільки переписати запис в тому ж кабінеті).
+
+## Питання до тебе (одне)
+
+**Де купив домен `nokarimatcha.eu`?** (Cloudflare / GoDaddy / Namecheap / OVH / Reg.ru / інший)
+
+Як скажеш — я дам точні покрокові скріншоти, які саме поля міняти, щоб ти не думав. 15 хв клікання з телефону і ти вільний назавжди.
