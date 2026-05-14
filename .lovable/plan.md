@@ -1,11 +1,77 @@
-Replace the 5 `featuredImage` URL strings in `src/data/blogPosts.ts` with the new Pexels URLs:
+# Варіанти деплою/публікації статей з GitHub
 
-| Slug | New featuredImage |
-|---|---|
-| japanese-matcha-guide-european-cafes | https://images.pexels.com/photos/33094639/pexels-photo-33094639.jpeg?auto=compress&cs=tinysrgb&w=1260 |
-| matcha-grades-explained-ceremonial-culinary-cafe | https://images.pexels.com/photos/8329664/pexels-photo-8329664.jpeg?auto=compress&cs=tinysrgb&w=1260 |
-| l-theanine-matcha-vs-coffee-energy-science | https://images.pexels.com/photos/8329669/pexels-photo-8329669.jpeg?auto=compress&cs=tinysrgb&w=1260 |
-| perfect-matcha-latte-barista-method | https://images.pexels.com/photos/5946637/pexels-photo-5946637.jpeg?auto=compress&cs=tinysrgb&w=1260 |
-| japan-matcha-regions-uji-nishio-kagoshima | https://images.pexels.com/photos/23192930/pexels-photo-23192930.jpeg?auto=compress&cs=tinysrgb&w=1260 |
+Контекст: ти пишеш статті через Claude → коміт у GitHub → стаття має зʼявитись на сайті в EN + автоматично перекластись на PT/ES.
 
-No other changes. After approval, swap each line at lines 23, 50, 77, 104, 177.
+## Як зараз працює проект
+
+- **Хостинг:** Lovable (домен `nokarimatcha.eu`)
+- **GitHub ↔ Lovable:** двосторонній sync вже увімкнено. Будь-який push у `main` → Lovable одразу підхоплює код.
+- **Frontend деплой:** потребує натискання **Publish → Update** в Lovable, щоб зміни пішли на live домен.
+- **Backend (edge functions, міграції):** деплоїться автоматично після push.
+- **Переклади блогу:** генеруються edge-функцією `translate-blog` при першому відкритті PT/ES версії та кешуються в БД.
+
+## Варіант 1 — Нічого не робити (рекомендовано) ⭐
+
+**Workflow:**
+1. Claude редагує `src/data/blogPosts.ts`, додає EN статтю, push у GitHub
+2. Lovable автоматично синхронізує код (10–30 сек)
+3. Ти заходиш у Lovable → **Publish → Update** (1 клік)
+4. Стаття вже на `nokarimatcha.eu/blog`
+5. Перший відвідувач PT/ES версії чекає 5–15с — генерується переклад. Далі — миттєво з кешу.
+
+**Плюси:** нуль налаштувань, працює зараз.
+**Мінуси:** треба руками тиснути "Update" в Lovable; перший PT/ES відвідувач чекає переклад.
+
+## Варіант 2 — Vercel auto-deploy
+
+Замість Lovable хостингу — підключити репо до Vercel. Кожен push у `main` = автоматичний деплой без кліків.
+
+**Плюси:** zero-click деплой.
+**Мінуси:**
+- Треба переносити custom domain `nokarimatcha.eu` з Lovable на Vercel
+- Edge functions Supabase працюють незалежно — це ОК
+- Lovable Cloud (Supabase) залишається — все інше без змін
+- Втрачаєш зручний редактор Lovable для UI правок (доведеться все робити через Claude+GitHub)
+
+**Не дуже доцільно** якщо ти все ще використовуєш Lovable UI для інших правок.
+
+## Варіант 3 — GitHub Actions для прогріву перекладів
+
+Залишаєш Lovable хостинг, але додаєш GitHub Action, який після push автоматично:
+1. Викликає edge function `translate-blog` для PT і ES для нової статті
+2. Переклади опиняються в кеші БД до того, як перший юзер відкриє сторінку
+
+**Файл:** `.github/workflows/warm-translations.yml`
+
+**Логіка:** при зміні `src/data/blogPosts.ts` витягує всі slug-и, для кожного робить `POST` на `/functions/v1/translate-blog` з locale `pt` і `es`.
+
+**Плюси:** PT/ES відвідувачі ніколи не чекають генерацію.
+**Мінуси:** треба зберегти SUPABASE_ANON_KEY в GitHub Secrets; все одно треба тиснути Publish в Lovable для frontend змін.
+
+## Варіант 4 — Гібрид (мій вибір для тебе)
+
+- Залишаєш Lovable хостинг (нічого не міняєш)
+- Додаєш GitHub Action з Варіанту 3 для прогріву перекладів
+- Додаєш `CLAUDE.md` в корінь репо з інструкцією як саме додавати статті (формат, обовʼязкові поля, стиль, бренд-терміни)
+
+**Що конкретно зробити в проекті:**
+
+1. **Створити `CLAUDE.md`** в корені — інструкція для Claude: структура `BlogPost`, де лежить файл, формат HTML контенту, які терміни не перекладати, приклад нової статті.
+
+2. **Створити `.github/workflows/warm-translations.yml`** — Action на push до `main`, парсить `blogPosts.ts`, викликає `translate-blog` edge function для pt+es кожної статті.
+
+3. **Додати GitHub Secret** `SUPABASE_ANON_KEY` (значення з `.env`, воно публічне — безпечно).
+
+4. (Опціонально) **Скрипт `scripts/warm-translations.ts`** — для ручного запуску перекладу з твоєї машини.
+
+## Технічні деталі
+
+- Edge function `translate-blog` приймає `{ slug, locale, post: {...} }` і кешує результат у таблиці `blog_translations` (unique `slug,locale`)
+- Існуючий кеш не перетирається — повторний виклик одразу повертає кешоване
+- Щоб **оновити** переклад існуючої статті — треба видалити рядок з `blog_translations` для цього `slug`+`locale` (можу додати ще один Action кроком "force-retranslate" по labels у коміті)
+- Frontend Publish треба тиснути руками — Lovable не автоматизує це навіть через GitHub push (це by design)
+
+## Моя рекомендація
+
+**Варіант 4 (Гібрид).** Мінімум змін, максимум зручності для Claude+тебе. Питання: робимо?
+
