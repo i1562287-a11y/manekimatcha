@@ -7,9 +7,10 @@
 1. Відкрий `src/data/blogPosts.ts`
 2. Додай новий обʼєкт `BlogPost` **на початок масиву** `blogPosts` (нові статті зверху)
 3. Заповни всі обовʼязкові поля (див. нижче)
-4. `git commit && git push` → Lovable автосинхронізується
-5. Власник тисне **Publish → Update** в Lovable, щоб задеплоїти на `nokarimatcha.eu`
-6. GitHub Action `warm-translations` автоматично прогріє PT/ES переклади (через ~1 хв після push)
+4. `git commit && git push` у `main`
+5. **Vercel** автоматично збере й задеплоїть на `nokarimatcha.eu` за ~60-90 секунд (без ручного Publish)
+6. GitHub Action `warm-translations` паралельно прогріє PT/ES переклади (~30 сек)
+7. Загальний час від push до публічної доступності: **~1-2 хвилини**
 
 ## Структура BlogPost
 
