@@ -1,77 +1,86 @@
-# Варіанти деплою/публікації статей з GitHub
+# Авто-деплой за 1-3 хвилини після push
 
-Контекст: ти пишеш статті через Claude → коміт у GitHub → стаття має зʼявитись на сайті в EN + автоматично перекластись на PT/ES.
+## Проблема
 
-## Як зараз працює проект
+Зараз: push у GitHub → Lovable синхронізує код, але щоб **frontend** оновився на `nokarimatcha.eu`, треба **руками** натиснути **Publish → Update** в Lovable. Це by design — Lovable не публікує автоматично і не має публічного API для тригеру publish.
 
-- **Хостинг:** Lovable (домен `nokarimatcha.eu`)
-- **GitHub ↔ Lovable:** двосторонній sync вже увімкнено. Будь-який push у `main` → Lovable одразу підхоплює код.
-- **Frontend деплой:** потребує натискання **Publish → Update** в Lovable, щоб зміни пішли на live домен.
-- **Backend (edge functions, міграції):** деплоїться автоматично після push.
-- **Переклади блогу:** генеруються edge-функцією `translate-blog` при першому відкритті PT/ES версії та кешуються в БД.
+Висновок: щоб отримати auto-publish за 1-3 хв без кліків, треба **винести frontend хостинг з Lovable**. Backend (Supabase / edge functions) залишається без змін.
 
-## Варіант 1 — Нічого не робити (рекомендовано) ⭐
+## Рекомендований варіант — Vercel
 
-**Workflow:**
-1. Claude редагує `src/data/blogPosts.ts`, додає EN статтю, push у GitHub
-2. Lovable автоматично синхронізує код (10–30 сек)
-3. Ти заходиш у Lovable → **Publish → Update** (1 клік)
-4. Стаття вже на `nokarimatcha.eu/blog`
-5. Перший відвідувач PT/ES версії чекає 5–15с — генерується переклад. Далі — миттєво з кешу.
+**Чому Vercel, а не альтернативи:**
+- Найшвидший build для Vite-проектів (~60-90 сек на цей проект)
+- Безкоштовний tier покриває з запасом (100 GB bandwidth/міс)
+- Атомарні деплої з instant rollback
+- Auto SSL, edge CDN, preview-деплої для PR
 
-**Плюси:** нуль налаштувань, працює зараз.
-**Мінуси:** треба руками тиснути "Update" в Lovable; перший PT/ES відвідувач чекає переклад.
+**Альтернативи (теж підійдуть):**
+- **Cloudflare Pages** — безкоштовний, без ліміту на bandwidth, build трошки повільніший
+- **Netlify** — аналог Vercel, дещо повільніший build
 
-## Варіант 2 — Vercel auto-deploy
+GitHub Pages не підходить: SPA fallback треба руками, немає env-змінних під час build.
 
-Замість Lovable хостингу — підключити репо до Vercel. Кожен push у `main` = автоматичний деплой без кліків.
+## Як буде працювати
 
-**Плюси:** zero-click деплой.
-**Мінуси:**
-- Треба переносити custom domain `nokarimatcha.eu` з Lovable на Vercel
-- Edge functions Supabase працюють незалежно — це ОК
-- Lovable Cloud (Supabase) залишається — все інше без змін
-- Втрачаєш зручний редактор Lovable для UI правок (доведеться все робити через Claude+GitHub)
+```text
+   Claude push у GitHub (main)
+            │
+            ├──► Lovable sync (для подальших правок в редакторі)
+            │
+            ├──► Vercel build & deploy (60-90 сек) ──► nokarimatcha.eu
+            │
+            └──► GitHub Action warm-translations (~30 сек паралельно)
+```
 
-**Не дуже доцільно** якщо ти все ще використовуєш Lovable UI для інших правок.
+Усе автоматично. Загальний час від push до публічного оновлення: **~2 хвилини**.
 
-## Варіант 3 — GitHub Actions для прогріву перекладів
+## Що міняється
 
-Залишаєш Lovable хостинг, але додаєш GitHub Action, який після push автоматично:
-1. Викликає edge function `translate-blog` для PT і ES для нової статті
-2. Переклади опиняються в кеші БД до того, як перший юзер відкриє сторінку
+**Зміни в проекті — мінімальні:**
+- ➕ Додаємо `vercel.json` з SPA-fallback (1 файл, ~10 рядків)
+- ➕ Edge functions Supabase працюють далі без змін (вони деплояться автоматично через Lovable Cloud)
+- ➕ `.env` змінні (`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`) додаються в Vercel UI
 
-**Файл:** `.github/workflows/warm-translations.yml`
+**Що НЕ міняється:**
+- Lovable Cloud (Supabase) залишається бекендом
+- Усі edge functions, БД, Stripe webhook, Telegram бот — без змін
+- Можна продовжувати редагувати в Lovable редакторі (зміни синкаються у GitHub → Vercel підхопить)
 
-**Логіка:** при зміні `src/data/blogPosts.ts` витягує всі slug-и, для кожного робить `POST` на `/functions/v1/translate-blog` з locale `pt` і `es`.
+## Що треба від тебе (одноразово, ~15 хв)
 
-**Плюси:** PT/ES відвідувачі ніколи не чекають генерацію.
-**Мінуси:** треба зберегти SUPABASE_ANON_KEY в GitHub Secrets; все одно треба тиснути Publish в Lovable для frontend змін.
+1. **Створити акаунт на vercel.com** (Sign in with GitHub)
+2. **Import Project** → вибрати репо `nokari-matcha` → Framework: Vite (auto-detected)
+3. **Environment Variables** — додати 3 змінні з твого `.env`:
+   - `VITE_SUPABASE_PROJECT_ID` = `aqkvpzwvncnpzmogpvyo`
+   - `VITE_SUPABASE_PUBLISHABLE_KEY` = `eyJhbGc...` (з `.env`)
+   - `VITE_SUPABASE_URL` = `https://aqkvpzwvncnpzmogpvyo.supabase.co`
+4. Натиснути **Deploy** → отримаєш `nokari-matcha.vercel.app` (тестовий URL, перевіриш що все працює)
+5. **Перенести custom domain `nokarimatcha.eu`:**
+   - В Lovable: **Project Settings → Domains → Remove** (або залишити для редиректу)
+   - В Vercel: **Settings → Domains → Add `nokarimatcha.eu`**
+   - У свого DNS-провайдера (де куплений домен) поміняти `A`/`CNAME` записи на ті, що покаже Vercel
+   - SSL Vercel випустить автоматично за 1-5 хв
 
-## Варіант 4 — Гібрид (мій вибір для тебе)
+## Що зроблю я в коді
 
-- Залишаєш Lovable хостинг (нічого не міняєш)
-- Додаєш GitHub Action з Варіанту 3 для прогріву перекладів
-- Додаєш `CLAUDE.md` в корінь репо з інструкцією як саме додавати статті (формат, обовʼязкові поля, стиль, бренд-терміни)
+1. Створити `vercel.json`:
+   ```json
+   {
+     "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+     "framework": "vite"
+   }
+   ```
+2. Перевірити що `package.json` має правильні `build` і `preview` скрипти (вже є — Vite дефолт)
+3. Оновити `CLAUDE.md` — описати новий workflow без ручного Publish
+4. Оновити `.github/workflows/warm-translations.yml` — додати очікування завершення Vercel-деплою (опціонально, через `vercel-action`), щоб переклади гарантовано були готові ДО того, як юзери побачать нову версію
 
-**Що конкретно зробити в проекті:**
+## Альтернатива (якщо не хочеш чіпати домен)
 
-1. **Створити `CLAUDE.md`** в корені — інструкція для Claude: структура `BlogPost`, де лежить файл, формат HTML контенту, які терміни не перекладати, приклад нової статті.
+Залишити Lovable-хостинг, але прийняти що треба тиснути "Update". Тоді можу додати:
+- **GitHub Action notification** — після push надсилає тобі повідомлення в Telegram "Стаття готова, натисни Publish в Lovable"
+- Це **не** скоротить час до публікації, але прибере ризик забути натиснути
 
-2. **Створити `.github/workflows/warm-translations.yml`** — Action на push до `main`, парсить `blogPosts.ts`, викликає `translate-blog` edge function для pt+es кожної статті.
+## Питання до тебе
 
-3. **Додати GitHub Secret** `SUPABASE_ANON_KEY` (значення з `.env`, воно публічне — безпечно).
-
-4. (Опціонально) **Скрипт `scripts/warm-translations.ts`** — для ручного запуску перекладу з твоєї машини.
-
-## Технічні деталі
-
-- Edge function `translate-blog` приймає `{ slug, locale, post: {...} }` і кешує результат у таблиці `blog_translations` (unique `slug,locale`)
-- Існуючий кеш не перетирається — повторний виклик одразу повертає кешоване
-- Щоб **оновити** переклад існуючої статті — треба видалити рядок з `blog_translations` для цього `slug`+`locale` (можу додати ще один Action кроком "force-retranslate" по labels у коміті)
-- Frontend Publish треба тиснути руками — Lovable не автоматизує це навіть через GitHub push (це by design)
-
-## Моя рекомендація
-
-**Варіант 4 (Гібрид).** Мінімум змін, максимум зручності для Claude+тебе. Питання: робимо?
+Чи готовий перенести `nokarimatcha.eu` з Lovable-хостингу на Vercel? Це єдиний шлях до 1-3 хв автодеплою. Якщо так — я зроблю `vercel.json` і дам покрокову інструкцію по DNS.
 
