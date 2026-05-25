@@ -15,6 +15,123 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "7",
+    slug: "cold-brew-matcha-cafe-guide",
+    title: "Cold Brew Matcha: The Café Operator's Playbook for Summer Menus",
+    excerpt: "Two methods, one chemistry problem. How European cafés should batch, price and serve cold brew matcha for 80%+ margin this summer.",
+    category: "Recipes",
+    readTime: 8,
+    publishedAt: "2026-05-25",
+    featuredImage: "https://images.pexels.com/photos/32529470/pexels-photo-32529470.jpeg?auto=compress&cs=tinysrgb&w=1260",
+    metaTitle: "Cold Brew Matcha: Café Operator's Playbook | Nokari",
+    metaDescription: "Shake vs overnight cold brew matcha — ratios, grade choice, batch prep and 87% margin math for European cafés. Get samples shipped in 48h.",
+    tags: ["matcha", "cold brew", "cafe", "recipes", "summer menu", "HoReCa"],
+    content: `<p>Last August in Lisbon the temperature hit 39°C and a café we supply on Rua da Boavista sold 184 iced matcha lattes in one day. They opened at 8am with a 2-litre batch of cold matcha concentrate already made. By 11am they were on their third batch. By 4pm they'd switched the espresso machine off for an hour because nobody was ordering anything hot.</p>
+
+<p>That is the math behind every European café menu right now. Hot drinks collapse in July. Cold matcha — done properly — can carry the afternoon shift.</p>
+
+<p>This is how to do it properly.</p>
+
+<h2>Cold brew matcha is not actually brewed</h2>
+
+<p>The phrase is misleading. Real cold brew — the kind you make with coffee or sencha tea leaves — is a slow infusion. Water seeps through the leaves over hours and pulls out flavour compounds at low temperature, which is why cold brew coffee tastes less acidic than hot.</p>
+
+<p>Matcha is different. Because the leaf has already been stone-ground into a 5-10 micron powder, there is nothing to "infuse." You are not extracting flavour from a leaf. You are dispersing solid particles into water.</p>
+
+<p>So "cold brew matcha" actually means one of two preparations: a fast cold shake, or a slow cold rest. The chemistry is genuinely different between them, and most café staff have no idea which one their menu calls for.</p>
+
+<h2>The shake method: 60 seconds, single serving</h2>
+
+<p>This is what 90% of cafés use for individual orders. The ratio that actually works for service:</p>
+
+<ul>
+<li>2 g matcha (about 1 level tsp, sifted)</li>
+<li>60 ml cold filtered water (below 10°C)</li>
+<li>Shake in a closed cocktail shaker for 20 seconds</li>
+</ul>
+
+<p>Then pour over ice in a glass and top with milk or water to 250 ml. That's your iced matcha latte or your straight cold matcha.</p>
+
+<p>Why a cocktail shaker beats a whisk for cold preparation: cold water has higher surface tension than hot, which means matcha particles cling together and resist dispersion. Mechanical force matters more than it does in hot preparation. A chasen whisk works but takes longer and produces an uneven suspension. A shaker, a milk frother with the wire mesh, or an immersion blender on low speed will all work. A spoon will not.</p>
+
+<p><strong>One trade secret most baristas miss:</strong> chill the shaker. A warm metal shaker raises the temperature of your water by 4-5°C in 20 seconds of vigorous shaking. That's enough to start pulling bitter catechins from the matcha. Keep the shaker in a freezer between drinks during a rush.</p>
+
+<h2>The overnight method: concentrate for batch prep</h2>
+
+<p>This is what changes the economics for a café doing 50+ matcha drinks a day. Instead of preparing each drink individually, you make a concentrate the night before and pour it like espresso.</p>
+
+<p>The ratio:</p>
+
+<ul>
+<li>20 g matcha</li>
+<li>500 ml cold filtered water</li>
+<li>Whisk or blend to combine, then refrigerate 6-12 hours</li>
+</ul>
+
+<p>In the morning you have a 40 g/L concentrate. One "matcha shot" = 30 ml, which contains roughly 1.2 g of matcha — slightly less than a freshly shaken drink uses, but with twelve hours of cold contact, the flavour extracts more fully and a smaller dose tastes equivalent. Pour the shot over ice, add milk to 250 ml, done. Drink-to-cup time drops from 90 seconds to under 30.</p>
+
+<p>There is a real trade-off. Catechins continue to extract slowly even at 4°C, and after about 36 hours the concentrate develops a pronounced bitter astringency. We recommend cafés batch in 12-hour cycles and discard whatever is left at the end of the next service day.</p>
+
+<p>The interesting nuance: overnight cold extraction reduces caffeine release by roughly 15-20% compared to hot preparation, while preserving L-theanine almost entirely. Cold-brewed matcha hits the bloodstream with a different ratio of stimulant to calming amino acid than a hot bowl does. Customers describe it as "smoother energy." That's not marketing — that's chemistry. (We go deeper into the L-theanine angle in our <a href="/blog/l-theanine-matcha-vs-coffee-energy-science">piece on matcha vs coffee for sustained focus</a>.)</p>
+
+<h2>Why grade matters more for cold than for hot</h2>
+
+<p>This is the conversation most matcha suppliers will not have honestly with you. Many café owners default to culinary grade for iced drinks because "the milk hides the bitterness." That logic works at 70°C. It collapses at 4°C.</p>
+
+<p>Cold preparation amplifies astringency. The catechins responsible for that mouth-puckering dryness extract more aggressively from low-grade matcha when given six to twelve hours of cold contact, and milk fat does not mask them the way it masks bitterness in a hot drink. A culinary-grade matcha that tastes fine in a hot oat milk latte will taste flatly grassy and faintly bitter when batched as an overnight cold concentrate.</p>
+
+<p>The fix is not necessarily ceremonial grade — that's overkill for most café cold programs and the cost ratio doesn't justify it. The fix is what we call premium grade: tencha-based, stone-ground, harvested from the second flush, shading period of at least 14 days. Around €60-90 per kilo at wholesale. It holds up to cold extraction without going bitter, the colour stays vibrant green rather than turning olive after 12 hours, and it foams properly when you shake-prep a single serving. (Our <a href="/blog/matcha-grades-explained-ceremonial-culinary-cafe">full guide to matcha grades</a> walks through what actually distinguishes each tier.)</p>
+
+<p>A practical rule for European café operators: if your menu has iced matcha at €5+ per drink, use premium. If you're undercutting at €3.50 and need 80%+ margin, culinary grade is defensible — but only via the shake method, never via overnight concentrate. Cold time is not your friend with cheap matcha.</p>
+
+<h2>The operator's economics</h2>
+
+<p>Here is what the math actually looks like for a single iced matcha latte sold at €5.50 in a Lisbon or Porto café in 2026:</p>
+
+<table>
+<tr><th>Cost item</th><th>Per drink</th></tr>
+<tr><td>Matcha (2 g premium @ €75/kg)</td><td>€0.15</td></tr>
+<tr><td>Oat milk (180 ml)</td><td>€0.32</td></tr>
+<tr><td>Cup, lid, straw</td><td>€0.18</td></tr>
+<tr><td>Ice, water, sundries</td><td>€0.05</td></tr>
+<tr><td><strong>Total COGS</strong></td><td><strong>€0.70</strong></td></tr>
+<tr><td>Sell price</td><td>€5.50</td></tr>
+<tr><td><strong>Gross margin</strong></td><td><strong>87%</strong></td></tr>
+</table>
+
+<p>That margin is competitive with the best espresso drinks on your menu and substantially better than most blended frappés or seasonal specials. The catch — and it is a real catch — is throughput. A barista pulling shaken iced matcha one-by-one will hit a ceiling around 30 drinks per hour. The same barista pouring overnight concentrate over ice can push 70+ drinks per hour with no loss in quality.</p>
+
+<p>For context on wholesale matcha pricing tiers and what to expect from European suppliers, our <a href="/blog/matcha-wholesale-pricing-europe-2026">2026 pricing guide</a> breaks down the realistic per-kilo numbers across grades.</p>
+
+<h2>Storage, shelf life and the things nobody tells you</h2>
+
+<p>Three rules that will save you waste and food-safety conversations:</p>
+
+<p>The shake-method drink should be consumed within 20 minutes. After that, matcha particles settle visibly to the bottom of the glass, and even vigorous stirring will not fully re-suspend them. This is why takeaway iced matcha needs to be shaken at the till, not pre-batched into to-go cups.</p>
+
+<p>Overnight concentrate is good for 24 hours refrigerated at or below 4°C in a sealed container, stretching to 36 hours before bitterness becomes noticeable. Store it in a glass bottle, not plastic — matcha clings to plastic walls and you'll lose roughly 8% of your concentrate to the container over the storage period.</p>
+
+<p>A finished iced matcha latte (matcha + milk + ice) holds its quality for about 4 hours in a cold display case before the milk begins to mute the matcha character and the texture goes grainy. This is the limit on grab-and-go displays.</p>
+
+<h2>Three variations that earn their spot on a summer menu</h2>
+
+<p>The classic iced matcha latte is necessary. It is not sufficient. The cafés generating real cold-matcha revenue this summer are running 3-4 differentiated SKUs:</p>
+
+<p><strong>Iced yuzu matcha.</strong> Two pumps of yuzu syrup (€0.20 cost), shaken cold matcha, sparkling water instead of milk, served in a tall glass with a slice of lemon. €5.80 sell price, 89% margin, lighter than a latte, sells especially well to customers who don't want dairy.</p>
+
+<p><strong>Matcha tonic.</strong> 30 ml overnight concentrate, 150 ml premium tonic water, ice, rosemary sprig. €6.50, 84% margin, the most photographed item on most menus that run it. Pairs with the after-work crowd.</p>
+
+<p><strong>Iced matcha with cold foam.</strong> 30 ml concentrate over ice with oat milk, topped with vanilla cold foam (whipped cold milk + vanilla syrup, prepared in batch). €5.90, 85% margin. This is the recipe that pulls coffee customers across — it visually and texturally references a cold-brew-coffee-with-cold-foam, which is now a default expectation in European specialty cafés.</p>
+
+<p>The full barista technique for the foundational hot latte that all of these riff on is in our <a href="/blog/perfect-matcha-latte-barista-method">perfect matcha latte guide</a> — the cold variations work from the same flavour principles.</p>
+
+<p>Cold brew matcha is a category that rewards operators who treat it as its own beverage system rather than a copy-paste of espresso workflow. The shake-versus-batch decision is real, the grade-versus-cold-time chemistry is real, and the margin opportunity in a Mediterranean summer is real.</p>
+
+<p>The question worth asking before next Monday: is your cold matcha SKU running 80%+ margin, or are you discovering each week that the culinary-grade powder you bought in January has gone flat and bitter in your concentrate jar?</p>
+
+<p>If you want to spec the right grade for your batch system before July hits, <a href="https://nokarimatcha.eu/contact">we can ship samples within 48 hours across Europe</a>.</p>`,
+  },
+  {
     id: "6",
     slug: "matcha-wholesale-pricing-europe-2026",
     title: "Matcha Wholesale Pricing in Europe: What You Should Actually Pay in 2026",
