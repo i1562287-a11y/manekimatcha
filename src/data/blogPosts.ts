@@ -15,6 +15,148 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    id: "8",
+    slug: "japanese-matcha-import-europe-guide",
+    title: "Japanese Matcha Import to Europe: The 2026 Compliance & Logistics Guide",
+    excerpt: "Most English-language guides cover the Japanese export workflow. The European import side is where shipments actually fail — pesticide MRLs, TRACES NT, and the deadline that destroys organic certification.",
+    category: "B2B",
+    readTime: 9,
+    publishedAt: "2026-05-28",
+    featuredImage: "https://images.pexels.com/photos/6932291/pexels-photo-6932291.jpeg?auto=compress&cs=tinysrgb&w=1260",
+    metaTitle: "Japanese Matcha Import to Europe: 2026 Compliance Guide",
+    metaDescription: "How to import Japanese matcha into the EU in 2026: pesticide MRLs, TRACES, customs and total landed cost — plus when to skip it and use a European importer.",
+    tags: ["matcha import", "europe", "compliance", "JAS", "wholesale", "horeca"],
+    content: `<p>A pallet of 80 kilograms of culinary-grade matcha sat in a bonded warehouse in Hamburg last September for eleven weeks. It was eventually destroyed at the importer's expense.</p>
+
+<p>The matcha itself was fine. The producer was a respected Nishio house with a JAS organic certificate. The Japanese paperwork was complete. What killed the shipment was a single missing TRACES NT validation that should have happened in Japan before the container left port. Once it arrived in the EU without it, the organic certification could not be retroactively applied. The matcha could no longer be sold as organic. The importer's customer — a chain of cafés — refused the non-organic substitution. Disposal.</p>
+
+<p>This is the most expensive lesson European matcha importers learn, and almost every English-language guide to importing matcha from Japan skips the part where the EU side is what actually breaks you. The Japanese export workflow is well-documented. The European import workflow is where the failures happen.</p>
+
+<p>If you are a café, a distributor, or a brand trying to bring Japanese matcha into the European Union in 2026, this is the part you need.</p>
+
+<h2>Why the EU is harder than the US (and what that means for your timeline)</h2>
+
+<p>The United States and the European Union both regulate matcha imports, but the regulatory philosophies are different in ways that hit your shipment in different places.</p>
+
+<p>The US system is heaviest on the importer's documented compliance burden — FSVP plans, FDA Prior Notice, foreign supplier verification — but its pesticide tolerances for tea are relatively permissive. The EU system is the inverse. Documentation is moderate. Pesticide enforcement is brutal.</p>
+
+<p>The EU's default Maximum Residue Limit for any active substance not specifically authorised on a crop is <strong>0.01 mg/kg</strong> — the analytical limit of detection. Japanese domestic MRLs for several common tea pesticides are 100 to 2,500 times higher than that. A matcha that is perfectly legal to sell in Tokyo can fail at the Port of Rotterdam without anything being wrong with the product by Japanese standards.</p>
+
+<p>The practical consequence: in the EU, the test you cannot fail happens before the shipment leaves Japan. Once a container is on the water, your compliance posture is fixed.</p>
+
+<h2>The five active substances that actually fail</h2>
+
+<p>If you are vetting a Japanese supplier for EU import, the conversation about pesticides should be specific, not general. "EU-compliant" is a marketing phrase. What you need to verify is performance against named active substances, because these are the ones the EU labs actually look for in tea.</p>
+
+<table>
+<tr><th>Active substance</th><th>Japan MRL (tea)</th><th>EU MRL (tea)</th><th>Risk level</th></tr>
+<tr><td>Acetamiprid</td><td>30 mg/kg</td><td>0.05 mg/kg</td><td>Very high — most common rejection</td></tr>
+<tr><td>Dinotefuran</td><td>25 mg/kg</td><td>0.01 mg/kg</td><td>Very high — not authorised in EU</td></tr>
+<tr><td>Chlorpyrifos</td><td>(revoked)</td><td>0.01 mg/kg</td><td>High — historical residue in fields</td></tr>
+<tr><td>Fipronil</td><td>0.002 mg/kg</td><td>0.005 mg/kg</td><td>Medium</td></tr>
+<tr><td>Imidacloprid</td><td>50 mg/kg</td><td>0.05 mg/kg</td><td>High</td></tr>
+</table>
+
+<p>A serious supplier will provide a lot-specific Certificate of Analysis from a third-party laboratory, with results stated against EU MRLs explicitly. If the CoA only references Japanese tolerances or "in compliance with applicable regulations," you do not have proof of EU compliance — you have marketing.</p>
+
+<p>Ask for the lab's accreditation number. Reputable Japanese tea labs run ISO 17025 accreditation; the certificate should reference it. Pre-shipment EU pesticide screening for a 50–100 kg matcha lot typically costs the supplier €180–€350 and adds three to five business days. If a supplier resists this, that is your answer.</p>
+
+<h2>The TRACES NT deadline that destroys organic shipments</h2>
+
+<p>If you are importing matcha labelled "organic" or carrying JAS certification you want recognised in the EU, you will use the European Commission's TRACES NT system (Trade Control and Expert System New Technology). This is the part of EU import procedure that quietly destroys the most matcha.</p>
+
+<p>Here is the sequence:</p>
+
+<ul>
+<li>The Japanese supplier — through their JAS-accredited control body — issues an electronic <strong>Certificate of Inspection (COI)</strong> in TRACES NT.</li>
+<li>The COI must be <strong>endorsed</strong> by the Japanese control body <strong>before the shipment departs Japan</strong>.</li>
+<li>On arrival in the EU, the first-arrival customs authority validates the COI.</li>
+<li>Only after validation can the goods be sold as organic in the EU.</li>
+</ul>
+
+<p>The deadline that matters is step 2. Once a shipment leaves Japan without an endorsed COI, the organic status of those goods cannot be restored. Not by the importer. Not by the customs authority. Not by the producer. The certification is gone for that lot. You will receive a conventional product, with a conventional price ceiling, that you cannot relabel.</p>
+
+<p>In our experience supplying European cafés, this is the single most common high-cost failure for first-time direct importers. The Japanese exporter assumes the importer is tracking it. The importer assumes the exporter is tracking it. Both are wrong.</p>
+
+<p>If you are doing your first direct organic import, build a written checkpoint: confirm endorsed COI in TRACES NT before authorising shipment release. Treat it like a Bill of Lading — a non-negotiable document, not a back-office formality.</p>
+
+<h2>The actual European-side documents you need</h2>
+
+<p>Beyond the Japanese export paperwork (Certificate of Origin, Commercial Invoice, Packing List, CoA, Air Waybill or B/L), the European importer needs to have prepared:</p>
+
+<p><strong>EORI number</strong> — Economic Operators Registration and Identification. Required for any commercial customs declaration in the EU. Applied for through the customs authority in your member state of establishment. Free, but allow 2–4 weeks the first time.</p>
+
+<p><strong>VAT registration</strong> in the country of first import. Matcha is subject to standard or reduced VAT depending on the member state — Portugal applies 6% (intermediate rate) on tea products; Germany applies 7%; France 5.5%. Verify with a local broker, not by analogy.</p>
+
+<p><strong>Import customs declaration</strong>, typically filed by your customs broker under the relevant CN code. Matcha generally falls under CN code <strong>0902 10 00</strong> (green tea, in immediate packings ≤3 kg) or <strong>0902 20 00</strong> (larger packings), with a Most Favoured Nation duty of 3.2% — though the EU–Japan EPA agreement reduces this to 0% with a valid Statement on Origin from the Japanese exporter. Ask the exporter for it; many forget.</p>
+
+<p><strong>Common Health Entry Document (CHED-D)</strong> for organic shipments, filed in TRACES NT in advance of arrival.</p>
+
+<p>A competent EU customs broker will cost €80–€150 per shipment and earn it back the first time they catch a missing document at the pre-clearance stage instead of at the warehouse gate.</p>
+
+<h2>What it actually costs: a worked example</h2>
+
+<p>Here is the landed-cost arithmetic for a representative first direct import — 50 kg of mid-tier culinary-grade matcha from a Nishio wholesaler, air freight, destination Lisbon, EU-organic certified.</p>
+
+<table>
+<tr><th>Line item</th><th>Cost (EUR)</th></tr>
+<tr><td>50 kg matcha @ €58/kg FOB Nagoya</td><td>€2,900</td></tr>
+<tr><td>EU pesticide pre-shipment testing</td><td>€280</td></tr>
+<tr><td>Nitrogen-flushed export packaging</td><td>€120</td></tr>
+<tr><td>Air freight Nagoya → Lisbon (40 kg chargeable)</td><td>€620</td></tr>
+<tr><td>Fuel and security surcharges</td><td>€95</td></tr>
+<tr><td>EU customs broker (single entry)</td><td>€110</td></tr>
+<tr><td>Import VAT (6% Portugal, on landed value)</td><td>€246</td></tr>
+<tr><td>Duty (0% under EU–Japan EPA)</td><td>€0</td></tr>
+<tr><td><strong>Total landed cost</strong></td><td><strong>€4,371</strong></td></tr>
+<tr><td><strong>Effective cost per kg</strong></td><td><strong>€87.42</strong></td></tr>
+</table>
+
+<p>That is roughly a 51% uplift over the FOB price — a useful planning number for any first import. Sea freight reduces freight cost dramatically (to under €1.50/kg) but adds 30–60 days of transit and quality risk for premium grades. For more on what you should actually be paying at the wholesale level once these costs are accounted for, see our breakdown of <a href="/blog/matcha-wholesale-pricing-europe-2026">matcha wholesale pricing in Europe</a>.</p>
+
+<h2>RASFF: the public record nobody reads</h2>
+
+<p>The Rapid Alert System for Food and Feed (RASFF) is the EU's public database of border rejections, recalls and food-safety notifications. It is searchable and free. It is also the closest thing the matcha trade has to a supplier blacklist.</p>
+
+<p>Before you commit to a Japanese exporter, search RASFF for their name, their export company name, and any parent brand. A history of EU pesticide rejections on tea is a hard signal — not because the company is dishonest, but because their internal QC for EU compliance is structurally insufficient for the market you want to sell into. RASFF logs roughly 8–15 Japanese tea rejections per year in a typical period; almost all are pesticide-related. If your shortlisted supplier appears, ask them directly what changed, who their new lab is, and request three consecutive clean CoAs.</p>
+
+<p>This is a five-minute check that prevents a five-figure mistake.</p>
+
+<h2>When direct import does not make sense</h2>
+
+<p>The honest answer that direct-from-Japan exporters will not give you: for most European cafés, importing matcha directly from Japan is the wrong move.</p>
+
+<p>Direct import makes sense when <strong>all</strong> of the following are true: your annual matcha volume is above roughly 300 kg, you have in-house customs and compliance capacity (or a paid broker on retainer), you can finance a 5–6 figure shipment 60–90 days before you generate revenue from it, and your business model requires a single-origin or single-producer story that you can only tell by sourcing direct.</p>
+
+<p>If those conditions are not all true — and for most independent cafés they are not — the rational path is to source from a European-based importer who has already done the compliance work, holds stock locally, and can ship 1–10 kg quantities on 48-hour lead times. The unit price is higher than FOB Japan; the total cost of ownership is almost always lower once you factor in working capital, customs risk, storage, and the cost of running out of matcha for a week while a shipment clears.</p>
+
+<p>This is why companies like ours exist as a layer between Japanese producers and European cafés. We hold EU-compliant, lot-tested matcha in Portugal, ship within the EU under standard VAT, and absorb the import risk so you don't have to. That model is not better in some abstract sense — it is better for the buyer whose core business is hospitality, not international trade. For the underlying quality question of what you are actually buying, our <a href="/blog/japanese-matcha-guide-european-cafes">buyer's guide to Japanese matcha for European cafés</a> covers the grading and origin side.</p>
+
+<h2>The realistic timeline, EU side</h2>
+
+<p>For a first-time direct importer working with a new Japanese supplier, plan <strong>10–14 weeks</strong> from purchase order to shelf:</p>
+
+<ul>
+<li><strong>Weeks 1–2:</strong> Sample evaluation, contract, deposit.</li>
+<li><strong>Weeks 3–5:</strong> Production, milling to order, packaging.</li>
+<li><strong>Week 6:</strong> EU pesticide pre-shipment lab, CoA, COI endorsement in TRACES NT.</li>
+<li><strong>Week 7:</strong> Export customs, air freight booking.</li>
+<li><strong>Weeks 7–8:</strong> Transit, advance EU broker filings.</li>
+<li><strong>Weeks 8–9:</strong> EU customs clearance, CHED-D validation if organic, inspection if triggered.</li>
+<li><strong>Weeks 9–10:</strong> Warehouse intake, library sample retention.</li>
+</ul>
+
+<p>Repeat orders with an established supplier compress this to 6–8 weeks. Sea freight adds roughly 4 weeks of transit time and is only appropriate for culinary-grade volumes above 200 kg, in temperature-controlled containers.</p>
+
+<h2>The question nobody asks</h2>
+
+<p>European matcha imports are growing roughly 35% year-on-year, and the supply pressure from Japan's 2024–2025 heat-stressed harvests is real. Most articles on this topic frame the decision as "how do I get authentic Japanese matcha into Europe?"</p>
+
+<p>The better question — the one your accountant would ask if they were in the room — is this: <strong>what is the smallest, lowest-risk, fastest path to having tested, EU-compliant Japanese matcha on your menu next month?</strong> Sometimes the answer is direct import. More often it isn't. The opportunity cost of getting it wrong is not a bad cup of matcha. It is a destroyed pallet in Hamburg.</p>
+
+<p>If you want to skip the import workflow entirely and start with EU-compliant Japanese matcha you can order in 1 kg increments, that is what we do. <a href="https://nokarimatcha.eu/contact">Request a sample and a quote.</a></p>`,
+  },
+  {
     id: "7",
     slug: "cold-brew-matcha-cafe-guide",
     title: "Cold Brew Matcha: The Café Operator's Playbook for Summer Menus",
